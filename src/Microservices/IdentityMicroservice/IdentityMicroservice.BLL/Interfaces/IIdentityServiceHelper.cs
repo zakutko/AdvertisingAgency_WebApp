@@ -4,5 +4,6 @@
     {
         string HashPassword(string password);
         string GetUsernameByDecodingJwtToken(string token);
+        int GetAgeByBirthday(DateTime birthday);
     }
 }

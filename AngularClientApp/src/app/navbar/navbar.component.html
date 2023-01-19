@@ -1,16 +1,50 @@
 <div class="navbar">
     <div class="container">
-        <div class="about-me-container">
-            <div class="about-me">
-                <a (click)="onAboutClick()" class="about-me-title">About me</a>
-            </div>
-        </div>
+        <div *ngIf="isLoggedIn() == true; then navigationAuthorized; else navigationUnAuthorized"></div>
         <div class="logo">
             <a class="logo-title" routerLink="">Advertising Agency</a>
         </div>
-        <div class="login-register-buttons">
-            <button class="button" (click)="onRegisterClick()">Register</button>
-            <button class="button" (click)="onLoginClick()">Login</button>
-        </div>
+        <div *ngIf="isLoggedIn() == true; then authorized; else unauthorized"></div>
+        <ng-template #unauthorized>
+            <div class="login-register-buttons">
+                <button class="button" (click)="onLoginClick()">Login</button>
+                <button class="button" (click)="onRegisterClick()">Register</button>
+            </div>
+        </ng-template>
+        
+        <ng-template #authorized>
+            <div class="login-register-buttons">
+                <div class="menu-nav">
+                    <div class="menu-item"></div>
+                    <div class="dropdown-container" tabindex="-1">
+                      <div class="three-dots"></div>
+                      <div class="dropdown">
+                        <a><div (click)="onProfileClick()">Profile</div></a>
+                        <a><div (click)="onLogoutClick()">Logout</div></a>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
     </div>
 </div>
+
+
+<ng-template #navigationAuthorized>
+    <div class="navigation-container">
+        <div class="about-me">
+            <a (click)="onAboutClick()" class="about-me-title">About me</a>
+        </div>
+        <div class="navigation-menu-link">
+            <a (click)="onMyPublicationsClick()" class="navigation-menu-link-title">My publications</a>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #navigationUnAuthorized>
+    <div class="navigation-container">
+        <div class="about-me">
+            <a (click)="onAboutClick()" class="about-me-title">About me</a>
+        </div>
+    </div>
+</ng-template>

@@ -1,4 +1,87 @@
 <navbar></navbar>
+<h1 class="form-title">Register</h1>
 <div class="container">
+    <form class="form" #f="ngForm" [formGroup]="form" (ngSubmit)="register(f.value)">
+        <div class="form-group">
+            <label class="group-label" for="email">Email</label>
+            <input
+                formControlName="email"
+                type="text" 
+                id="email" 
+                class="form-control">
 
+            <div *ngIf="email?.touched && email?.invalid" class="alert alert-danger">
+                <div *ngIf="email?.errors?.['required']">Email is required.</div>
+                <div *ngIf="email?.errors?.['email']">Should be email (...@example.com).</div>
+                <div *ngIf="email?.errors?.['shouldBeUnique']">Email already taken.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="group-label" for="username">Username</label>
+            <input
+                formControlName="username"
+                type="text" 
+                id="username" 
+                class="form-control">
+
+            <div *ngIf="username?.touched && username?.invalid" class="alert alert-danger">
+                <div *ngIf="username?.errors?.['required']">Username is required.</div>
+                <div *ngIf="username?.errors?.['shouldBeUnique']">Username already taken.</div>
+                <div *ngIf="username?.errors?.['minlength']">Min length username is {{username?.errors?.['minlength']?.requiredLength}} characters.</div>
+                <div *ngIf="username?.errors?.['cannotContainSpace']">Username cannot contain Space.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="group-label" for="birthday">Birthday</label>
+            <input
+                formControlName="birthday"
+                type="date" 
+                id="birthday" 
+                class="form-control">
+
+            <div *ngIf="birthday?.touched && birthday?.invalid" class="alert alert-danger">
+                <div *ngIf="birthday?.errors?.['required']">Birthday is required.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="group-label" for="aboutInfo">About you</label>
+            <input
+                formControlName="aboutInfo"
+                type="text" 
+                id="aboutInfo" 
+                class="form-control">
+
+            <div *ngIf="aboutInfo?.touched && aboutInfo?.invalid" class="alert alert-danger">
+                <div *ngIf="aboutInfo?.errors?.['required']">About you is required.</div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label class="group-label" for="password">Password</label>
+            <input 
+                formControlName="password"
+                type="password" 
+                id="password" 
+                class="form-control">
+            
+            <div *ngIf="password?.touched && password?.invalid" class="alert alert-danger">
+                <div *ngIf="password?.errors?.['required']">Password is required.</div>
+                <div *ngIf="password?.errors?.['cannotContainSpace']">Password cannot contain Space.</div>
+                <div *ngIf="password?.errors?.['passwordShouldHaveNumbers']">Must contain at least 1 Number.</div>
+                <div *ngIf="password?.errors?.['passwordShouldHaveCapitalCase']">Must contain at least 1 Capital Case.</div>
+                <div *ngIf="password?.errors?.['passwordShouldHaveSpecialCharacter']">Must contain at least 1 Special Characters.</div>
+            </div>
+        </div>
+
+        <div class="btn-offer-group">
+            <button class="form-btn btn btn-primary" type="submit">Register</button>
+            <div class="offer-login">
+                <span style="margin-right: 2px;">If you already have account, please </span>
+                <a routerLink="/login">login...</a>
+            </div>
+        </div>
+    </form>
 </div>

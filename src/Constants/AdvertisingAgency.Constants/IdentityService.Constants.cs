@@ -8,7 +8,7 @@
         public const string queryGetUserByUsername = "SELECT * FROM [User] WHERE Username = @username";
         public const string queryGetUserByEmailOrUsername = "SELECT * FROM [User] WHERE Username = @username OR Email = @email";
         public const string queryGetUserByLoginRequest = "SELECT * FROM [User] WHERE Username = @usernameOfEmail OR Email = @usernameOfEmail";
-        public const string queryInsertNewUser = "INSERT INTO [User] OUTPUT INSERTED.Id VALUES (@id ,@username, @age, @email, @passwordHash, @aboutInfo, NULL, NULL, @roleId)";
+        public const string queryInsertNewUser = "INSERT INTO [User] OUTPUT INSERTED.Id VALUES (@id ,@username, @birthday, @email, @passwordHash, @aboutInfo, NULL, NULL, @roleId)";
 
         //Role
         public const string queryGetRoleNameById = "SELECT RoleName FROM [Role] WHERE Id = @id";

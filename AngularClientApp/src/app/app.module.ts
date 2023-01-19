@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     AdvertisementsComponent,
     AboutMeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,10 @@ import { HttpClientModule } from '@angular/common/http';
       {
         path: "register",
         component: RegisterComponent
+      },
+      {
+        path: "profile",
+        component: ProfileComponent
       }
     ])
   ],

@@ -1,4 +1,5 @@
 ﻿using IdentityMicroservice.BLL.Interfaces;
+using IdentityMicroservice.DAL.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
@@ -23,6 +24,14 @@ namespace IdentityMicroservice.BLL.Helpers
             var username = jwtSecurityToken.Claims.First(claim => claim.Type == "unique_name").Value;
 
             return username;
+        }
+
+        public int GetAgeByBirthday(DateTime birthday)
+        {
+            var dateTimeNow = DateTime.UtcNow;
+            var difference = dateTimeNow.Subtract(birthday);
+            var firstDay = new DateTime(1, 1, 1);
+            return (firstDay + difference).Year - 1;
         }
     }
 }

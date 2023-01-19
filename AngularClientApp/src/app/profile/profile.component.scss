@@ -1,0 +1,95 @@
+$color-dark: #1A1A1D;
+$color-vine: #950740;
+
+.container {
+
+    .profile-title-container {
+        display: flex;
+        justify-content: center;
+
+        .profile-title {
+            display: inline-block;
+            padding: 30px 50px 5px 50px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            border-bottom: 3px solid $color-vine;
+
+            font-family: 'Hando Soft Trial';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 38px;
+
+            color: $color-dark;
+        }
+    }
+
+    .profile-information-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        
+        .profile-information {
+            display: flex;
+            justify-content: space-between;
+            width: 800px;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+            .profile-names {
+                flex: 0.2;
+                padding: 10px;
+
+                .profile-name {
+                    text-align: left;
+                    font-family: 'Hando Soft Trial';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 22px;
+
+                    color: $color-dark;
+                }
+            }
+
+            .profile-results {
+                flex: 0.8;
+                padding: 10px;
+                position: relative;
+
+                .profile-result {
+                    font-family: 'Hando Soft Trial';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 22px;
+
+                    color: $color-dark;
+                }
+
+                .star {
+                    position: absolute;
+                    padding: 10px;
+                    bottom: 0;
+                    right: 0;
+
+                    img {
+                        width: 30px;
+                        height: 30px;
+                    }
+                }
+
+                .number-of-publications {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    padding: 10px;
+
+                    font-family: 'Hando Soft Trial';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 18px;
+
+                    color: $color-dark;
+                }
+            }
+        }
+    }
+}

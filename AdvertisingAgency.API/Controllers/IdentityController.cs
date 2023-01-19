@@ -58,5 +58,20 @@ namespace AdvertisingAgency.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("isExistByEmail")]
+        public async Task<ActionResult<IsExistReponse>> IsExistByEmailOrUsername(string requestValue)
+        {
+            try
+            {
+                var request = new IsExistByEmailOrUsernameRequest { RequestValue = requestValue };
+                var response = await _bus.Request<IsExistByEmailOrUsernameRequest, IsExistReponse>(request);
+                return Ok(response.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

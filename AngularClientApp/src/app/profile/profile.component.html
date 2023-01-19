@@ -1,0 +1,51 @@
+<navbar></navbar>
+<div class="container">
+    <div class="profile-title-container">
+        <h1 class="profile-title">Profile</h1>
+    </div>
+    <div class="profile-information-container">
+        <div class="profile-information">
+            <div class="profile-names">
+                <p class="profile-name">Username:</p>
+                <p class="profile-name">Age:</p>
+                <p class="profile-name">Email:</p>
+                <p class="profile-name">About Info:</p>
+                <p class="profile-name">Role:</p>
+            </div>
+            <div class="profile-results">
+                <p class="profile-result">{{userInfo.username}}</p>
+                <p class="profile-result">{{userInfo.age}}</p>
+                <p class="profile-result">{{userInfo.email}}</p>
+                <p class="profile-result">{{userInfo.aboutInfo}}</p>
+                <p class="profile-result">{{userInfo.roleName}}</p>
+
+                <div *ngIf="thisIsOldUser == false; then isNewUser; else isOldUser"></div>
+                <div *ngIf="numberOfPublications == 0; then zeroPublications; else notZeroPublications"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #isOldUser>
+    <div class="star">
+        <img src="../../assets/images/star-old-user.png" alt="oldUser">
+    </div>
+</ng-template>
+
+<ng-template #isNewUser>
+    <div class="star">
+        <img src="../../assets/images/star-new-user.png" alt="newUser">
+    </div>
+</ng-template>
+
+<ng-template #zeroPublications>
+    <div class="number-of-publications">
+        No one publications!
+    </div>
+</ng-template>
+
+<ng-template #notZeroPublications>
+    <div class="number-of-publications">
+        Number of publications: {{numberOfPublications}}
+    </div>
+</ng-template>

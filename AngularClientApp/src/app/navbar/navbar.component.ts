@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'navbar',
@@ -8,11 +9,19 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit
 {
-
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void
   {
+  }
+
+  isLoggedIn() {
+    if (localStorage.getItem('token') === null) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
   onLoginClick()
@@ -27,5 +36,18 @@ export class NavbarComponent implements OnInit
 
   onAboutClick() {
     this.router.navigate(['about']);
+  }
+
+  onLogoutClick() {
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
+
+  onProfileClick() {
+    this.router.navigate(['profile']);
+  }
+
+  onMyPublicationsClick() {
+    this.router.navigate(['publications']);
   }
 }

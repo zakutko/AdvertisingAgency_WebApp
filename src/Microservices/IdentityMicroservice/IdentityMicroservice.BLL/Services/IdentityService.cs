@@ -53,7 +53,7 @@ namespace IdentityMicroservice.BLL.Services
             var newUser = await _userRepository.InsertNewUser(
                 Guid.NewGuid(),
                 registerRequest.Username,
-                registerRequest.Age,
+                registerRequest.Birthday,
                 registerRequest.Email,
                 _identityServiceHelper.HashPassword(registerRequest.Password),
                 registerRequest.AboutInfo,
@@ -74,13 +74,25 @@ namespace IdentityMicroservice.BLL.Services
             return new GetCurrentUserResponse
             {
                 Username = user.Username,
-                Age = user.Age,
+                Age = _identityServiceHelper.GetAgeByBirthday(user.Birthday),
                 Email = user.Email,
                 AboutInfo = user.AboutInfo,
                 NumberOfPublications = user.NumberOfPublications,
                 IsOldUser = user.IsOldUser,
                 RoleName = await _roleRepository.GetRoleNameById(user.RoleId),
             };
+        }
+
+        public async Task<IsExistReponse> IsUserExistByEmailOrUsername(IsExistByEmailOrUsernameRequest isExistByEmailRequest)
+        {
+            var user = await _userRepository.GetUserByLoginRequest(isExistByEmailRequest.RequestValue);
+
+            if (user == null)
+            {
+                return new IsExistReponse { IsExist = false, ErrorMessage = null };
+            }
+
+            return new IsExistReponse { IsExist = true, ErrorMessage = null };
         }
     }
 }

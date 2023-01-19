@@ -39,7 +39,7 @@ namespace IdentityMicroservice.DAL.Repositories
             return await connection.QueryFirstOrDefaultAsync<User>(IdentityServiceConstants.queryGetUserByLoginRequest, new { usernameOfEmail = usernameOrEmail });
         }
 
-        public async Task<User> InsertNewUser(Guid id, string username, int age, string email, string passwordHash, string aboutInfo, int roleId)
+        public async Task<User> InsertNewUser(Guid id, string username, DateTime birthday, string email, string passwordHash, string aboutInfo, int roleId)
         {
             using var connection = _context.CreateConnection();
             var newUserId = await connection.QueryFirstOrDefaultAsync<Guid>(IdentityServiceConstants.queryInsertNewUser,
@@ -47,7 +47,7 @@ namespace IdentityMicroservice.DAL.Repositories
                 {
                     id = id,
                     username = username,
-                    age = age,
+                    birthday = birthday,
                     email = email,
                     passwordHash = passwordHash,
                     aboutInfo = aboutInfo,
