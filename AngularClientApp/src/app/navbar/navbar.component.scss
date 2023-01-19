@@ -1,0 +1,99 @@
+$color-white: #FFFFFF;
+$color-dark: #1A1A1D;
+$color-dark-vine: #6F2232;
+$color-light-vine: #C3073F;
+
+.navbar {
+    background-color: $color-dark;
+    width: 100vw;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+
+    .about-me-container {
+        width: 225px;
+
+        .about-me {
+            width: 75px;
+            height: 35px;
+            border-bottom: 3px solid $color-white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.5s;
+
+            &:hover {
+                border-bottom: 3px solid $color-light-vine;
+
+                .about-me-title {
+                    color: $color-light-vine;
+                }
+            }
+
+            .about-me-title {
+                text-decoration: none;
+                font-family: 'Hando Soft Trial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 19px;
+                transition: 0.5s;
+                cursor: pointer;
+
+                color: $color-white;
+            }
+        }
+    }
+
+    .logo {
+        width: 255px;
+        height: 55px;
+        border-width: 3px 3px 6px 3px;
+        border-style: solid;
+        border-color: $color-white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .logo-title {
+            color: $color-light-vine;
+            margin-bottom: 0;
+            font-family: 'Hando Soft Trial';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 29px;
+            text-decoration: none;
+        }
+    }
+
+    .login-register-buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 225px;
+
+        .button {
+            width: 100px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 10px;
+            border: none;
+
+            font-family: 'Hando Soft Trial';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+
+            color: $color-white;
+            background-color: $color-dark-vine;
+            transition: 0.5s;
+
+            &:hover {
+                background-color: $color-light-vine;
+            }
+        }
+    }
+}

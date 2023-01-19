@@ -1,0 +1,99 @@
+$color-dark: #1A1A1D;
+$color-vine: #950740;
+
+.container {
+
+    .about-title-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .about-title {
+            display: inline-block;
+            padding: 30px 50px 5px 50px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            border-bottom: 3px solid $color-vine;
+
+            font-family: 'Hando Soft Trial';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 38px;
+
+            color: $color-dark;
+        }
+    }
+
+    .about-photo-container {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+
+        img {
+            display: block;
+            width: 500px;
+            border-radius: 100px;
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+        }
+
+        .about-text-container {
+            width: 100%;
+            margin-left: 30px;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+            .about-name {
+                text-align: center;
+                padding: 15px 0;
+                font-family: 'Hando Soft Trial';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 28px;
+                line-height: 38px;
+
+                color: $color-dark;
+            }
+
+            .about-position {
+                text-align: center;
+                font-family: 'Hando Soft Trial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 38px;
+
+                color: $color-dark;
+            }
+
+            .about-description {
+                display: flex;
+                justify-content: space-around;
+
+                .about-server-client-side {
+
+                    .about-server-client-side-title {
+                        text-align: center;
+                        font-family: 'Hando Soft Trial';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 20px;
+                        line-height: 38px;
+
+                        color: $color-dark;
+                    }
+
+                    ul {
+                        li {
+                            font-family: 'Hando Soft Trial';
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 16px;
+
+                            color: $color-dark;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
