@@ -1,0 +1,83 @@
+$color-white: #FFFFFF;
+$color-dark: #1A1A1D;
+$color-dark-vine: #6F2232;
+$color-light-vine: #C3073F;
+
+.form-title {
+    text-align: center;
+    margin-top: 50px;
+    padding-bottom: 30px;
+    text-shadow: 3px 3px 20px $color-dark, -2px 1px 30px $color-dark;
+
+    font-family: 'Hando Soft Trial';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 38px;
+
+    color: $color-dark-vine;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .form {
+        width: 600px;
+        padding: 25px;
+        margin-top: 10px;
+        box-shadow: rgb(38, 57, 77) -10px 20px 30px -10px;
+        border-radius: 10px;
+        background-color: $color-dark-vine;
+
+        .form-group {
+
+            .group-label {
+                color: white;
+                font-weight: bold;
+                font-size: 16px;
+                padding-bottom: 10px;
+                margin-top: 5px;
+            }
+
+            .form-loader {
+                color: white;
+            }
+        }
+
+        .form-btn {
+            font-family: 'Hando Soft Trial';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+        }
+
+        .btn-offer-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 20px;
+        
+            .offer-register {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: rgb(175, 175, 175);
+        
+                a {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+.form-control.ng-pristine.ng-invalid.ng-touched {
+    border: 2px solid $color-light-vine;
+}
+
+.form-control.ng-dirty.ng-invalid.ng-touched {
+    border: 2px solid $color-light-vine;
+}

@@ -1,4 +1,42 @@
 <navbar></navbar>
+<h1 class="form-title">Sign In</h1>
 <div class="container">
+    <div *ngIf="invalidLogin == true" class="alert alert-danger">
+        The email/username or password is invalid.
+    </div>
+    <form class="form" #f="ngForm" [formGroup]="form" (ngSubmit)="login(f.value)">
+        <div class="form-group">
+            <label class="group-label" for="usernameOrEmail">Email or Username</label>
+            <input
+                formControlName="usernameOrEmail"
+                type="text" 
+                id="usernameOrEmail" 
+                class="form-control">
 
+            <div *ngIf="usernameOrEmail?.touched && usernameOrEmail?.invalid" class="alert alert-danger">
+                <div *ngIf="usernameOrEmail?.errors?.['required']">Email or Username is required.</div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label class="group-label" for="password">Password</label>
+            <input 
+                formControlName="password"
+                type="password" 
+                id="password" 
+                class="form-control">
+            
+            <div *ngIf="password?.touched && password?.invalid" class="alert alert-danger">
+                <div *ngIf="password?.errors?.['required']">Password is required.</div>
+            </div>
+        </div>
+
+        <div class="btn-offer-group">
+            <button class="form-btn btn btn-primary" type="submit">Sign In</button>
+            <div class="offer-register">
+                <span style="margin-right: 2px;">If you don't have account, please </span>
+                <a routerLink="/register">register...</a>
+            </div>
+        </div>
+    </form>
 </div>

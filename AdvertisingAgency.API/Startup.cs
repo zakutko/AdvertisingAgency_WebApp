@@ -16,6 +16,14 @@ namespace AdvertisingAgency.API
 
             services.AddEndpointsApiExplorer();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:4200", "http://localhost:4201");
+                });
+            });
+
             services.AddAdvertisingAgencyServices();
         }
 
@@ -31,6 +39,8 @@ namespace AdvertisingAgency.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
