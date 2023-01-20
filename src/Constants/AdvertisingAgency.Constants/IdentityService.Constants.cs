@@ -12,5 +12,9 @@
 
         //Role
         public const string queryGetRoleNameById = "SELECT RoleName FROM [Role] WHERE Id = @id";
+
+        //RoleRequest
+        public const string queryInsertNewRoleRequest = "INSERT INTO [RoleRequest] VALUES (@userId, @roleName, @numberOfPublications, @isOldUser)";
+        public const string queryGetRoleRequestByUserId = "SELECT * FROM [RoleRequest] WHERE UserId = @userId";
     }
 }

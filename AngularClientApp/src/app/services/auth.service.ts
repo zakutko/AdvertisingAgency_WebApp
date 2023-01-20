@@ -5,12 +5,14 @@ import { User } from '../models/user';
 import { RegisterCredentials } from '../credentials/register-credentials';
 import { UserInfo } from '../models/user-info';
 import { Exist } from '../models/exist';
+import { UpdateRoleCredentials } from '../credentials/update-role-credentials';
+import { UpdateRoleResponse } from '../models/update-role-response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl = "https://localhost:58566/api";
+  baseUrl = "https://localhost:58923/api";
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -38,5 +40,10 @@ export class AuthService {
 
   isUserExistByEmailOrUsername(requestValue: string) {
     return this.http.get<Exist>(this.baseUrl + `/Identity/isExistByEmail?requestValue=${requestValue}`);
+  }
+
+  updateRoleRequest(credentials: UpdateRoleCredentials) {
+    return this.http.post<UpdateRoleResponse>(this.baseUrl + '/Identity/updateRole', 
+      credentials, this.httpOptions);
   }
 }

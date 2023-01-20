@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UpdateRoleCredentials } from '../credentials/update-role-credentials';
 import { UserInfo } from '../models/user-info';
 import { AuthService } from '../services/auth.service';
 
@@ -11,6 +12,7 @@ export class ProfileComponent implements OnInit {
   userInfo!: UserInfo;
   thisIsOldUser!: boolean;
   numberOfPublications!: number;
+  getRoleRequestMessage!: string | null;
 
   constructor(private authService: AuthService) { }
 
@@ -33,6 +35,20 @@ export class ProfileComponent implements OnInit {
             this.numberOfPublications = result.numberOfPublications;
           }
         });
+    }
+  }
+
+  onUpdateRoleRequestClick(roleName: string) {
+    let token = localStorage.getItem('token');
+    if(token != null){
+      let updateRoleCredentials: UpdateRoleCredentials = {token: token, roleName: roleName};
+      this.authService.updateRoleRequest(updateRoleCredentials)
+        .subscribe(result => {
+          this.getRoleRequestMessage = result.message;
+          setTimeout(() => {
+            this.getRoleRequestMessage = null;
+          }, 4000);
+        })
     }
   }
 }

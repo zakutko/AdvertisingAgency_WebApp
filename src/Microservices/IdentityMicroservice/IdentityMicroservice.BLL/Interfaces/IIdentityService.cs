@@ -9,5 +9,6 @@ namespace IdentityMicroservice.BLL.Interfaces
         Task<LoginRegisterResponse> Register(RegisterRequest registerRequest);
         Task<GetCurrentUserResponse> GetCurrentUser(GetCurrentUserRequest getCurrentUserRequest);
         Task<IsExistReponse> IsUserExistByEmailOrUsername(IsExistByEmailOrUsernameRequest isExistByEmailRequest);
+        Task<UpdateRoleResponse> UpdateRoleByUserId(UpdateRoleRequest updateRoleRequest);
     }
 }

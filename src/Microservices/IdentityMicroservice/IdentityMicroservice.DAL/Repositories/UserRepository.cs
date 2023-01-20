@@ -56,5 +56,11 @@ namespace IdentityMicroservice.DAL.Repositories
 
             return await connection.QueryFirstOrDefaultAsync<User>(IdentityServiceConstants.queryGetUserById, new { id = newUserId });
         }
+
+        public async Task<User> GetUserById(string id)
+        {
+            using var connection = _context.CreateConnection();
+            return await connection.QueryFirstOrDefaultAsync<User>(IdentityServiceConstants.queryGetUserById, new { id = id });
+        }
     }
 }

@@ -18,10 +18,7 @@
                     <div class="menu-item"></div>
                     <div class="dropdown-container" tabindex="-1">
                       <div class="three-dots"></div>
-                      <div class="dropdown">
-                        <a><div (click)="onProfileClick()">Profile</div></a>
-                        <a><div (click)="onLogoutClick()">Logout</div></a>
-                      </div>
+                      <div *ngIf="userInfo.roleName == 'Admin'; then isAdmin"></div>
                     </div>
                 </div>
             </div>
@@ -36,7 +33,7 @@
             <a (click)="onAboutClick()" class="about-me-title">About me</a>
         </div>
         <div class="navigation-menu-link">
-            <a (click)="onMyPublicationsClick()" class="navigation-menu-link-title">My publications</a>
+            <a (click)="onMyAdvertisementsClick()" class="navigation-menu-link-title">My advertisements</a>
         </div>
     </div>
 </ng-template>
@@ -47,4 +44,12 @@
             <a (click)="onAboutClick()" class="about-me-title">About me</a>
         </div>
     </div>
+</ng-template>
+
+<ng-template #isAdmin>
+    <div class="dropdown">
+        <a><div (click)="onAdminPanelClick()">Admin Panel</div></a>
+        <a><div (click)="onProfileClick()">Profile</div></a>
+        <a><div (click)="onLogoutClick()">Logout</div></a>
+      </div>
 </ng-template>

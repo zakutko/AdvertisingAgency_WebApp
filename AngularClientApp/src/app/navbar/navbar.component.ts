@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserInfo } from '../models/user-info';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -9,10 +10,19 @@ import { AuthService } from '../services/auth.service';
 })
 export class NavbarComponent implements OnInit
 {
+  userInfo!: UserInfo;
+  
   constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void
   {
+    let token = localStorage.getItem('token');
+    if (token != null) {
+      this.authService.getCurrentUser(token)
+        .subscribe(result => {
+          this.userInfo = result;
+        });
+    }
   }
 
   isLoggedIn() {
@@ -47,7 +57,11 @@ export class NavbarComponent implements OnInit
     this.router.navigate(['profile']);
   }
 
-  onMyPublicationsClick() {
-    this.router.navigate(['publications']);
+  onMyAdvertisementsClick() {
+    this.router.navigate(['advertisements']);
+  }
+
+  onAdminPanelClick() {
+    this.router.navigate(['admin-panel'])
   }
 }

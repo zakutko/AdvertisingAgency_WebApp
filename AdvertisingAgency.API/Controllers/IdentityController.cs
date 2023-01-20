@@ -73,5 +73,19 @@ namespace AdvertisingAgency.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost("updateRole")]
+        public async Task<ActionResult<UpdateRoleResponse>> AddNewRoleRequest(UpdateRoleRequest updateRoleRequest)
+        {
+            try
+            {
+                var response = await _bus.Request<UpdateRoleRequest, UpdateRoleResponse>(updateRoleRequest);
+                return Ok(response.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

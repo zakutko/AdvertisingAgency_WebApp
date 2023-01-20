@@ -11,13 +11,20 @@ namespace IdentityMicroservice.BLL.Services
         private readonly IIdentityServiceHelper _identityServiceHelper;
         private readonly IUserRepository _userRepository;
         private readonly IRoleRepository _roleRepository;
+        private readonly IRoleRequestRepository _roleRequestRepository;
 
-        public IdentityService(ITokenService tokenService, IIdentityServiceHelper identityServiceHelper, IUserRepository userRepository, IRoleRepository roleRepository)
+        public IdentityService(
+            ITokenService tokenService, 
+            IIdentityServiceHelper identityServiceHelper, 
+            IUserRepository userRepository, 
+            IRoleRepository roleRepository, 
+            IRoleRequestRepository roleRequestRepository)
         {
             _tokenService = tokenService;
             _identityServiceHelper = identityServiceHelper;
             _userRepository = userRepository;
             _roleRepository = roleRepository;
+            _roleRequestRepository = roleRequestRepository;
         }
 
         public async Task<LoginRegisterResponse> Login(LoginRequest loginRequest)
@@ -93,6 +100,39 @@ namespace IdentityMicroservice.BLL.Services
             }
 
             return new IsExistReponse { IsExist = true, ErrorMessage = null };
+        }
+
+        public async Task<UpdateRoleResponse> UpdateRoleByUserId(UpdateRoleRequest updateRoleRequest)
+        {
+            var userId = _identityServiceHelper.GetUserIdByDecodingJwtToken(updateRoleRequest.Token);
+            var user = await _userRepository.GetUserById(userId);
+            var numberOfPublications = 0;
+            var isOldUser = false;
+
+            var roleRequest = await _roleRequestRepository.GetRoleRequestByUserId(userId);
+            if (roleRequest != null)
+            {
+                return new UpdateRoleResponse { Message = "You have already sent a request, please wait while it is being considered by the site administration" };
+            }
+
+            if (user.NumberOfPublications != null)
+            {
+                numberOfPublications = user.NumberOfPublications.Value;
+            }
+            if (user.IsOldUser != null)
+            {
+                isOldUser = user.IsOldUser.Value;
+            }
+
+            try
+            {
+                await _roleRequestRepository.InsertNewRoleRequest(userId, updateRoleRequest.RoleName, numberOfPublications, isOldUser);
+                return new UpdateRoleResponse { Message = "Your request has been accepted to review." };
+            }
+            catch (Exception ex)
+            {
+                return new UpdateRoleResponse { Message = ex.Message };
+            }
         }
     }
 }

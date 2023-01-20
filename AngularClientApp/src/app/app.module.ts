@@ -14,6 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProfileComponent } from './profile/profile.component';
     AboutMeComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,10 @@ import { ProfileComponent } from './profile/profile.component';
       {
         path: "profile",
         component: ProfileComponent
+      },
+      {
+        path: "admin-panel",
+        component: AdminPanelComponent
       }
     ])
   ],

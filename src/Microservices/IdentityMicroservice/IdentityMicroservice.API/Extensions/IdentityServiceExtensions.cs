@@ -17,6 +17,7 @@ namespace IdentityMicroservice.API.Extensions
             services.AddScoped<IIdentityServiceHelper, IdentityServiceHelper>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IRoleRequestRepository, RoleRequestRepository>();
 
             services.AddMassTransit(x =>
             {
@@ -24,6 +25,7 @@ namespace IdentityMicroservice.API.Extensions
                 x.AddConsumer<RegisterConsumer>();
                 x.AddConsumer<GetCurrentUserConsumer>();
                 x.AddConsumer<IsExistByEmailConsumer>();
+                x.AddConsumer<UpdateRoleConsumer>();
 
                 x.SetKebabCaseEndpointNameFormatter();
                 x.AddDelayedMessageScheduler();
