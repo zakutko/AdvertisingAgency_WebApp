@@ -10,5 +10,8 @@ namespace IdentityMicroservice.DAL.Interfaces
         Task<User> GetUserByLoginRequest(string usernameOrEmail);
         Task<User> InsertNewUser(Guid id, string username, DateTime birthday, string email, string passwordHash, string aboutInfo, int roleId);
         Task<User> GetUserById(string id);
+        Task<IEnumerable<User>> GetAllUsersWithoutCurrUser(string id);
+        Task<string> GetUsernameByUserId(string userId);
+        Task DeleteUserByUsernameAndEmail(string username, string email);
     }
 }

@@ -3,7 +3,7 @@
     public class GetCurrentUserResponse
     {
         public string? Username { get; set; }
-        public int? Age { get; set; }
+        public string Birthday { get; set; }
         public string? Email { get; set; }
         public string? AboutInfo { get; set; }
         public int? NumberOfPublications { get; set; }

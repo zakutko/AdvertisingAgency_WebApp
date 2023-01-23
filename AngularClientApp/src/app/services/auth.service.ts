@@ -7,12 +7,15 @@ import { UserInfo } from '../models/user-info';
 import { Exist } from '../models/exist';
 import { UpdateRoleCredentials } from '../credentials/update-role-credentials';
 import { UpdateRoleResponse } from '../models/update-role-response';
+import { RoleRequest } from '../models/role-request';
+import { Advertisement } from '../models/advertisement';
+import { DeleteUserCredentials } from '../credentials/delete-user-credentials';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl = "https://localhost:58923/api";
+  baseUrl = "https://localhost:64089/api";
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -45,5 +48,21 @@ export class AuthService {
   updateRoleRequest(credentials: UpdateRoleCredentials) {
     return this.http.post<UpdateRoleResponse>(this.baseUrl + '/Identity/updateRole', 
       credentials, this.httpOptions);
+  }
+
+  getAllUsers(token: string) {
+    return this.http.get<UserInfo[]>(this.baseUrl + `/Identity/getAllUsers?token=${token}`);
+  }
+
+  getAllRoleRequests(token: string) {
+    return this.http.get<RoleRequest[]>(this.baseUrl + `/Identity/getAllRoleRequests?token=${token}`);
+  }
+
+  getAllAdvertisements(token: string){
+    return this.http.get<Advertisement[]>(this.baseUrl + `/Identity/getAllAdvertisements?token=${token}`);
+  }
+
+  deleteUser(credentials: DeleteUserCredentials){
+    return this.http.delete(this.baseUrl + `/Identity/deleteUserByUsernameAndEmail?username=${credentials.username}&&email=${credentials.email}`, this.httpOptions);
   }
 }

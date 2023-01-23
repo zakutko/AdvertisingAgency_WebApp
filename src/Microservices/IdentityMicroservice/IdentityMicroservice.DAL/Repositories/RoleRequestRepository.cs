@@ -33,5 +33,11 @@ namespace IdentityMicroservice.DAL.Repositories
                     isOldUser = isOldUser 
                 });
         }
+
+        public async Task<IEnumerable<RoleRequest>> GetAllRoleRequests(string userId)
+        {
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<RoleRequest>(IdentityServiceConstants.queryGetAllRoleRequests, new { userId = userId });
+        }
     }
 }

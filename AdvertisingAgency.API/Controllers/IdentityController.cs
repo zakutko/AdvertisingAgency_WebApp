@@ -87,5 +87,54 @@ namespace AdvertisingAgency.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("getAllUsers")]
+        public async Task<ActionResult<GetAllUsersResponse>> GetAllUsers(string token)
+        {
+            try
+            {
+                var getAllUsersRequest = new GetAllUsersRequest { Token = token };
+                var response = await _bus.Request<GetAllUsersRequest, GetAllUsersResponse>(getAllUsersRequest);
+                return Ok(response.Message.UsersList);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("getAllRoleRequests")]
+        public async Task<ActionResult<GetAllRoleRequestsResponseList>> GetAllRoleRequests(string token)
+        {
+            try
+            {
+                var getAllRoleRequestsRequest = new GetAllRoleRequestsRequest { Token = token };
+                var response = await _bus.Request<GetAllRoleRequestsRequest, GetAllRoleRequestsResponseList>(getAllRoleRequestsRequest);
+                return Ok(response.Message.AllRoleRequestResponses);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("deleteUserByUsernameAndEmail")]
+        public async Task<ActionResult<DeleteUserResponse>> DeleteUser(string username, string email)
+        {
+            try
+            {
+                var deleteUserRequest = new DeleteUserRequest
+                {
+                    Username = username,
+                    Email = email
+                };
+                var response = await _bus.Request<DeleteUserRequest, DeleteUserResponse>(deleteUserRequest);
+                return Ok(response.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ using Dapper;
 using IdentityMicroservice.DAL.DataContext;
 using IdentityMicroservice.DAL.Interfaces;
 using IdentityMicroservice.DAL.Models;
+using System.Data;
 
 namespace IdentityMicroservice.DAL.Repositories
 {
@@ -61,6 +62,24 @@ namespace IdentityMicroservice.DAL.Repositories
         {
             using var connection = _context.CreateConnection();
             return await connection.QueryFirstOrDefaultAsync<User>(IdentityServiceConstants.queryGetUserById, new { id = id });
+        }
+
+        public async Task<IEnumerable<User>> GetAllUsersWithoutCurrUser(string id)
+        {
+            using var connection = _context.CreateConnection();
+            return await connection.QueryAsync<User>(IdentityServiceConstants.queryGetAllUserWithoutCurrUser, new { id = id });
+        }
+
+        public async Task<string> GetUsernameByUserId(string userId)
+        {
+            using var connection = _context.CreateConnection();
+            return await connection.QueryFirstOrDefaultAsync<string>(IdentityServiceConstants.queryGetUsernameByUserId, new { userId = userId });
+        }
+
+        public async Task DeleteUserByUsernameAndEmail(string username, string email)
+        {
+            using var connection = _context.CreateConnection();
+            await connection.ExecuteAsync("deleteUser", new { username = username, email = email }, commandType: CommandType.StoredProcedure);
         }
     }
 }

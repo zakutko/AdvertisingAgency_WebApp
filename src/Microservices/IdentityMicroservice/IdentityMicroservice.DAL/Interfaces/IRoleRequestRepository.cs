@@ -6,5 +6,6 @@ namespace IdentityMicroservice.DAL.Interfaces
     {
         Task<RoleRequest> GetRoleRequestByUserId(string userId);
         Task InsertNewRoleRequest(string userId, string roleName, int numberOfPublications, bool isOldUser);
+        Task<IEnumerable<RoleRequest>> GetAllRoleRequests(string userId);
     }
 }

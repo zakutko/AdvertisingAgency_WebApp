@@ -14,10 +14,10 @@ namespace IdentityMicroservice.BLL.Services
         private readonly IRoleRequestRepository _roleRequestRepository;
 
         public IdentityService(
-            ITokenService tokenService, 
-            IIdentityServiceHelper identityServiceHelper, 
-            IUserRepository userRepository, 
-            IRoleRepository roleRepository, 
+            ITokenService tokenService,
+            IIdentityServiceHelper identityServiceHelper,
+            IUserRepository userRepository,
+            IRoleRepository roleRepository,
             IRoleRequestRepository roleRequestRepository)
         {
             _tokenService = tokenService;
@@ -81,7 +81,7 @@ namespace IdentityMicroservice.BLL.Services
             return new GetCurrentUserResponse
             {
                 Username = user.Username,
-                Age = _identityServiceHelper.GetAgeByBirthday(user.Birthday),
+                Birthday = user.Birthday.ToShortDateString(),
                 Email = user.Email,
                 AboutInfo = user.AboutInfo,
                 NumberOfPublications = user.NumberOfPublications,
@@ -133,6 +133,57 @@ namespace IdentityMicroservice.BLL.Services
             {
                 return new UpdateRoleResponse { Message = ex.Message };
             }
+        }
+
+        public async Task<GetAllUsersResponse> GetAllUsersWithoutCurrUser(GetAllUsersRequest getAllUsersRequest)
+        {
+            var userId = _identityServiceHelper.GetUserIdByDecodingJwtToken(getAllUsersRequest.Token);
+            var userList = await _userRepository.GetAllUsersWithoutCurrUser(userId);
+            var responseList = new List<GetCurrentUserResponse>();
+            foreach (var user in userList)
+            {
+                responseList.Add(new GetCurrentUserResponse
+                {
+                    Username = user.Username,
+                    Birthday = user.Birthday.ToShortDateString(),
+                    Email = user.Email,
+                    AboutInfo = user.AboutInfo,
+                    NumberOfPublications = user.NumberOfPublications,
+                    IsOldUser = user.IsOldUser,
+                    RoleName = await _roleRepository.GetRoleNameById(user.RoleId),
+                });
+            }
+
+            return new GetAllUsersResponse { UsersList = responseList };
+        }
+
+        public async Task<GetAllRoleRequestsResponseList> GetAllRoleRequests(GetAllRoleRequestsRequest getAllRoleRequestsRequest)
+        {
+            var userId = _identityServiceHelper.GetUserIdByDecodingJwtToken(getAllRoleRequestsRequest.Token);
+            var roleRequestList = await _roleRequestRepository.GetAllRoleRequests(userId);
+            var allRoleRequestList = new GetAllRoleRequestsResponseList();
+            foreach (var roleRequest in roleRequestList)
+            {
+                var username = await _userRepository.GetUsernameByUserId(roleRequest.UserId);
+                allRoleRequestList.AllRoleRequestResponses.Add(new GetAllRoleRequestResponse
+                {
+                    Username = username,
+                    RoleName = roleRequest.RoleName,
+                    NumberOfPublications = roleRequest.NumberOfPublications,
+                    IsOldUser = roleRequest.IsOldUser,
+                });
+            }
+
+            return allRoleRequestList;
+        }
+
+        public async Task<DeleteUserResponse> DeleteUser(DeleteUserRequest deleteUserRequest)
+        {
+            await _userRepository.DeleteUserByUsernameAndEmail(deleteUserRequest.Username, deleteUserRequest.Email);
+            return new DeleteUserResponse
+            {
+                Message = "Delete Successful"
+            };
         }
     }
 }

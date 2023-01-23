@@ -1,10 +1,10 @@
 export interface UserInfo {
     username: string;
-    age: number;
+    birthday: string;
     email: string;
     aboutInfo: string;
     numberOfPublications: number | null;
-    isOldUser: boolean | null;
+    isOldUser: boolean;
     roleName: string;
     errorMessage: string | null;
 }
