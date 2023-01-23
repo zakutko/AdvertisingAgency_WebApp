@@ -27,6 +27,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityMicroservice.DAL", 
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{533FFC3C-00BC-418C-881D-591EF628526A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AdvertisementsMicroservice", "AdvertisementsMicroservice", "{AE15E664-3C3E-42E0-9269-CCE14214F13A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvertisementsMicroservice.API", "src\Microservices\AdvertisementsMicroservice\AdvertisementsMicroservice.API\AdvertisementsMicroservice.API.csproj", "{B18C1B05-5C45-4C65-A120-DD60D70E3908}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvertisementsMicroservice.BLL", "src\Microservices\AdvertisementsMicroservice\AdvertisementsMicroservice.BLL\AdvertisementsMicroservice.BLL.csproj", "{1536F550-B329-4F22-B959-0685127EA64D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvertisementsMicroservice.DAL", "src\Microservices\AdvertisementsMicroservice\AdvertisementsMicroservice.DAL\AdvertisementsMicroservice.DAL.csproj", "{4B3EDDCE-9CE2-4D7B-BDCA-9059476F6CDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +69,18 @@ Global
 		{533FFC3C-00BC-418C-881D-591EF628526A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{533FFC3C-00BC-418C-881D-591EF628526A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{533FFC3C-00BC-418C-881D-591EF628526A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B18C1B05-5C45-4C65-A120-DD60D70E3908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B18C1B05-5C45-4C65-A120-DD60D70E3908}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B18C1B05-5C45-4C65-A120-DD60D70E3908}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B18C1B05-5C45-4C65-A120-DD60D70E3908}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1536F550-B329-4F22-B959-0685127EA64D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1536F550-B329-4F22-B959-0685127EA64D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1536F550-B329-4F22-B959-0685127EA64D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1536F550-B329-4F22-B959-0685127EA64D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B3EDDCE-9CE2-4D7B-BDCA-9059476F6CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B3EDDCE-9CE2-4D7B-BDCA-9059476F6CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B3EDDCE-9CE2-4D7B-BDCA-9059476F6CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B3EDDCE-9CE2-4D7B-BDCA-9059476F6CDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +95,10 @@ Global
 		{B2933AAB-B20D-4D28-ACAC-5E11D30BD2F5} = {D66F3B96-1613-4F38-BABD-FF628EC95C16}
 		{0DAB005E-8861-4610-962F-38EB7C05C6B0} = {D66F3B96-1613-4F38-BABD-FF628EC95C16}
 		{4FDFD951-2352-4887-A978-C62F34B84C1F} = {D66F3B96-1613-4F38-BABD-FF628EC95C16}
+		{AE15E664-3C3E-42E0-9269-CCE14214F13A} = {3B563D09-6C3A-4391-AF05-CFD5D2FB3ECC}
+		{B18C1B05-5C45-4C65-A120-DD60D70E3908} = {AE15E664-3C3E-42E0-9269-CCE14214F13A}
+		{1536F550-B329-4F22-B959-0685127EA64D} = {AE15E664-3C3E-42E0-9269-CCE14214F13A}
+		{4B3EDDCE-9CE2-4D7B-BDCA-9059476F6CDA} = {AE15E664-3C3E-42E0-9269-CCE14214F13A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8CBEE321-7E80-4D17-8045-0A5EC5CCB004}

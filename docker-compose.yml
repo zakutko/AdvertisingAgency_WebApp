@@ -38,3 +38,16 @@ services:
         - ACCEPT_EULA=Y
         - Id=serhii
         - PASSWORD=Sql_Passw@rd
+
+
+  advertisementsmicroservice.api:
+    container_name: Advertisements-Microservice
+    image: ${DOCKER_REGISTRY-}advertisementsmicroserviceapi
+    build:
+      context: .
+      dockerfile: src/Microservices/AdvertisementsMicroservice/AdvertisementsMicroservice.API/Dockerfile
+    depends_on:
+    - rabbitmq
+    - app_db
+    environment:
+        - DB_CONNECTION_STRING=Server=host.docker.internal, 1433;Database=AdvertisingAgency_DB;User Id=serhii;Password=Pj6l3gEl9!2e;TrustServerCertificate=True

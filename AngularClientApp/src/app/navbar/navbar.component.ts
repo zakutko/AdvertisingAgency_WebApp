@@ -62,6 +62,14 @@ export class NavbarComponent implements OnInit
   }
 
   onAdminPanelClick() {
-    this.router.navigate(['admin-panel'])
+    this.router.navigate(['admin-panel']);
+  }
+
+  onEditorPanelClick() {
+    this.router.navigate(['editor-panel']);
+  }
+
+  onApproverPanelClick() {
+    this.router.navigate(['approver-panel']);
   }
 }
