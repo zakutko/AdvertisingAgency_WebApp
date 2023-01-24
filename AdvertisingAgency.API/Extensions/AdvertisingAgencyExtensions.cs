@@ -19,7 +19,8 @@ namespace AdvertisingAgency.API.Extensions
                 x.AddRequestClient<GetAllUsersRequest>();
                 x.AddRequestClient<GetAllRoleRequestsRequest>();
                 x.AddRequestClient<DeleteUserRequest>();
-                x.AddRequestClient<GetAllBannersRequest>(); 
+                x.AddRequestClient<GetAllBannersRequest>();
+                x.AddRequestClient<AddBannerRequest>();
             });
 
             services.AddOptions<MassTransitHostOptions>()

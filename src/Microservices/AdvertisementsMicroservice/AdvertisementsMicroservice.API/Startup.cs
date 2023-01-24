@@ -1,11 +1,18 @@
 ﻿using AdvertisementsMicroservice.API.Extensions;
-using IdentityMicroservice.DAL.DataContext;
+using AdvertisementsMicroservice.DAL.DataContext;
 using Microsoft.OpenApi.Models;
 
 namespace AdvertisementsMicroservice.API
 {
     public class Startup
     {
+        private readonly IConfiguration _config;
+
+        public Startup(IConfiguration config)
+        {
+            _config = config;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<DapperContext>();
@@ -16,7 +23,7 @@ namespace AdvertisementsMicroservice.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Advertisements Microservice", Version = "v1" });
             });
 
-            services.AddAdvertisementsServices();
+            services.AddAdvertisementsServices(_config);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

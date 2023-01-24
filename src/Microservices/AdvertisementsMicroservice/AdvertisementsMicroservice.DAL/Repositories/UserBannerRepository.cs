@@ -15,6 +15,12 @@ namespace AdvertisementsMicroservice.DAL.Repositories
             _context = context;
         }
 
+        public async Task AddUserBanner(string userId, Guid bannerId)
+        {
+            using var connection = _context.CreateConnection();
+            await connection.ExecuteAsync(AdvertisementsServiceConstants.queryAddUserBanner, new { userId = Guid.Parse(userId), bannerId = bannerId });
+        }
+
         public async Task<IEnumerable<UserBanner>> GetAllUserBanners()
         {
             using var connection = _context.CreateConnection();

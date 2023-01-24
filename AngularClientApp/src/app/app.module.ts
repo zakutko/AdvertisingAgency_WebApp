@@ -15,6 +15,13 @@ import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { AddAdvertisementComponent } from './add-advertisement/add-advertisement.component';
+
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -26,9 +33,14 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    AddAdvertisementComponent
   ],
   imports: [
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
+    provideStorage(() => getStorage()),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -58,6 +70,10 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
       {
         path: "admin-panel",
         component: AdminPanelComponent
+      },
+      {
+        path: "add-advertisement",
+        component: AddAdvertisementComponent
       }
     ])
   ],

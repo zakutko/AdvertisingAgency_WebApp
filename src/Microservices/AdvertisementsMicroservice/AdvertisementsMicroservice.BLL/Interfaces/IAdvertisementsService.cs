@@ -5,6 +5,7 @@ namespace AdvertisementsMicroservice.BLL.Interfaces
 {
     public interface IAdvertisementsService
     {
-        Task<GetAllBannersResponse> GetAllBanners(GetAllBannersRequest getAllBannersRequest);
+        Task<GetAllBannersResponse> GetAllBanners();
+        Task<AddBannerResponse> AddBanner(AddBannerRequest addBannerRequest);
     }
 }

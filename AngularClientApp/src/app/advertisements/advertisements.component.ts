@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Advertisement } from '../models/advertisement';
+import { AdvertisementsService } from '../services/advertisements.service';
 
 @Component({
   selector: 'advertisements',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./advertisements.component.scss']
 })
 export class AdvertisementsComponent implements OnInit {
+  advertisements!: Advertisement[];
 
-  constructor() { }
+  constructor(private advertisementsService: AdvertisementsService) { }
 
   ngOnInit(): void {
-  }
+    this.advertisementsService.getAllBanners("get all banners")
+      .subscribe(result => {
+        this.advertisements = result;
+      });
 
+    setInterval(() => {
+      this.advertisementsService.getAllBanners("get all banners")
+      .subscribe(result => {
+        this.advertisements = result;
+      });
+    }, 3000);
+  }
 }

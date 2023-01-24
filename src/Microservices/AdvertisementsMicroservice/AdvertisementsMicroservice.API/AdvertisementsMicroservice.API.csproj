@@ -19,10 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Consumers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\IdentityMicroservice\IdentityMicroservice.DAL\IdentityMicroservice.DAL.csproj" />
     <ProjectReference Include="..\AdvertisementsMicroservice.BLL\AdvertisementsMicroservice.BLL.csproj" />
   </ItemGroup>

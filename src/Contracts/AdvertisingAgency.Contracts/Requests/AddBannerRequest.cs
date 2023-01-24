@@ -1,14 +1,14 @@
-﻿namespace AdvertisingAgency.Contracts.Responses
+﻿using Microsoft.AspNetCore.Http;
+
+namespace AdvertisingAgency.Contracts.Requests
 {
-    public class BannerResponse
+    public class AddBannerRequest
     {
         public string UserId { get; set; }
         public string Title { get; set; }
         public string SubTitle { get; set; }
         public string Description { get; set; }
         public string LinkToBrowserPage { get; set; }
-        public string ReleaseDate { get; set; }
-        public string Status { get; set; }
-        public string PhotoUrl { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

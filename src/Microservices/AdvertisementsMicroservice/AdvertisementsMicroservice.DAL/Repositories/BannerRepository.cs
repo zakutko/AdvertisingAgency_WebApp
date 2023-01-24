@@ -15,6 +15,21 @@ namespace AdvertisementsMicroservice.DAL.Repositories
             _context = context;
         }
 
+        public async Task<Guid> AddBannerAndGetBannerId(string title, string subtitle, string description, string linkToBrowserPage, string photoUrl)
+        {
+            using var connection = _context.CreateConnection();
+            var result = await connection.QueryFirstOrDefaultAsync<Guid>(AdvertisementsServiceConstants.queryAddbannerAdnReturnBannerId,
+                new
+                {
+                    title = title,
+                    subtitle = subtitle,
+                    description = description,
+                    linkToBrowserPage = linkToBrowserPage,
+                    photoUrl = photoUrl
+                });
+            return result;
+        }
+
         public async Task<IEnumerable<Banner>> GetAllBanners()
         {
             using var connection = _context.CreateConnection();

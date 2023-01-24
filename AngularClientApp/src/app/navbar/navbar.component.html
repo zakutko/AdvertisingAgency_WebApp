@@ -18,10 +18,10 @@
                     <div class="menu-item"></div>
                     <div class="dropdown-container" tabindex="-1">
                       <div class="three-dots"></div>
-                      <div *ngIf="userInfo.roleName == 'Admin'; then isAdmin"></div>
-                      <div *ngIf="userInfo.roleName == 'Author'; then isAuthor"></div>
-                      <div *ngIf="userInfo.roleName == 'Editor'; then isEditor"></div>
-                      <div *ngIf="userInfo.roleName == 'Approver'; then isApprover"></div>
+                      <div *ngIf="userInfo?.roleName == 'Admin'; then isAdmin"></div>
+                      <div *ngIf="userInfo?.roleName == 'Author'; then isAuthor"></div>
+                      <div *ngIf="userInfo?.roleName == 'Editor'; then isEditor"></div>
+                      <div *ngIf="userInfo?.roleName == 'Approver'; then isApprover"></div>
                     </div>
                 </div>
             </div>

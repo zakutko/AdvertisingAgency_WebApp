@@ -3,34 +3,10 @@
         <h1 class="advertisements-title">Advertisements</h1>
     </div>
     <div class="advertisements">
-
-        <!--Should be add ngFor -->
-
-        <div class="adv">
-            <div class="adv-title">Some Header</div>
+        <div class="adv" *ngFor="let adv of advertisements">
+            <div class="adv-title">{{adv.title}}</div>
             <div class="adv-body">
-                <img src="../../assets//images/1.jpg" alt="">
-                <button class="adv-button">More information</button>
-            </div>
-        </div>
-        <div class="adv">
-            <div class="adv-title">Some Header</div>
-            <div class="adv-body">
-                <img src="../../assets//images/1.jpg" alt="">
-                <button class="adv-button">More information</button>
-            </div>
-        </div>
-        <div class="adv">
-            <div class="adv-title">Some Header</div>
-            <div class="adv-body">
-                <img src="../../assets//images/1.jpg" alt="">
-                <button class="adv-button">More information</button>
-            </div>
-        </div>
-        <div class="adv">
-            <div class="adv-title">Some Header</div>
-            <div class="adv-body">
-                <img src="../../assets//images/1.jpg" alt="">
+                <img src="../../assets//images/1.jpg" [alt]="adv.title">
                 <button class="adv-button">More information</button>
             </div>
         </div>

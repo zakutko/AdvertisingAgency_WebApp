@@ -17,12 +17,27 @@ namespace AdvertisingAgency.API.Controllers
         }
 
         [HttpGet("getAllBanners")]
-        public async Task<ActionResult<GetAllBannersResponse>> GetAllBanners(GetAllBannersRequest getAllBannersRequest)
+        public async Task<ActionResult<GetAllBannersResponse>> GetAllBanners(string message)
         {
             try
             {
+                var getAllBannersRequest = new GetAllBannersRequest { Message = message };
                 var response = await _bus.Request<GetAllBannersRequest, GetAllBannersResponse>(getAllBannersRequest);
                 return Ok(response.Message.BannerList);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("addBanner")]
+        public async Task<ActionResult<AddBannerResponse>> AddBanner(AddBannerRequest addBannerRequest)
+        {
+            try
+            {
+                var response = await _bus.Request<AddBannerRequest, AddBannerResponse>(addBannerRequest);
+                return Ok(response.Message);
             }
             catch (Exception ex)
             {

@@ -15,7 +15,7 @@ import { DeleteUserCredentials } from '../credentials/delete-user-credentials';
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl = "https://localhost:64089/api";
+  baseUrl = "https://localhost:57075/api";
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
