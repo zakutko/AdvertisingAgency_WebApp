@@ -10,5 +10,6 @@
         public DateTime ReleaseDate { get; set; }
         public int StatusId { get; set; }
         public string PhotoUrl { get; set; }
+        public string Comment { get; set; }
     }
 }

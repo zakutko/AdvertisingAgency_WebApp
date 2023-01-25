@@ -4,9 +4,12 @@
     </div>
     <div class="advertisements">
         <div class="adv" *ngFor="let adv of advertisements">
-            <div class="adv-title">{{adv.title}}</div>
+            <div class="adv-title">
+                {{adv.title}}
+                <div class="adv-status"></div>
+            </div>
             <div class="adv-body">
-                <img src="../../assets//images/1.jpg" [alt]="adv.title">
+                <img [src]="adv.photoUrl" [alt]="adv.title">
                 <button class="adv-button">More information</button>
             </div>
         </div>

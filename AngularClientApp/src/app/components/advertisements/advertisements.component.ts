@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Advertisement } from '../models/advertisement';
-import { AdvertisementsService } from '../services/advertisements.service';
+import { Advertisement } from '../../models/advertisement';
+import { AdvertisementsService } from '../../services/advertisements.service';
 
 @Component({
   selector: 'advertisements',
@@ -17,12 +17,5 @@ export class AdvertisementsComponent implements OnInit {
       .subscribe(result => {
         this.advertisements = result;
       });
-
-    setInterval(() => {
-      this.advertisementsService.getAllBanners("get all banners")
-      .subscribe(result => {
-        this.advertisements = result;
-      });
-    }, 3000);
   }
 }

@@ -32,6 +32,36 @@ namespace AdvertisementsMicroservice.BLL.Services
             return new AddBannerResponse { Message = "Banner was added successful" };
         }
 
+        public async Task<GetAllBannersResponse> GetAllBannersByUserId(GetAllBannersByUserIdRequest getAllBannersByUserIdRequest)
+        {
+            var userId = Guid.Parse(getAllBannersByUserIdRequest.UserId);
+            var userBanners = await _userBannerRepository.GetAllUserBannersByUserId(userId);
+
+            var response = new GetAllBannersResponse();
+
+            foreach (var item in userBanners)
+            {
+                var banner = await _bannerRepository.GetBannerByIdAnyStatus(item.BannerId.ToString());
+                if (banner != null)
+                {
+                    response.BannerList.Add(new BannerResponse
+                    {
+                        UserId = item.UserId.ToString(),
+                        Title = banner.Title,
+                        SubTitle = banner.SubTitle,
+                        Description = banner.Description,
+                        LinkToBrowserPage = banner.LinkToBrowserPage,
+                        ReleaseDate = banner.ReleaseDate.ToShortDateString(),
+                        Status = await _statusRepository.GetStatusNameById(banner.StatusId),
+                        PhotoUrl = banner.PhotoUrl,
+                        Comment = banner.Comment
+                    });
+                }
+            }
+
+            return response;
+        }
+
         public async Task<GetAllBannersResponse> GetAllBanners()
         {
             var userBanners = await _userBannerRepository.GetAllUserBanners();
@@ -41,17 +71,21 @@ namespace AdvertisementsMicroservice.BLL.Services
             foreach (var item in userBanners)
             {
                 var banner = await _bannerRepository.GetBannerById(item.BannerId.ToString());
-                response.BannerList.Add(new BannerResponse
+                if (banner != null)
                 {
-                    UserId = item.UserId.ToString(),
-                    Title = banner.Title,
-                    SubTitle = banner.SubTitle,
-                    Description = banner.Description,
-                    LinkToBrowserPage = banner.LinkToBrowserPage,
-                    ReleaseDate = banner.ReleaseDate.ToShortDateString(),
-                    Status = await _statusRepository.GetStatusNameById(banner.StatusId),
-                    PhotoUrl = banner.PhotoUrl,
-                });
+                    response.BannerList.Add(new BannerResponse
+                    {
+                        UserId = item.UserId.ToString(),
+                        Title = banner.Title,
+                        SubTitle = banner.SubTitle,
+                        Description = banner.Description,
+                        LinkToBrowserPage = banner.LinkToBrowserPage,
+                        ReleaseDate = banner.ReleaseDate.ToShortDateString(),
+                        Status = await _statusRepository.GetStatusNameById(banner.StatusId),
+                        PhotoUrl = banner.PhotoUrl,
+                        Comment = banner.Comment
+                    });
+                }
             }
 
             return response;

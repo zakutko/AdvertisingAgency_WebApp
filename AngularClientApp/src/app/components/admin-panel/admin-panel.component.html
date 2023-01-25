@@ -10,7 +10,7 @@
             </h1>
             <a [ngClass]="{'active': selectedSideBarMenu === 'Users'}" (click)="selectedSideBarMenu = 'Users'; getAllUsers()">Users</a>
             <a [ngClass]="{'active': selectedSideBarMenu === 'UpdateRoleRequests'}" (click)="selectedSideBarMenu = 'UpdateRoleRequests'; getAllRoleRequests()">Update role requests</a>
-            <a [ngClass]="{'active': selectedSideBarMenu === 'Advertisements'}" (click)="selectedSideBarMenu = 'Advertisements'">Advertisements</a>
+            <a [ngClass]="{'active': selectedSideBarMenu === 'Advertisements'}" (click)="selectedSideBarMenu = 'Advertisements'; getAllAdvertisements()">Advertisements</a>
         </div>
         <div *ngIf="selectedSideBarMenu == 'Users'; then users"></div>
         <div *ngIf="selectedSideBarMenu == 'UpdateRoleRequests'; then updateRoleRequest"></div>
@@ -25,7 +25,7 @@
             <div *ngFor="let user of usersInfo; index as i;" class="card">
                 <div class="card-header">{{user.username}}</div>
                 <div class="card-body">
-                    <p class="card-text"><span>Age:</span> {{user.birthday}}</p>
+                    <p class="card-text"><span>Birthday:</span> {{user.birthday}}</p>
                     <p class="card-text"><span>Email:</span> {{user.email}}</p>
                     <p class="card-text"><span>About:</span> {{user.aboutInfo}}</p>
                     <p class="card-text"><span>Number Of Publications:</span> {{user.numberOfPublications}}</p>
@@ -64,7 +64,23 @@
 <ng-template #advertisements>
     <div class="admin-panel-content">
         <h1 class="admin-panel-content-title">{{selectedSideBarMenu}}</h1>
-
+        <div class="cards">
+            <div *ngFor="let advertisement of advertisementsList index as i;" class="card">
+                <div class="card-header">{{advertisement.title}}</div>
+                <div class="card-body">
+                    <p class="card-text"><span>Subtitle: </span> {{advertisement.subTitle}}</p>
+                    <p class="card-text"><span>Description: </span> {{advertisement.description}}</p>
+                    <p class="card-text"><span>Link: </span><a [href]="advertisement.linkToBrowserPage">Link to browser page</a></p>
+                    <p class="card-text"><span>Release Date: </span> {{advertisement.releaseDate}}</p>
+                    <p class="card-text"><span>Status:</span> {{advertisement.status}}</p>
+                    <p class="card-text"><span>Photo url: </span> <a [href]="advertisement.photoUrl">Link to image</a></p>
+                    <div class="card-buttons">
+                        <button class="card-button update" (click)="onUpdateAdvClick()">Update</button>
+                        <button class="card-button delete" (click)="onDeleteAdvClick()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </ng-template>
 

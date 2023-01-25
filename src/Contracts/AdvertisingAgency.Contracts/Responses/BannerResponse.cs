@@ -10,5 +10,6 @@
         public string ReleaseDate { get; set; }
         public string Status { get; set; }
         public string PhotoUrl { get; set; }
+        public string? Comment { get; set; }
     }
 }

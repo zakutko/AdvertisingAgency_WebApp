@@ -31,6 +31,21 @@ namespace AdvertisingAgency.API.Controllers
             }
         }
 
+        [HttpGet("getAllBannersByUserId")]
+        public async Task<ActionResult<GetAllBannersByUserIdRequest>> GetAllBannersByUserId(string userId)
+        {
+            try
+            {
+                var getAllBannersByUserIdRequest = new GetAllBannersByUserIdRequest { UserId = userId };
+                var response = await _bus.Request<GetAllBannersByUserIdRequest, GetAllBannersResponse>(getAllBannersByUserIdRequest);
+                return Ok(response.Message.BannerList);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost("addBanner")]
         public async Task<ActionResult<AddBannerResponse>> AddBanner(AddBannerRequest addBannerRequest)
         {

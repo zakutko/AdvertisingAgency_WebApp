@@ -21,6 +21,7 @@ namespace AdvertisingAgency.API.Extensions
                 x.AddRequestClient<DeleteUserRequest>();
                 x.AddRequestClient<GetAllBannersRequest>();
                 x.AddRequestClient<AddBannerRequest>();
+                x.AddRequestClient<GetAllBannersByUserIdRequest>();
             });
 
             services.AddOptions<MassTransitHostOptions>()

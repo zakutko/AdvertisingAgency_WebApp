@@ -9,3 +9,6 @@ body {
 h1, p, ul {
     margin-bottom: 0;
 }
+html, body { height: 100%; }
+
+@import '~bootstrap/scss/bootstrap';

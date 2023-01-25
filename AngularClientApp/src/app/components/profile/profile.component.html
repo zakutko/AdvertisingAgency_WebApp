@@ -16,7 +16,7 @@
         </div>
     </div> 
     <div class="get-role-alert alert alert-success" *ngIf="getRoleRequestMessage != null">{{getRoleRequestMessage}}</div>
-    <div *ngIf="numberOfPublications > 10 && userInfo.roleName != 'Admin'; then requestRole"></div>
+    <div *ngIf="numberOfPublications >= 5 && userInfo.roleName != 'Admin'; then requestRole"></div>
 </div>
 
 <ng-template #isOldUser>

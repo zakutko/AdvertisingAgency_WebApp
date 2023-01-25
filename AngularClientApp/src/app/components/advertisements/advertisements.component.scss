@@ -2,6 +2,7 @@ $color-dark: #1A1A1D;
 $color-white: #FFFFFF;
 $color-dark-vine: #950740;
 $color-light-vine: #C3073F;
+$color-green: rgba(21, 255, 0, 0.644);
 
 .container {
 
@@ -41,6 +42,7 @@ $color-light-vine: #C3073F;
             box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 
             .adv-title {
+                position: relative;
                 height: 50px;
                 margin-bottom: 0px;
                 display: flex;
@@ -53,8 +55,22 @@ $color-light-vine: #C3073F;
                 font-size: 22px;
                 line-height: 19px;
 
+                border-bottom: 3px solid $color-white;
                 background-color: $color-dark;
-                color: $color-light-vine;
+                color: $color-white;
+                
+                .adv-status {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 15px;
+                    height: 15px;
+    
+                    border-radius: 15px;
+                    margin: 10px;
+    
+                    background-color: $color-green;
+                }
             }
 
             .adv-body {
@@ -63,6 +79,8 @@ $color-light-vine: #C3073F;
                 img {
                     width: 600px;
                     height: 300px;
+                    background-size: cover;
+
                     opacity: 1;
                     transition: 0.7s;
                 }

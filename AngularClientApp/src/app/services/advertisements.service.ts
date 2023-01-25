@@ -7,7 +7,7 @@ import { Advertisement } from '../models/advertisement';
   providedIn: 'root'
 })
 export class AdvertisementsService {
-  baseUrl = "https://localhost:57075/api";
+  baseUrl = "https://localhost:62207/api";
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -17,6 +17,10 @@ export class AdvertisementsService {
 
   getAllBanners(message: string){
     return this.http.get<Advertisement[]>(this.baseUrl + `/Advertisements/getAllBanners?message=${message}`);
+  }
+
+  getAllBannersByUserId(userId: string) {
+    return this.http.get<Advertisement[]>(this.baseUrl + `/Advertisements/getAllBannersByUserId?userId=${userId}`);
   }
 
   addBanner(credentials: AddAdvertisementCredentials){

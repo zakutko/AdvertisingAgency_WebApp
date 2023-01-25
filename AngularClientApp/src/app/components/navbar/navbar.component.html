@@ -36,7 +36,7 @@
             <a (click)="onAboutClick()" class="about-me-title">About me</a>
         </div>
         <div class="navigation-menu-link">
-            <a (click)="onMyAdvertisementsClick()" class="navigation-menu-link-title">My advertisements</a>
+            <a (click)="onAddAdvertisementClick()" class="navigation-menu-link-title">Add advertisement</a>
         </div>
     </div>
 </ng-template>
@@ -52,6 +52,7 @@
 <ng-template #isAdmin>
     <div class="dropdown">
         <a><div (click)="onAdminPanelClick()">Admin Panel</div></a>
+        <a><div (click)="onMyAdvertisementsClick()">My advertisements</div></a>
         <a><div (click)="onProfileClick()">Profile</div></a>
         <a><div (click)="onLogoutClick()">Logout</div></a>
       </div>
@@ -68,6 +69,7 @@
 <ng-template #isEditor>
     <div class="dropdown">
         <a><div (click)="onEditorPanelClick()">Editor Panel</div></a>
+        <a><div (click)="onMyAdvertisementsClick()">My advertisements</div></a>
         <a><div (click)="onProfileClick()">Profile</div></a>
         <a><div (click)="onLogoutClick()">Logout</div></a>
     </div>
@@ -76,6 +78,7 @@
 <ng-template #isApprover>
     <div class="dropdown">
         <a><div (click)="onApproverPanelClick()">Approver Panel</div></a>
+        <a><div (click)="onMyAdvertisementsClick()">My advertisements</div></a>
         <a><div (click)="onProfileClick()">Profile</div></a>
         <a><div (click)="onLogoutClick()">Logout</div></a>
     </div>

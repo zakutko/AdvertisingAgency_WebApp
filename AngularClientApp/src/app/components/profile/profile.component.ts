@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UpdateRoleCredentials } from '../credentials/update-role-credentials';
-import { UserInfo } from '../models/user-info';
-import { AuthService } from '../services/auth.service';
+import { UpdateRoleCredentials } from '../../credentials/update-role-credentials';
+import { UserInfo } from '../../models/user-info';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'profile',

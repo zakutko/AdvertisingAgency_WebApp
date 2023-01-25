@@ -6,6 +6,7 @@ namespace AdvertisementsMicroservice.DAL.Interfaces
     {
         Task<IEnumerable<Banner>> GetAllBanners();
         Task<Banner> GetBannerById(string id);
+        Task<Banner> GetBannerByIdAnyStatus(string id);
         Task<Guid> AddBannerAndGetBannerId(string title, string subtitle, string description, string linkToBrowserPage, string photoUrl);
     }
 }

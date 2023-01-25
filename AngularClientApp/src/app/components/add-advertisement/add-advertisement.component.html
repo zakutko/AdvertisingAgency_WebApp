@@ -51,17 +51,28 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="image" class="group-label">Image</label>
-            <input
+            <label for="image" class="group-label">Image (Will be compressed to 600x300px)</label>
+            <div class="file-input-container">
+                <input
                 id="image"
                 type="file"
-                class="form-control"
+                class="upload-image-input form-control"
                 (change)="onChange($event)"
                 accept=".png,.jpg">
+
+                <button 
+                    [disabled]="imageUrl != null" 
+                    class="form-btn btn btn-success upload-image-btn" 
+                    (click)="onUploadClick()"
+                >
+                    Upload
+                </button>
+            </div>
+            <p class="progress-bar"><ngb-progressbar [showValue]="true" type="success" [value]="progressPercent"></ngb-progressbar></p>
         </div>
         
         <div class="btn-offer-group">
-            <button class="form-btn btn btn-primary" type="submit">Add advertisement</button>
+            <button [disabled]="progressPercent < 100" class="form-btn btn btn-primary" type="submit">Add advertisement</button>
         </div>
     </form> 
 </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserInfo } from '../models/user-info';
-import { AuthService } from '../services/auth.service';
+import { UserInfo } from '../../models/user-info';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'navbar',
@@ -57,8 +57,12 @@ export class NavbarComponent implements OnInit
     this.router.navigate(['profile']);
   }
 
+  onAddAdvertisementClick() {
+    this.router.navigate(['add-advertisement']);
+  }
+
   onMyAdvertisementsClick() {
-    this.router.navigate(['advertisements']);
+    this.router.navigate(['my-advertisements']);
   }
 
   onAdminPanelClick() {

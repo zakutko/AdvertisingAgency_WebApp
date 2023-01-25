@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AddAdvertisementCredentials } from '../credentials/add-advertisement-credentials';
-import { AdvertisementsService } from '../services/advertisements.service';
+import { AddAdvertisementCredentials } from '../../credentials/add-advertisement-credentials';
+import { AdvertisementsService } from '../../services/advertisements.service';
 import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'add-advertisement',
@@ -11,9 +12,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: ['./add-advertisement.component.scss']
 })
 export class AddAdvertisementComponent implements OnInit {
+[x: string]: any;
   resultMessage!: string;
   file!: any;
   imageUrl: string | null = null;
+  progressPercent = 0;
 
   jwtHelper = new JwtHelperService();
 
@@ -32,7 +35,7 @@ export class AddAdvertisementComponent implements OnInit {
     ]),
   });
 
-  constructor(private advertisementService: AdvertisementsService, private storage: Storage) { }
+  constructor(private advertisementService: AdvertisementsService, private storage: Storage, private router: Router) { }
 
   get title() {
     return this.form.get('title');
@@ -55,17 +58,16 @@ export class AddAdvertisementComponent implements OnInit {
 
   onChange(event: any) {
     this.file = event.target.files[0];
-    console.log(this.file);
   }
 
-  appData() {
+  onUploadClick() {
     const storageRef = ref(this.storage, this.file.name);
     const uploadTask = uploadBytesResumable(storageRef, this.file);
 
     uploadTask.on('state_changed',
       (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes);
-        console.log('Upload is ' + progress + '% done.')
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        this.progressPercent = progress;
       },
       (error) => {
         console.log(error);
@@ -79,8 +81,6 @@ export class AddAdvertisementComponent implements OnInit {
   }
 
   addAdvertisement(credentials: AddAdvertisementCredentials) {
-    this.appData()
-
     if (this.imageUrl != null) {
       credentials.imageUrl = this.imageUrl;
       let token = localStorage.getItem('token');
@@ -91,7 +91,7 @@ export class AddAdvertisementComponent implements OnInit {
       this.advertisementService.addBanner(credentials)
         .subscribe(result => {
           this.resultMessage = result;
-          console.log(this.resultMessage);
+          this.router.navigate(['my-advertisements']);
         });
     }
   }

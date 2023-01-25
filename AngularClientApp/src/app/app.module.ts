@@ -5,23 +5,28 @@ import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { AdvertisementsComponent } from './advertisements/advertisements.component';
-import { AboutMeComponent } from './about-me/about-me.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { AdvertisementsComponent } from './components/advertisements/advertisements.component';
+import { AboutMeComponent } from './components/about-me/about-me.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ProfileComponent } from './profile/profile.component';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { AddAdvertisementComponent } from './add-advertisement/add-advertisement.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { AddAdvertisementComponent } from './components/add-advertisement/add-advertisement.component';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { MyAdvertisementsComponent } from './components/my-advertisements/my-advertisements.component';
 
 @NgModule({
   declarations: [
@@ -34,9 +39,12 @@ import { environment } from 'src/environments/environment';
     RegisterComponent,
     ProfileComponent,
     AdminPanelComponent,
-    AddAdvertisementComponent
+    AddAdvertisementComponent,
+    MyAdvertisementsComponent
   ],
   imports: [
+    NgbPaginationModule,
+    NgbAlertModule,
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
@@ -74,8 +82,14 @@ import { environment } from 'src/environments/environment';
       {
         path: "add-advertisement",
         component: AddAdvertisementComponent
+      },
+      {
+        path: "my-advertisements",
+        component: MyAdvertisementsComponent
       }
-    ])
+    ]),
+    BrowserAnimationsModule,
+    NgbModule
   ],
   providers: [
     AuthService

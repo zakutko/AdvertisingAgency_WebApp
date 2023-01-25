@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EmailValidators } from '../common/validators/email-validators';
-import { PasswordValidators } from '../common/validators/password-validators';
-import { UsernameValidators } from '../common/validators/username-validators';
-import { RegisterCredentials } from '../credentials/register-credentials';
-import { AuthService } from '../services/auth.service';
+import { EmailValidators } from '../../common/validators/email-validators';
+import { PasswordValidators } from '../../common/validators/password-validators';
+import { UsernameValidators } from '../../common/validators/username-validators';
+import { RegisterCredentials } from '../../credentials/register-credentials';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'register',

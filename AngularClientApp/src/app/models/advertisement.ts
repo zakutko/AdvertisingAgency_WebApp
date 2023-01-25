@@ -6,4 +6,6 @@ export interface Advertisement{
     linkToBrowserPage: string;
     releaseDate: Date;
     status: string;
+    photoUrl: string;
+    comment: string | null;
 };

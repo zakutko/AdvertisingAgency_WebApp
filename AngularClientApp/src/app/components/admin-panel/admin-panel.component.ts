@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DeleteUserCredentials } from '../credentials/delete-user-credentials';
-import { Advertisement } from '../models/advertisement';
-import { RoleRequest } from '../models/role-request';
-import { UserInfo } from '../models/user-info';
-import { AuthService } from '../services/auth.service';
+import { DeleteUserCredentials } from '../../credentials/delete-user-credentials';
+import { Advertisement } from '../../models/advertisement';
+import { RoleRequest } from '../../models/role-request';
+import { UserInfo } from '../../models/user-info';
+import { AdvertisementsService } from '../../services/advertisements.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'admin-panel',
@@ -14,9 +15,9 @@ export class AdminPanelComponent implements OnInit {
   selectedSideBarMenu: string = 'Users';
   usersInfo!: UserInfo[];
   roleRequests!: RoleRequest[];
-  advertisements!: Advertisement[];
+  advertisementsList!: Advertisement[];
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private advertisementsService: AdvertisementsService) { }
 
   ngOnInit(): void {
     let token = localStorage.getItem('token');
@@ -51,9 +52,9 @@ export class AdminPanelComponent implements OnInit {
   getAllAdvertisements() {
     let token = localStorage.getItem('token');
     if(token != null){
-      this.authService.getAllAdvertisements(token)
+      this.advertisementsService.getAllBanners("get all advertisements")
         .subscribe(result => {
-          this.advertisements = result;
+          this.advertisementsList = result;
         })
     }
   }
@@ -71,6 +72,14 @@ export class AdminPanelComponent implements OnInit {
   }
 
   onRejectClick() {
+
+  }
+
+  onUpdateAdvClick() {
+
+  }
+
+  onDeleteAdvClick() {
 
   }
 }
