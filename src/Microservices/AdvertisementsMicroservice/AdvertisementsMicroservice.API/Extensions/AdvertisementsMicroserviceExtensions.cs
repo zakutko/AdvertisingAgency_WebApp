@@ -21,6 +21,7 @@ namespace AdvertisementsMicroservice.API.Extensions
                 x.AddConsumer<GetAllBannersConsumer>();
                 x.AddConsumer<AddBannerConsumer>();
                 x.AddConsumer<GetAllBannersByUserIdConsumer>();
+                x.AddConsumer<DeleteBannerConsumer>();
 
                 x.SetKebabCaseEndpointNameFormatter();
                 x.AddDelayedMessageScheduler();

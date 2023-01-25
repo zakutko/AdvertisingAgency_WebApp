@@ -26,4 +26,8 @@ export class AdvertisementsService {
   addBanner(credentials: AddAdvertisementCredentials){
     return this.http.post<string>(this.baseUrl + '/Advertisements/addBanner', credentials, this.httpOptions);
   }
+
+  deleteBannerByUserIdAndBannerId(userId: string, bannerId: string) {
+    return this.http.delete(this.baseUrl + `/Advertisements/deleteBanner?userId=${userId}&&bannerId=${bannerId}`);
+  }
 }

@@ -8,5 +8,6 @@ namespace AdvertisementsMicroservice.BLL.Interfaces
         Task<GetAllBannersResponse> GetAllBanners();
         Task<GetAllBannersResponse> GetAllBannersByUserId(GetAllBannersByUserIdRequest getAllBannersByUserIdRequest);
         Task<AddBannerResponse> AddBanner(AddBannerRequest addBannerRequest);
+        Task<DeleteBannerResponse> DeleteBanner(DeleteBannerRequest deleteBannerRequest);
     }
 }

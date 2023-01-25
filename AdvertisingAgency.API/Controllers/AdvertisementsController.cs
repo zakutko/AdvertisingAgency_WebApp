@@ -59,5 +59,20 @@ namespace AdvertisingAgency.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete("deleteBanner")]
+        public async Task<ActionResult<DeleteBannerResponse>> DeleteBanner(string userId, string bannerId)
+        {
+            try
+            {
+                var deleteBannerRequest = new DeleteBannerRequest { UserId = userId, BannerId = bannerId };
+                var response = await _bus.Request<DeleteBannerRequest, DeleteBannerResponse>(deleteBannerRequest);
+                return Ok(response.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -47,6 +47,7 @@ namespace AdvertisementsMicroservice.BLL.Services
                     response.BannerList.Add(new BannerResponse
                     {
                         UserId = item.UserId.ToString(),
+                        BannerId = item.BannerId.ToString(),
                         Title = banner.Title,
                         SubTitle = banner.SubTitle,
                         Description = banner.Description,
@@ -76,6 +77,7 @@ namespace AdvertisementsMicroservice.BLL.Services
                     response.BannerList.Add(new BannerResponse
                     {
                         UserId = item.UserId.ToString(),
+                        BannerId = item.BannerId.ToString(),
                         Title = banner.Title,
                         SubTitle = banner.SubTitle,
                         Description = banner.Description,
@@ -89,6 +91,12 @@ namespace AdvertisementsMicroservice.BLL.Services
             }
 
             return response;
+        }
+
+        public async Task<DeleteBannerResponse> DeleteBanner(DeleteBannerRequest deleteBannerRequest)
+        {
+            //TODO:
+            return new DeleteBannerResponse { Message = "Delete successful!" };
         }
     }
 }
