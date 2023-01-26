@@ -27,6 +27,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { MyAdvertisementsComponent } from './components/my-advertisements/my-advertisements.component';
+import { EditorPanelComponent } from './components/editor-panel/editor-panel.component';
+import { ApproverPanelComponent } from './components/approver-panel/approver-panel.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { MyAdvertisementsComponent } from './components/my-advertisements/my-adv
     ProfileComponent,
     AdminPanelComponent,
     AddAdvertisementComponent,
-    MyAdvertisementsComponent
+    MyAdvertisementsComponent,
+    EditorPanelComponent,
+    ApproverPanelComponent
   ],
   imports: [
     NgbPaginationModule,
@@ -86,6 +90,14 @@ import { MyAdvertisementsComponent } from './components/my-advertisements/my-adv
       {
         path: "my-advertisements",
         component: MyAdvertisementsComponent
+      },
+      {
+        path: "editor-panel",
+        component: EditorPanelComponent
+      },
+      {
+        path: "approver-panel",
+        component: ApproverPanelComponent
       }
     ]),
     BrowserAnimationsModule,

@@ -23,6 +23,13 @@ namespace AdvertisingAgency.API.Extensions
                 x.AddRequestClient<AddBannerRequest>();
                 x.AddRequestClient<GetAllBannersByUserIdRequest>();
                 x.AddRequestClient<DeleteBannerRequest>();
+                x.AddRequestClient<AddToQueueToCheckRequest>();
+                x.AddRequestClient<GetAllBannersWhereStatusInQueueToCheckRequest>();
+                x.AddRequestClient<SetStatusCheckSuccessfulRequest>();
+                x.AddRequestClient<SetStatusCheckNotSuccessfulRequest>();
+                x.AddRequestClient<GetAllBannersWhereStatusCheckSuccessfulRequest>();
+                x.AddRequestClient<SetStatusReleasedRequest>();
+                x.AddRequestClient<SetStatusReleasePlannedRequest>();
             });
 
             services.AddOptions<MassTransitHostOptions>()

@@ -1,0 +1,65 @@
+<navbar></navbar>
+
+<div class="container">
+    <div class="approver-panel-title-container">
+        <h1 class="approver-panel-title">Approver panel</h1>
+    </div>
+    <div class="approver-panel-container">
+        <div class="approver-panel-sidebar">
+            <h1 class="approver-panel-sidebar-title">
+                Editor opportunities
+            </h1>
+            <a [ngClass]="{'active': selectedSideBarMenu === 'Advertisements'}" (click)="selectedSideBarMenu = 'Advertisements';">Advertisements</a>
+        </div>
+        <div *ngIf="selectedSideBarMenu == 'Advertisements'; then advertisements"></div>
+    </div>
+</div>
+
+
+<ng-template #advertisements>
+    <div class="approver-panel-content">
+        <h1 class="approver-panel-content-title">{{selectedSideBarMenu}}</h1>
+        <div class="cards">
+            <div *ngFor="let adv of advertisementsList; index as i" class="card">
+                <div class="card-header">{{adv.title}}</div>
+                <div class="card-body">
+                    <p class="card-text"><span>Subtitle:</span> {{adv.subTitle}}</p>
+                    <p class="card-text"><span>Description:</span> {{adv.description}}</p>
+                    <p class="card-text"><span>Link:</span><a [href]="adv.linkToBrowserPage">Link to browser page</a></p>
+                    <p class="card-text"><span>Release Date:</span> {{adv.releaseDate}}</p>
+                    <p class="card-text"><span>Status:</span> {{adv.status}}</p>
+                    <p class="card-text"><span>Photo:</span><a [href]="adv.photoUrl">Link to photo</a></p>
+
+                    <div class="card-buttons">
+                        <button class="card-button update" (click)="onReleaseClick(adv.bannerId)">Release</button>
+                    </div>
+
+                    <form #f="ngForm" [formGroup]="form" (ngSubmit)="onPlanReleaseClick(adv.bannerId, f.value)">
+                        <label class="group-label" for="releaseDate">Please set date of release</label>
+                        <div class="form-group">
+                            <input 
+                                formControlName="releaseDate"
+                                type="datetime-local" 
+                                id="releaseDate"
+                                class="form-control">
+                            
+                            <button class="form-button" [disabled]="form.invalid" type="submit">Plan release</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>`
+    </div>
+</ng-template>
+
+<ng-template #isOldUser>
+    <div class="star">
+        <img src="../../assets/images/star-old-user.png" alt="oldUser">
+    </div>
+</ng-template>
+
+<ng-template #isNewUser>
+    <div class="star">
+        <img src="../../assets/images/star-new-user.png" alt="newUser">
+    </div>
+</ng-template>

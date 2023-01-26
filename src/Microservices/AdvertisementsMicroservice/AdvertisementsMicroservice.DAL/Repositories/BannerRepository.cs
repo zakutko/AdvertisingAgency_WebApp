@@ -42,10 +42,52 @@ namespace AdvertisementsMicroservice.DAL.Repositories
             return await connection.QueryFirstOrDefaultAsync<Banner>(AdvertisementsServiceConstants.queryGetBannerById, new { id = id });
         }
 
+        public async Task<Banner> GetBannerByIdWhereToQueueToCheck(string id)
+        {
+            using var connection = _context.CreateConnection();
+            return await connection.QueryFirstOrDefaultAsync<Banner>(AdvertisementsServiceConstants.queryGetBannerByIdAndStatusInQueueToCheck, new { id = id });
+        }
+
+        public async Task<Banner> GetBannerByIdWhereCheckSuccessful(string id)
+        {
+            using var connection = _context.CreateConnection();
+            return await connection.QueryFirstOrDefaultAsync<Banner>(AdvertisementsServiceConstants.queryGetBannerByIdAndStatusCheckSuccessful, new { id = id });
+        }
+
         public async Task<Banner> GetBannerByIdAnyStatus(string id)
         {
             using var connection = _context.CreateConnection();
             return await connection.QueryFirstOrDefaultAsync<Banner>(AdvertisementsServiceConstants.queryGetBannerByIdAnyStatus, new { id = id });
+        }
+
+        public async Task AddBannerToQueueToCheck(string bannerId)
+        {
+            using var connection = _context.CreateConnection();
+            await connection.ExecuteAsync(AdvertisementsServiceConstants.queryUpdateBannerAddToQueueToCheck, new { bannerId = bannerId });
+        }
+
+        public async Task SetStatusCheckSuccessful(string bannerId)
+        {
+            using var connection = _context.CreateConnection();
+            await connection.ExecuteAsync(AdvertisementsServiceConstants.querySetStatusCheckSuccessful, new { bannerId = bannerId });
+        }
+
+        public async Task SetStatusCheckNotSuccessful(string bannerId, string comment)
+        {
+            using var connection = _context.CreateConnection();
+            await connection.ExecuteAsync(AdvertisementsServiceConstants.querySetStatusCheckNotSuccessful, new { bannerId = bannerId, comment = comment });
+        }
+
+        public async Task SetStatusReleased(string bannerId)
+        {
+            using var connection = _context.CreateConnection();
+            await connection.ExecuteAsync(AdvertisementsServiceConstants.querySetStatusReleased, new { bannerId = bannerId, releaseDate = DateTime.UtcNow });
+        }
+
+        public async Task SetStatusReleasePlanned(string bannerId, DateTime releaseDate)
+        {
+            using var connection = _context.CreateConnection();
+            await connection.ExecuteAsync(AdvertisementsServiceConstants.querySetStatusReleasePlanned, new { bannerId = bannerId, releaseDate = releaseDate });
         }
     }
 }

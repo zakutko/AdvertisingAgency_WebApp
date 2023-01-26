@@ -1,13 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AddAdvertisementCredentials } from '../credentials/add-advertisement-credentials';
+import { RejectCredentials } from '../credentials/reject-credentials';
+import { ReleasePlannedCredentials } from '../credentials/release-planned-credentials';
 import { Advertisement } from '../models/advertisement';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdvertisementsService {
-  baseUrl = "https://localhost:62207/api";
+  baseUrl = "https://localhost:50813/api";
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -29,5 +31,33 @@ export class AdvertisementsService {
 
   deleteBannerByUserIdAndBannerId(userId: string, bannerId: string) {
     return this.http.delete(this.baseUrl + `/Advertisements/deleteBanner?userId=${userId}&&bannerId=${bannerId}`);
+  }
+
+  addToQueueToCheck(bannerId: string){
+    return this.http.put(this.baseUrl + '/Advertisements/addToQueueToCheck', { 'BannerId': bannerId }, this.httpOptions);
+  }
+
+  getAllBannersWhereStatusInQueueToCheck() {
+    return this.http.get<Advertisement[]>(this.baseUrl + '/Advertisements/getAllBannersWhereStatusInQueueToCheck');
+  }
+
+  setStatusCheckSuccessfull(bannerId: string) {
+    return this.http.put(this.baseUrl + '/Advertisements/setStatusCheckSuccessfull', { 'BannerId': bannerId }, this.httpOptions);
+  }
+
+  setStatusCheckNotSuccessfull(credentials: RejectCredentials) {
+    return this.http.put(this.baseUrl + '/Advertisements/setStatusCheckNotSuccessful', { 'BannerId': credentials.bannerId, 'Comment': credentials.comment }, this.httpOptions);
+  }
+
+  setStatusReleased(bannerId: string){
+    return this.http.put(this.baseUrl + '/Advertisements/setStatusReleased', { 'BannerId': bannerId }, this.httpOptions);
+  }
+
+  setStatusReleasePlanned(credentials: ReleasePlannedCredentials) {
+    return this.http.put(this.baseUrl + '/Advertisements/setStatusReleasePlanned', { 'BannerId': credentials.bannerId, 'ReleaseDate': credentials.releaseDate.toString() }, this.httpOptions);
+  }
+
+  getAllBannersWhereStatusCheckSuccessful() {
+    return this.http.get<Advertisement[]>(this.baseUrl + '/Advertisements/getAllBannersWhereStatusCheckSuccessful');
   }
 }

@@ -3,8 +3,6 @@ $color-dark: #1A1A1D;
 $color-dark-vine: #6F2232;
 $color-light-vine: #C3073F;
 $color-light-grey: #dbdbdb;
-$color-btn-update: blue;
-$color-btn-delete: red;
 
 $color-released: #00f014;
 $color-released-planned: #fce83a;
@@ -184,44 +182,6 @@ $color-in-queue-to-check: #fb95ff;
                             }
                         }
                     }
-    
-                    .card-buttons {
-                        display: flex;
-                        justify-content: center;
-                        margin-top: 10px;
-    
-                        .card-button {
-                            width: 100px;
-                            height: 35px;
-                
-                            border-radius: 10px;
-                            border: none;
-                
-                            font-family: 'Hando Soft Trial';
-                            font-style: normal;
-                            font-weight: 400;
-                            font-size: 16px;
-                
-                            color: $color-white;
-                            transition: 0.7s;
-    
-                            &.update {
-                                background-color: $color-btn-update;
-                            }
-    
-                            &.delete {
-                                background-color: $color-btn-delete;
-                            }
-                
-                            &:hover {
-                                background-color: $color-dark;
-                            }
-                
-                            &:last-child {
-                                margin-left: 10px;
-                            }
-                        }
-                    }
                 }
     
                 .card-body {
@@ -252,38 +212,40 @@ $color-in-queue-to-check: #fb95ff;
     
                     .card-buttons {
                         display: flex;
-                        justify-content: center;
+                        justify-content: flex-end;
                         margin-top: 10px;
     
                         .card-button {
-                            width: 100px;
+                            min-width: 100px;
                             height: 35px;
+                            margin-left: 10px;
                 
                             border-radius: 10px;
                             border: none;
                 
                             font-family: 'Hando Soft Trial';
                             font-style: normal;
-                            font-weight: 400;
+                            font-weight: 700;
                             font-size: 16px;
                 
-                            color: $color-white;
+                            color: $color-dark;
                             transition: 0.7s;
     
                             &.update {
-                                background-color: $color-btn-update;
+                                border: 3px solid $color-dark-vine;
                             }
     
                             &.delete {
-                                background-color: $color-btn-delete;
+                                border: 3px solid $color-dark-vine;
                             }
+
+                            &.add-to-queue {
+                                border: 3px solid $color-dark-vine;
+                            } 
                 
                             &:hover {
-                                background-color: $color-dark;
-                            }
-                
-                            &:last-child {
-                                margin-left: 10px;
+                                background-color: $color-dark-vine;
+                                color: $color-white;
                             }
                         }
                     }

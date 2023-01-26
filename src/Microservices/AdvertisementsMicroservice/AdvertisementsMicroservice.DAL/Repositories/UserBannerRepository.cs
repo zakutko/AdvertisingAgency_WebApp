@@ -32,5 +32,11 @@ namespace AdvertisementsMicroservice.DAL.Repositories
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<UserBanner>(AdvertisementsServiceConstants.queryGetAllUserBannersByUserId, new { userId = userId });
         }
+
+        public async Task DeleteUserBanner(string userId, string bannerId)
+        {
+            using var connection = _context.CreateConnection();
+            await connection.ExecuteAsync(AdvertisementsServiceConstants.queryDeleteUserBanner, new { userId = Guid.Parse(userId), bannerId = Guid.Parse(bannerId) });
+        }
     }
 }

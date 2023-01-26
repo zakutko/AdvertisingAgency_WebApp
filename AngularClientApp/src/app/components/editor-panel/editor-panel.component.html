@@ -1,0 +1,63 @@
+<navbar></navbar>
+<div class="container">
+    <div class="editor-panel-title-container">
+        <h1 class="editor-panel-title">Editor panel</h1>
+    </div>
+    <div class="editor-panel-container">
+        <div class="editor-panel-sidebar">
+            <h1 class="editor-panel-sidebar-title">
+                Editor opportunities
+            </h1>
+            <a [ngClass]="{'active': selectedSideBarMenu === 'Advertisements'}" (click)="selectedSideBarMenu = 'Advertisements';">Advertisements</a>
+        </div>
+        <div *ngIf="selectedSideBarMenu == 'Advertisements'; then advertisements"></div>
+    </div>
+</div>
+
+<ng-template #advertisements>
+    <div class="editor-panel-content">
+        <h1 class="editor-panel-content-title">{{selectedSideBarMenu}}</h1>
+        <div class="cards">
+            <div *ngFor="let adv of advertisementsList" class="card">
+                <div class="card-header">{{adv.title}}</div>
+                <div class="card-body">
+                    <p class="card-text"><span>Subtitle:</span> {{adv.subTitle}}</p>
+                    <p class="card-text"><span>Description:</span> {{adv.description}}</p>
+                    <p class="card-text"><span>Link:</span><a [href]="adv.linkToBrowserPage">Link to browser page</a></p>
+                    <p class="card-text"><span>Release Date:</span> {{adv.releaseDate}}</p>
+                    <p class="card-text"><span>Status:</span> {{adv.status}}</p>
+                    <p class="card-text"><span>Photo:</span><a [href]="adv.photoUrl">Link to photo</a></p>
+
+                    <div class="card-buttons">
+                        <button class="card-button update" (click)="onAcceptClick(adv.bannerId)">Accept</button>
+                    </div>
+
+                    <form #f="ngForm" [formGroup]="form" (ngSubmit)="onRejectClick(adv.bannerId, f.value)">
+                        <label class="group-label" for="comment">Leave your comment here if your are rejected this request, please</label>
+                        <div class="form-group">
+                            <input 
+                                formControlName="comment"
+                                type="text" 
+                                id="comment"
+                                class="form-control">
+                            
+                            <button class="form-button" [disabled]="form.invalid" type="submit">Reject</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #isOldUser>
+    <div class="star">
+        <img src="../../assets/images/star-old-user.png" alt="oldUser">
+    </div>
+</ng-template>
+
+<ng-template #isNewUser>
+    <div class="star">
+        <img src="../../assets/images/star-new-user.png" alt="newUser">
+    </div>
+</ng-template>

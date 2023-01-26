@@ -7,10 +7,6 @@
             <h1 class="sidebar-title">Status</h1>
 
             <div class="sidebar-nav">
-                <div class="sidebar-nav-item" (click)="selectedSidebarMenu = 'Released'">
-                    <div [ngClass]="{'color-released': selectedSidebarMenu === 'Released'}" class="dot"></div>
-                    Released
-                </div>
                 <div class="sidebar-nav-item" (click)="selectedSidebarMenu = 'Created'">
                     <div [ngClass]="{'color-created': selectedSidebarMenu === 'Created'}" class="dot"></div>
                     Created
@@ -30,6 +26,10 @@
                 <div class="sidebar-nav-item" (click)="selectedSidebarMenu = 'ReleasePlanned'">
                     <div [ngClass]="{'color-released-planned': selectedSidebarMenu === 'ReleasePlanned'}" class="dot"></div>
                     Planned to release
+                </div>
+                <div class="sidebar-nav-item" (click)="selectedSidebarMenu = 'Released'">
+                    <div [ngClass]="{'color-released': selectedSidebarMenu === 'Released'}" class="dot"></div>
+                    Released
                 </div>
             </div>
         </div>
@@ -59,14 +59,18 @@
                             <p class="card-text"><span>Photo url: </span> <a [href]="advertisement.photoUrl">Link to image</a></p>
                             <p *ngIf="advertisement.comment != null" class="card-text"><span>Comment: </span>{{advertisement.comment}}</p>
                             <div class="card-buttons">
-                                <button class="card-button update">Update</button>
-                                <button class="card-button delete">Delete</button>
+                                <button *ngIf="advertisement.status == 'CheckNotSuccessful' || advertisement.status == 'Created'" class="card-button update">Update</button>
+                                <button class="card-button delete" (click)="onDeleteClick(advertisement.userId, advertisement.bannerId)">Delete</button>
+                                <button 
+                                    *ngIf="advertisement.status == 'Created'" 
+                                    class="card-button add-to-queue"
+                                    (click)="addToQueueToCheck(advertisement.bannerId)"
+                                >
+                                    Add to queue to check
+                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div *ngSwitchDefault>
-                    <h1 class="default-title">There are no items with this status</h1>
                 </div>
             </div>
         </div>

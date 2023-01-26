@@ -1,4 +1,6 @@
 export interface Advertisement{
+    userId: string;
+    bannerId: string;
     username: string;
     title: string;
     subTitle: string;
