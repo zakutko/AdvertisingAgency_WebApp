@@ -15,5 +15,6 @@ namespace AdvertisementsMicroservice.DAL.Interfaces
         Task SetStatusCheckNotSuccessful(string bannerId, string comment);
         Task SetStatusReleased(string bannerId);
         Task SetStatusReleasePlanned(string bannerId, DateTime releaseDate);
+        Task UpdateBanner(string bannerId, string title, string subTitle, string description, string linkToBrowserPage, string photoUrl);
     }
 }

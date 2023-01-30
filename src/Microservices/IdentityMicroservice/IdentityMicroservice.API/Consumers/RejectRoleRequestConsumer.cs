@@ -5,20 +5,20 @@ using MassTransit;
 
 namespace IdentityMicroservice.API.Consumers
 {
-    public class DeleteUserConsumer : IConsumer<DeleteUserRequest>
+    public class RejectRoleRequestConsumer : IConsumer<RejectRoleRequest>
     {
         private readonly IIdentityService _identityService;
 
-        public DeleteUserConsumer(IIdentityService identityService)
+        public RejectRoleRequestConsumer(IIdentityService identityService)
         {
             _identityService = identityService;
         }
 
-        public async Task Consume(ConsumeContext<DeleteUserRequest> context)
+        public async Task Consume(ConsumeContext<RejectRoleRequest> context)
         {
             try
             {
-                var result = await _identityService.DeleteUser(context.Message);
+                var result = await _identityService.RejectRoleRequest(context.Message);
                 await context.RespondAsync(result);
             }
             catch (Exception ex)

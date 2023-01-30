@@ -102,7 +102,7 @@ namespace IdentityMicroservice.BLL.Services
             return new IsExistReponse { IsExist = true, ErrorMessage = null };
         }
 
-        public async Task<UpdateRoleResponse> UpdateRoleByUserId(UpdateRoleRequest updateRoleRequest)
+        public async Task<MessageResponse> UpdateRoleByUserId(UpdateRoleRequest updateRoleRequest)
         {
             var userId = _identityServiceHelper.GetUserIdByDecodingJwtToken(updateRoleRequest.Token);
             var user = await _userRepository.GetUserById(userId);
@@ -112,7 +112,7 @@ namespace IdentityMicroservice.BLL.Services
             var roleRequest = await _roleRequestRepository.GetRoleRequestByUserId(userId);
             if (roleRequest != null)
             {
-                return new UpdateRoleResponse { Message = "You have already sent a request, please wait while it is being considered by the site administration" };
+                return new MessageResponse { Message = "You have already sent a request, please wait while it is being considered by the site administration" };
             }
 
             if (user.NumberOfPublications != null)
@@ -127,11 +127,11 @@ namespace IdentityMicroservice.BLL.Services
             try
             {
                 await _roleRequestRepository.InsertNewRoleRequest(userId, updateRoleRequest.RoleName, numberOfPublications, isOldUser);
-                return new UpdateRoleResponse { Message = "Your request has been accepted to review." };
+                return new MessageResponse { Message = "Your request has been accepted to review." };
             }
             catch (Exception ex)
             {
-                return new UpdateRoleResponse { Message = ex.Message };
+                return new MessageResponse { Message = ex.Message };
             }
         }
 
@@ -167,6 +167,7 @@ namespace IdentityMicroservice.BLL.Services
                 var username = await _userRepository.GetUsernameByUserId(roleRequest.UserId);
                 allRoleRequestList.AllRoleRequestResponses.Add(new GetAllRoleRequestResponse
                 {
+                    UserId = roleRequest.UserId,
                     Username = username,
                     RoleName = roleRequest.RoleName,
                     NumberOfPublications = roleRequest.NumberOfPublications,
@@ -177,13 +178,39 @@ namespace IdentityMicroservice.BLL.Services
             return allRoleRequestList;
         }
 
-        public async Task<DeleteUserResponse> DeleteUser(DeleteUserRequest deleteUserRequest)
+        public async Task<MessageResponse> DeleteUser(DeleteUserRequest deleteUserRequest)
         {
             await _userRepository.DeleteUserByUsernameAndEmail(deleteUserRequest.Username, deleteUserRequest.Email);
-            return new DeleteUserResponse
+            return new MessageResponse
             {
                 Message = "Delete Successful"
             };
+        }
+
+        public async Task<MessageResponse> RejectRoleRequest(RejectRoleRequest rejectRoleRequest)
+        {
+            await _roleRequestRepository.DeleteRoleRequestWhereUserId(rejectRoleRequest.UserId);
+            return new MessageResponse
+            {
+                Message = "Reject Successful"
+            };
+        }
+
+        public async Task<MessageResponse> AcceptRoleRequest(AcceptRoleRequest acceptRoleRequest)
+        {
+            var roleRequest = await _roleRequestRepository.GetRoleRequestByUserId(acceptRoleRequest.UserId);
+            await _userRepository.UpdateRoleId(acceptRoleRequest.UserId, roleRequest.RoleName);
+            await _roleRequestRepository.DeleteRoleRequestWhereUserId(acceptRoleRequest.UserId);
+            return new MessageResponse
+            {
+                Message = "Accept Successful"
+            };
+        }
+
+        public async Task<GetUsernameResponse> GetUsername(GetUsernameRequest getUsernameRequest)
+        {
+            var username = await _userRepository.GetUsernameByUserId(getUsernameRequest.UserId);
+            return new GetUsernameResponse { Username = username };
         }
     }
 }

@@ -29,6 +29,8 @@ import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap'
 import { MyAdvertisementsComponent } from './components/my-advertisements/my-advertisements.component';
 import { EditorPanelComponent } from './components/editor-panel/editor-panel.component';
 import { ApproverPanelComponent } from './components/approver-panel/approver-panel.component';
+import { UpdateAdvertisementComponent } from './components/update-advertisement/update-advertisement.component';
+import { MoreInformationComponent } from './components/more-information/more-information.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { ApproverPanelComponent } from './components/approver-panel/approver-pan
     AddAdvertisementComponent,
     MyAdvertisementsComponent,
     EditorPanelComponent,
-    ApproverPanelComponent
+    ApproverPanelComponent,
+    UpdateAdvertisementComponent,
+    MoreInformationComponent
   ],
   imports: [
     NgbPaginationModule,

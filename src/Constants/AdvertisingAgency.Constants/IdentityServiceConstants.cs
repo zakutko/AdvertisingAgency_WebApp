@@ -13,6 +13,7 @@
         public const string queryGetAllUserWithoutCurrUser = "SELECT * FROM [User] WHERE Id != @id";
         public const string queryGetUsernameByUserId = "SELECT Username FROM [User] WHERE Id = @userId";
         public const string queryDeleteUserByUsernameAndEmail = "DELETE FROM [User] WHERE Username = @username AND Email = @email";
+        public const string queryUpdateRoleId = "UPDATE [User] SET RoleId = (SELECT Id FROM [Role] WHERE RoleName = @roleName), IsOldUser = 1 WHERE Id = @userId";
 
         //Role
         public const string queryGetRoleNameById = "SELECT RoleName FROM [Role] WHERE Id = @id";

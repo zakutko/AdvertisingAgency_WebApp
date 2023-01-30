@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Advertisement } from 'src/app/models/advertisement';
 import { AdvertisementsService } from 'src/app/services/advertisements.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UpdateAdvertisementComponent } from '../update-advertisement/update-advertisement.component';
 
 @Component({
   selector: 'my-advertisements',
@@ -11,14 +12,22 @@ import { AdvertisementsService } from 'src/app/services/advertisements.service';
 })
 export class MyAdvertisementsComponent implements OnInit {
   advertisementsByUserId!: Advertisement[];
-  selectedSidebarMenu: string = "Created";
+  selectedSidebarMenu: string = "InQueueToCheck";
 
   jwtHelper = new JwtHelperService();
 
-  constructor(private advertisementsService: AdvertisementsService, private router: Router) { }
+  constructor(
+    private advertisementsService: AdvertisementsService,
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit(): void {
     this.getAllBannersByUserId();
+  }
+
+  open(advertisement: Advertisement) {
+    const modalRef = this.modalService.open(UpdateAdvertisementComponent);
+    modalRef.componentInstance.advertisement = advertisement;
   }
 
   onDeleteClick(userId: string, bannerId: string){

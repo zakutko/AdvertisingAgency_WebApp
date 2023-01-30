@@ -13,5 +13,6 @@ namespace IdentityMicroservice.DAL.Interfaces
         Task<IEnumerable<User>> GetAllUsersWithoutCurrUser(string id);
         Task<string> GetUsernameByUserId(string userId);
         Task DeleteUserByUsernameAndEmail(string username, string email);
+        Task UpdateRoleId(string userId, string roleName);
     }
 }

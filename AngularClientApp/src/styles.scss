@@ -10,3 +10,5 @@ body {
 h1, p, ul {
     margin-bottom: 0;
 }
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

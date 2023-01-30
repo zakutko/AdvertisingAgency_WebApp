@@ -30,6 +30,10 @@ namespace AdvertisingAgency.API.Extensions
                 x.AddRequestClient<GetAllBannersWhereStatusCheckSuccessfulRequest>();
                 x.AddRequestClient<SetStatusReleasedRequest>();
                 x.AddRequestClient<SetStatusReleasePlannedRequest>();
+                x.AddRequestClient<UpdateBannerRequest>();
+                x.AddRequestClient<RejectRoleRequest>();
+                x.AddRequestClient<AcceptRoleRequest>();
+                x.AddRequestClient<GetUsernameRequest>();
             });
 
             services.AddOptions<MassTransitHostOptions>()

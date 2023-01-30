@@ -52,8 +52,8 @@
                     <p class="card-text"><span>Number Of Publications:</span> {{roleRequest.numberOfPublications}}</p>
                     <div *ngIf="roleRequest.isOldUser == false; then isNewUser; else isOldUser"></div>
                     <div class="card-buttons">
-                        <button class="card-button update" (click)="onAcceptClick()">Accept</button>
-                        <button class="card-button delete" (click)="onRejectClick()">Reject</button>
+                        <button class="card-button update" (click)="onAcceptClick(roleRequest.userId)">Accept</button>
+                        <button class="card-button delete" (click)="onRejectClick(roleRequest.userId)">Reject</button>
                     </div>
                 </div>
             </div>
@@ -75,8 +75,8 @@
                     <p class="card-text"><span>Status:</span> {{advertisement.status}}</p>
                     <p class="card-text"><span>Photo url: </span> <a [href]="advertisement.photoUrl">Link to image</a></p>
                     <div class="card-buttons">
-                        <button class="card-button update" (click)="onUpdateAdvClick()">Update</button>
-                        <button class="card-button delete" (click)="onDeleteAdvClick()">Delete</button>
+                        <button class="card-button update" (click)="open(advertisement)">Update</button>
+                        <button class="card-button delete" (click)="onDeleteAdvClick(advertisement.userId, advertisement.bannerId)">Delete</button>
                     </div>
                 </div>
             </div>

@@ -22,6 +22,10 @@
             "WHERE Id = @bannerId";
         public const string querySetStatusReleasePlanned = "UPDATE [Banner] SET StatusId = " +
             "(SELECT Id FROM [Status] WHERE StatusName = 'ReleasePlanned'), ReleaseDate = @releaseDate WHERE Id = @bannerId";
+        public const string queryUpdateBannerById = "UPDATE [Banner] " +
+            "SET Title = @title, SubTitle = @subTitle, Description = @description, LinkToBrowserPage = @linkToBrowserPage, PhotoUrl = @photoUrl, " +
+            "StatusId = (SELECT Id FROM [Status] WHERE StatusName = 'InQueueToCheck'), Comment = NULL " +
+            "WHERE Id = @bannerId";
 
         //UserBanner
         public const string queryGetAllUserBanners = "SELECT * FROM [UserBanner]";

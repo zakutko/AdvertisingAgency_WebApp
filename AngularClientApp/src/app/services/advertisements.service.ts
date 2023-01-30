@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { AddAdvertisementCredentials } from '../credentials/add-advertisement-credentials';
 import { RejectCredentials } from '../credentials/reject-credentials';
 import { ReleasePlannedCredentials } from '../credentials/release-planned-credentials';
+import { UpdateAdvertisementCredentials } from '../credentials/update-advertisement-credentials';
 import { Advertisement } from '../models/advertisement';
+import { UpdateAdvertisementResponse } from '../models/update-advertisement-reponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdvertisementsService {
-  baseUrl = "https://localhost:50813/api";
+  baseUrl = "https://localhost:56782/api";
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -59,5 +61,9 @@ export class AdvertisementsService {
 
   getAllBannersWhereStatusCheckSuccessful() {
     return this.http.get<Advertisement[]>(this.baseUrl + '/Advertisements/getAllBannersWhereStatusCheckSuccessful');
+  }
+
+  updateBanner(credentials: UpdateAdvertisementCredentials){
+    return this.http.put<UpdateAdvertisementResponse>(this.baseUrl + '/Advertisements/updateBanner', credentials, this.httpOptions);
   }
 }

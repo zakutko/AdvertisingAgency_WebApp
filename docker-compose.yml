@@ -20,7 +20,7 @@ services:
         - rabbitmq
         - app_db
     environment:
-        - DB_CONNECTION_STRING=Server=host.docker.internal, 1433;Database=AdvertisingAgency_DB;User Id=serhii;Password=Pj6l3gEl9!2e;TrustServerCertificate=True
+        - DB_CONNECTION_STRING=Server=host.docker.internal, 1433;Database=AdvertisingAgency_DB;User Id=serhii;Password=%PgwZMXJF23#@&j2;TrustServerCertificate=True
 
   rabbitmq:
     container_name: RabbitMQ
@@ -50,4 +50,4 @@ services:
     - rabbitmq
     - app_db
     environment:
-        - DB_CONNECTION_STRING=Server=host.docker.internal, 1433;Database=AdvertisingAgency_DB;User Id=serhii;Password=Pj6l3gEl9!2e;TrustServerCertificate=True
+        - DB_CONNECTION_STRING=Server=host.docker.internal, 1433;Database=AdvertisingAgency_DB;User Id=serhii;Password=%PgwZMXJF23#@&j2;TrustServerCertificate=True

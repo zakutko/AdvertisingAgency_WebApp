@@ -10,12 +10,13 @@ import { UpdateRoleResponse } from '../models/update-role-response';
 import { RoleRequest } from '../models/role-request';
 import { Advertisement } from '../models/advertisement';
 import { DeleteUserCredentials } from '../credentials/delete-user-credentials';
+import { Username } from '../models/username';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl = "https://localhost:50813/api";
+  baseUrl = "https://localhost:56782/api";
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -64,5 +65,17 @@ export class AuthService {
 
   deleteUser(credentials: DeleteUserCredentials){
     return this.http.delete(this.baseUrl + `/Identity/deleteUserByUsernameAndEmail?username=${credentials.username}&&email=${credentials.email}`, this.httpOptions);
+  }
+
+  rejectRoleRequest(userId: string){
+    return this.http.get(this.baseUrl + `/Identity/rejectRoleRequest?userId=${userId}`);
+  }
+
+  acceptRoleRequest(userId: string){
+    return this.http.get(this.baseUrl + `/Identity/acceptRoleRequest?userId=${userId}`);
+  }
+
+  getUsername(userId: string){
+    return this.http.get<Username>(this.baseUrl + `/Identity/getUsername?userId=${userId}`);
   }
 }

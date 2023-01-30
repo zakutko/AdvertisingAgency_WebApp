@@ -5,20 +5,20 @@ using MassTransit;
 
 namespace AdvertisementsMicroservice.API.Consumers
 {
-    public class SetStatusCheckSuccessfulConsumer : IConsumer<SetStatusCheckSuccessfulRequest>
+    public class UpdateBannerConsumer : IConsumer<UpdateBannerRequest>
     {
         private readonly IAdvertisementsService _advertisementsService;
 
-        public SetStatusCheckSuccessfulConsumer(IAdvertisementsService advertisementsService)
+        public UpdateBannerConsumer(IAdvertisementsService advertisementsService)
         {
             _advertisementsService = advertisementsService;
         }
 
-        public async Task Consume(ConsumeContext<SetStatusCheckSuccessfulRequest> context)
+        public async Task Consume(ConsumeContext<UpdateBannerRequest> context)
         {
             try
             {
-                var result = await _advertisementsService.SetStatusCheckSuccessful(context.Message);
+                var result = await _advertisementsService.UpdateBanner(context.Message);
                 await context.RespondAsync(result);
             }
             catch (Exception ex)

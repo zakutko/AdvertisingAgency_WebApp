@@ -217,38 +217,40 @@ $color-btn-delete: red;
 
                         .card-buttons {
                             display: flex;
-                            justify-content: center;
+                            justify-content: flex-end;
                             margin-top: 10px;
-
+        
                             .card-button {
-                                width: 100px;
+                                min-width: 100px;
                                 height: 35px;
+                                margin-left: 10px;
                     
                                 border-radius: 10px;
                                 border: none;
                     
                                 font-family: 'Hando Soft Trial';
                                 font-style: normal;
-                                font-weight: 400;
+                                font-weight: 700;
                                 font-size: 16px;
                     
-                                color: $color-white;
+                                color: $color-dark;
                                 transition: 0.7s;
-
+        
                                 &.update {
-                                    background-color: $color-btn-update;
+                                    border: 3px solid $color-dark-vine;
+                                }
+        
+                                &.delete {
+                                    border: 3px solid $color-dark-vine;
                                 }
     
-                                &.delete {
-                                    background-color: $color-btn-delete;
-                                }
+                                &.add-to-queue {
+                                    border: 3px solid $color-dark-vine;
+                                } 
                     
                                 &:hover {
-                                    background-color: $color-dark;
-                                }
-                    
-                                &:last-child {
-                                    margin-left: 10px;
+                                    background-color: $color-dark-vine;
+                                    color: $color-white;
                                 }
                             }
                         }

@@ -23,7 +23,7 @@ namespace AdvertisementsMicroservice.API.Consumers
             }
             catch (Exception ex)
             {
-                await context.RespondAsync(new SetStatusResponse { Message = ex.Message });
+                await context.RespondAsync(new MessageResponse { Message = ex.Message });
             }
         }
     }

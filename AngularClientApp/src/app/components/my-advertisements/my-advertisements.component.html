@@ -36,7 +36,7 @@
         
         <div class="cards">
             <div [ngSwitch]="selectedSidebarMenu">
-                <div *ngFor="let advertisement of advertisementsByUserId;" class="card">
+                <div *ngFor="let advertisement of advertisementsByUserId; index as i" class="card">
                     <div *ngSwitchCase="advertisement.status">
                         <div
                             [ngClass]="{
@@ -57,9 +57,14 @@
                             <p class="card-text"><span>Release Date: </span> {{advertisement.releaseDate}}</p>
                             <p class="card-text"><span>Status:</span> {{advertisement.status}}</p>
                             <p class="card-text"><span>Photo url: </span> <a [href]="advertisement.photoUrl">Link to image</a></p>
-                            <p *ngIf="advertisement.comment != null" class="card-text"><span>Comment: </span>{{advertisement.comment}}</p>
+                            <p *ngIf="advertisement.comment != null" class="card-text"><span style="color: #C3073F;">Comment(what you need to update): </span>{{advertisement.comment}}</p>
                             <div class="card-buttons">
-                                <button *ngIf="advertisement.status == 'CheckNotSuccessful' || advertisement.status == 'Created'" class="card-button update">Update</button>
+                                <button 
+                                    *ngIf="advertisement.status == 'CheckNotSuccessful' || advertisement.status == 'Created'" 
+                                    class="card-button update"
+                                    (click)="open(advertisement)">
+                                    Update
+                                </button>
                                 <button class="card-button delete" (click)="onDeleteClick(advertisement.userId, advertisement.bannerId)">Delete</button>
                                 <button 
                                     *ngIf="advertisement.status == 'Created'" 

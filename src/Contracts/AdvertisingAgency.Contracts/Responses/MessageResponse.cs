@@ -1,6 +1,6 @@
 ﻿namespace AdvertisingAgency.Contracts.Responses
 {
-    public class AddBannerResponse
+    public class MessageResponse
     {
         public string Message { get; set; }
     }

@@ -1,0 +1,67 @@
+<div class="modal-header">
+    <h4 class="modal-title">Update advertisement</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click'); reloadPage()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="alert alert-success" *ngIf="resultMessage != null">{{resultMessage}}! Please push close button ;)</div>
+<div class="modal-body">
+    <form class="form" #f="ngForm" [formGroup]="form" (ngSubmit)="updateAdvertisement(f.value); ">
+        <div class="form-group">
+            <label class="group-label" for="title">Your new title(must be empty):</label>
+            <input
+                formControlName="title"
+                type="text" 
+                id="title" 
+                class="form-control"
+                [placeholder]="advertisement.title">
+        </div>
+        <div class="form-group">
+            <label class="group-label" for="subTitle">Your new sub title(must be empty):</label>
+            <input
+                formControlName="subTitle"
+                type="text" 
+                id="subTitle" 
+                class="form-control"
+                [placeholder]="advertisement.subTitle">
+        </div>
+        <div class="form-group">
+            <label class="group-label" for="description">Your new description:(must be empty)</label>
+            <textarea formControlName="description" class="form-control" id="description" rows="10" [placeholder]="advertisement.description"></textarea>
+        </div>
+        <div class="form-group">
+            <label class="group-label" for="linkToBrowserPage">Your new link to browser page(must be empty):</label>
+            <input
+                formControlName="linkToBrowserPage"
+                type="text" 
+                id="linkToBrowserPage" 
+                class="form-control"
+                [placeholder]="advertisement.linkToBrowserPage">
+        </div>
+        <div class="form-group">
+            <label for="image" class="group-label">Image (Will be compressed to 600x300px)(must be empty):</label>
+            <div class="file-input-container">
+                <input
+                id="image"
+                type="file"
+                class="upload-image-input form-control"
+                (change)="onChange($event)"
+                accept=".png,.jpg">
+
+                <button 
+                    type="button"
+                    [disabled]="imageUrl != null" 
+                    class="form-btn btn btn-success" 
+                    (click)="onUploadClick()">
+                    Upload
+                </button>
+            </div>
+            <p class="progress-bar"><ngb-progressbar [showValue]="true" type="success" [value]="progressPercent"></ngb-progressbar></p>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-dark" *ngIf="resultMessage == null">Update</button>
+            <button type="button" class="btn btn-outline-dark" *ngIf="resultMessage != null" (click)="activeModal.close('Close click'); reloadPage()">Close</button>
+        </div>
+    </form>
+</div>

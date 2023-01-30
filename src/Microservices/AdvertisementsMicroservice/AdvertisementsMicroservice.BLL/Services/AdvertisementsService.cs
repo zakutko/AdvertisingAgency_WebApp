@@ -18,7 +18,7 @@ namespace AdvertisementsMicroservice.BLL.Services
             _statusRepository = statusRepository;
         }
 
-        public async Task<AddBannerResponse> AddBanner(AddBannerRequest addBannerRequest)
+        public async Task<MessageResponse> AddBanner(AddBannerRequest addBannerRequest)
         {
             var bannerId = await _bannerRepository.AddBannerAndGetBannerId(
                 addBannerRequest.Title, 
@@ -29,7 +29,7 @@ namespace AdvertisementsMicroservice.BLL.Services
 
             await _userBannerRepository.AddUserBanner(addBannerRequest.UserId, bannerId);
 
-            return new AddBannerResponse { Message = "Banner was added successful" };
+            return new MessageResponse { Message = "Banner was added successful" };
         }
 
         public async Task<GetAllBannersResponse> GetAllBannersByUserId(GetAllBannersByUserIdRequest getAllBannersByUserIdRequest)
@@ -93,16 +93,16 @@ namespace AdvertisementsMicroservice.BLL.Services
             return response;
         }
 
-        public async Task<DeleteBannerResponse> DeleteBanner(DeleteBannerRequest deleteBannerRequest)
+        public async Task<MessageResponse> DeleteBanner(DeleteBannerRequest deleteBannerRequest)
         {
             await _userBannerRepository.DeleteUserBanner(deleteBannerRequest.UserId, deleteBannerRequest.BannerId);
-            return new DeleteBannerResponse { Message = "Delete successful!" };
+            return new MessageResponse { Message = "Delete successful!" };
         }
 
-        public async Task<SetStatusResponse> AddToQueueToCheck(AddToQueueToCheckRequest addToQueueToCheckRequest)
+        public async Task<MessageResponse> AddToQueueToCheck(AddToQueueToCheckRequest addToQueueToCheckRequest)
         {
             await _bannerRepository.AddBannerToQueueToCheck(addToQueueToCheckRequest.BannerId);
-            return new SetStatusResponse { Message = "Successful added to queue to check" };
+            return new MessageResponse { Message = "Successful added to queue to check" };
         }
 
         public async Task<GetAllBannersResponse> GetAllBannersWhereStatusInQueueToCheck()
@@ -165,28 +165,40 @@ namespace AdvertisementsMicroservice.BLL.Services
             return response;
         }
 
-        public async Task<SetStatusResponse> SetStatusCheckSuccessful(SetStatusCheckSuccessfulRequest setStatusCheckSuccessfulRequest)
+        public async Task<MessageResponse> SetStatusCheckSuccessful(SetStatusCheckSuccessfulRequest setStatusCheckSuccessfulRequest)
         {
             await _bannerRepository.SetStatusCheckSuccessful(setStatusCheckSuccessfulRequest.BannerId);
-            return new SetStatusResponse { Message = "Successful update status to Check Successful" };
+            return new MessageResponse { Message = "Successful update status to Check Successful" };
         }
 
-        public async Task<SetStatusResponse> SetStatusCheckNotSuccessful(SetStatusCheckNotSuccessfulRequest setStatusCheckSuccessfulRequest)
+        public async Task<MessageResponse> SetStatusCheckNotSuccessful(SetStatusCheckNotSuccessfulRequest setStatusCheckSuccessfulRequest)
         {
             await _bannerRepository.SetStatusCheckNotSuccessful(setStatusCheckSuccessfulRequest.BannerId, setStatusCheckSuccessfulRequest.Comment);
-            return new SetStatusResponse { Message = "Successful update status to Check Not Successful" };
+            return new MessageResponse { Message = "Successful update status to Check Not Successful" };
         }
 
-        public async Task<SetStatusResponse> SetStatusReleased(SetStatusReleasedRequest setStatusReleasedRequest)
+        public async Task<MessageResponse> SetStatusReleased(SetStatusReleasedRequest setStatusReleasedRequest)
         {
             await _bannerRepository.SetStatusReleased(setStatusReleasedRequest.BannerId);
-            return new SetStatusResponse { Message = "Successful update status to Released" };
+            return new MessageResponse { Message = "Successful update status to Released" };
         }
 
-        public async Task<SetStatusResponse> SetStatusReleasePlanned(SetStatusReleasePlannedRequest setStatusReleasePlannedRequest)
+        public async Task<MessageResponse> SetStatusReleasePlanned(SetStatusReleasePlannedRequest setStatusReleasePlannedRequest)
         {
             await _bannerRepository.SetStatusReleasePlanned(setStatusReleasePlannedRequest.BannerId, setStatusReleasePlannedRequest.ReleaseDate);
-            return new SetStatusResponse { Message = "Successful update status to Released Planned" };
+            return new MessageResponse { Message = "Successful update status to Released Planned" };
+        }
+
+        public async Task<MessageResponse> UpdateBanner(UpdateBannerRequest updateAdvertisementRequest)
+        {
+            await _bannerRepository.UpdateBanner(
+                updateAdvertisementRequest.BannerId,
+                updateAdvertisementRequest.Title,
+                updateAdvertisementRequest.SubTitle,
+                updateAdvertisementRequest.Description,
+                updateAdvertisementRequest.LinkToBrowserPage,
+                updateAdvertisementRequest.PhotoUrl);
+            return new MessageResponse { Message = "Update advertisement successfull" };
         }
     }
 }

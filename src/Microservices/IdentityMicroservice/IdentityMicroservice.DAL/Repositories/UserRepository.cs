@@ -81,5 +81,11 @@ namespace IdentityMicroservice.DAL.Repositories
             using var connection = _context.CreateConnection();
             await connection.ExecuteAsync("deleteUser", new { username = username, email = email }, commandType: CommandType.StoredProcedure);
         }
+
+        public async Task UpdateRoleId(string userId, string roleName)
+        {
+            using var connection = _context.CreateConnection();
+            await connection.ExecuteAsync(IdentityServiceConstants.queryUpdateRoleId, new { userId = userId, roleName = roleName });
+        }
     }
 }

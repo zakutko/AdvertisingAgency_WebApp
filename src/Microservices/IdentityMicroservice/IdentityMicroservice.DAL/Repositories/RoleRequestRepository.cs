@@ -39,5 +39,11 @@ namespace IdentityMicroservice.DAL.Repositories
             using var connection = _context.CreateConnection();
             return await connection.QueryAsync<RoleRequest>(IdentityServiceConstants.queryGetAllRoleRequests, new { userId = userId });
         }
+
+        public async Task DeleteRoleRequestWhereUserId(string userId)
+        {
+            using var connection = _context.CreateConnection();
+            await connection.ExecuteAsync(IdentityServiceConstants.queryDeleteFromRoleRequestByUserId, new { userId = userId });
+        }
     }
 }

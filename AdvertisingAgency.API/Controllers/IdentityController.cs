@@ -75,11 +75,11 @@ namespace AdvertisingAgency.API.Controllers
         }
 
         [HttpPost("updateRole")]
-        public async Task<ActionResult<UpdateRoleResponse>> AddNewRoleRequest(UpdateRoleRequest updateRoleRequest)
+        public async Task<ActionResult<MessageResponse>> AddNewRoleRequest(UpdateRoleRequest updateRoleRequest)
         {
             try
             {
-                var response = await _bus.Request<UpdateRoleRequest, UpdateRoleResponse>(updateRoleRequest);
+                var response = await _bus.Request<UpdateRoleRequest, MessageResponse>(updateRoleRequest);
                 return Ok(response.Message);
             }
             catch (Exception ex)
@@ -119,7 +119,7 @@ namespace AdvertisingAgency.API.Controllers
         }
 
         [HttpDelete("deleteUserByUsernameAndEmail")]
-        public async Task<ActionResult<DeleteUserResponse>> DeleteUser(string username, string email)
+        public async Task<ActionResult<MessageResponse>> DeleteUser(string username, string email)
         {
             try
             {
@@ -128,7 +128,52 @@ namespace AdvertisingAgency.API.Controllers
                     Username = username,
                     Email = email
                 };
-                var response = await _bus.Request<DeleteUserRequest, DeleteUserResponse>(deleteUserRequest);
+                var response = await _bus.Request<DeleteUserRequest, MessageResponse>(deleteUserRequest);
+                return Ok(response.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("rejectRoleRequest")]
+        public async Task<ActionResult<MessageResponse>> RejectRoleRequest(string userId)
+        {
+            try
+            {
+                var request = new RejectRoleRequest { UserId = userId };
+                var response = await _bus.Request<RejectRoleRequest, MessageResponse>(request);
+                return Ok(response.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("acceptRoleRequest")]
+        public async Task<ActionResult<MessageResponse>> AcceptRoleRequest(string userId)
+        {
+            try
+            {
+                var request = new AcceptRoleRequest { UserId = userId };
+                var response = await _bus.Request<AcceptRoleRequest, MessageResponse>(request);
+                return Ok(response.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("getUsername")]
+        public async Task<ActionResult<GetUsernameResponse>> GetUsername(string userId)
+        {
+            try
+            {
+                var request = new GetUsernameRequest { UserId = userId };
+                var response = await _bus.Request<GetUsernameRequest, GetUsernameResponse>(request);
                 return Ok(response.Message);
             }
             catch (Exception ex)

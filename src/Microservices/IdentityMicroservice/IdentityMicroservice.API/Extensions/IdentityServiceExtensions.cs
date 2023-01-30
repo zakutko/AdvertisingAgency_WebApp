@@ -29,6 +29,9 @@ namespace IdentityMicroservice.API.Extensions
                 x.AddConsumer<GetAllUsersWithoutCurrUserConsumer>();
                 x.AddConsumer<GetAllRoleRequestConsumer>();
                 x.AddConsumer<DeleteUserConsumer>();
+                x.AddConsumer<RejectRoleRequestConsumer>();
+                x.AddConsumer<AcceptRoleRequestConsumer>();
+                x.AddConsumer<GetUsernameConsumer>();
 
                 x.SetKebabCaseEndpointNameFormatter();
                 x.AddDelayedMessageScheduler();

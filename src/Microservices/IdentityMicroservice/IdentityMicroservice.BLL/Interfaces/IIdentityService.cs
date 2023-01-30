@@ -9,9 +9,12 @@ namespace IdentityMicroservice.BLL.Interfaces
         Task<LoginRegisterResponse> Register(RegisterRequest registerRequest);
         Task<GetCurrentUserResponse> GetCurrentUser(GetCurrentUserRequest getCurrentUserRequest);
         Task<IsExistReponse> IsUserExistByEmailOrUsername(IsExistByEmailOrUsernameRequest isExistByEmailRequest);
-        Task<UpdateRoleResponse> UpdateRoleByUserId(UpdateRoleRequest updateRoleRequest);
+        Task<MessageResponse> UpdateRoleByUserId(UpdateRoleRequest updateRoleRequest);
         Task<GetAllUsersResponse> GetAllUsersWithoutCurrUser(GetAllUsersRequest getAllUsersRequest);
         Task<GetAllRoleRequestsResponseList> GetAllRoleRequests(GetAllRoleRequestsRequest getAllRoleRequestsRequest);
-        Task<DeleteUserResponse> DeleteUser(DeleteUserRequest deleteUserRequest);
+        Task<MessageResponse> DeleteUser(DeleteUserRequest deleteUserRequest);
+        Task<MessageResponse> RejectRoleRequest(RejectRoleRequest rejectRoleRequest);
+        Task<MessageResponse> AcceptRoleRequest(AcceptRoleRequest acceptRoleRequest);
+        Task<GetUsernameResponse> GetUsername(GetUsernameRequest getUsernameRequest);
     }
 }

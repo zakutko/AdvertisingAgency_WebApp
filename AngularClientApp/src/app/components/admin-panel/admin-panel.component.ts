@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteUserCredentials } from '../../credentials/delete-user-credentials';
 import { Advertisement } from '../../models/advertisement';
 import { RoleRequest } from '../../models/role-request';
 import { UserInfo } from '../../models/user-info';
 import { AdvertisementsService } from '../../services/advertisements.service';
 import { AuthService } from '../../services/auth.service';
+import { UpdateAdvertisementComponent } from '../update-advertisement/update-advertisement.component';
 
 @Component({
   selector: 'admin-panel',
@@ -12,12 +14,16 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./admin-panel.component.scss']
 })
 export class AdminPanelComponent implements OnInit {
-  selectedSideBarMenu: string = 'Users';
+  selectedSideBarMenu!: string;
   usersInfo!: UserInfo[];
   roleRequests!: RoleRequest[];
   advertisementsList!: Advertisement[];
 
-  constructor(private authService: AuthService, private advertisementsService: AdvertisementsService) { }
+  constructor(
+    private authService: AuthService, 
+    private advertisementsService: AdvertisementsService,
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit(): void {
     let token = localStorage.getItem('token');
@@ -27,6 +33,7 @@ export class AdminPanelComponent implements OnInit {
           this.usersInfo = result;
         })
     }
+    this.selectedSideBarMenu = "Users";
   }
 
   getAllUsers() {
@@ -67,19 +74,32 @@ export class AdminPanelComponent implements OnInit {
       });
   }
 
-  onAcceptClick() {
-
+  open(advertisement: Advertisement) {
+    const modalRef = this.modalService.open(UpdateAdvertisementComponent);
+    modalRef.componentInstance.advertisement = advertisement;
   }
 
-  onRejectClick() {
-
+  onAcceptClick(userId: string) {
+    this.authService.acceptRoleRequest(userId)
+      .subscribe(result => {
+        console.log(result);
+        this.getAllRoleRequests();
+      })
   }
 
-  onUpdateAdvClick() {
-
+  onRejectClick(userId: string) {
+    this.authService.rejectRoleRequest(userId)
+      .subscribe(result => {
+        console.log(result);
+        this.getAllRoleRequests();
+      })
   }
 
-  onDeleteAdvClick() {
-
+  onDeleteAdvClick(userId: string, bannerId: string) {
+    this.advertisementsService.deleteBannerByUserIdAndBannerId(userId, bannerId)
+      .subscribe(result => {
+        console.log(result);
+        this.getAllAdvertisements();
+      });
   }
 }

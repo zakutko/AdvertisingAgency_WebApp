@@ -89,5 +89,20 @@ namespace AdvertisementsMicroservice.DAL.Repositories
             using var connection = _context.CreateConnection();
             await connection.ExecuteAsync(AdvertisementsServiceConstants.querySetStatusReleasePlanned, new { bannerId = bannerId, releaseDate = releaseDate });
         }
+
+        public async Task UpdateBanner(string bannerId, string title, string subTitle, string description, string linkToBrowserPage, string photoUrl)
+        {
+            using var connection = _context.CreateConnection();
+            await connection.ExecuteAsync(AdvertisementsServiceConstants.queryUpdateBannerById, 
+                new
+                {
+                    bannerId = Guid.Parse(bannerId),
+                    title = title,
+                    subTitle = subTitle,
+                    description = description,
+                    linkToBrowserPage = linkToBrowserPage,
+                    photoUrl = photoUrl
+                });
+        }
     }
 }

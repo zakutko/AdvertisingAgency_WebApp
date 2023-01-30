@@ -77,11 +77,11 @@ namespace AdvertisingAgency.API.Controllers
         }
 
         [HttpPost("addBanner")]
-        public async Task<ActionResult<AddBannerResponse>> AddBanner(AddBannerRequest addBannerRequest)
+        public async Task<ActionResult<MessageResponse>> AddBanner(AddBannerRequest addBannerRequest)
         {
             try
             {
-                var response = await _bus.Request<AddBannerRequest, AddBannerResponse>(addBannerRequest);
+                var response = await _bus.Request<AddBannerRequest, MessageResponse>(addBannerRequest);
                 return Ok(response.Message);
             }
             catch (Exception ex)
@@ -91,12 +91,12 @@ namespace AdvertisingAgency.API.Controllers
         }
 
         [HttpDelete("deleteBanner")]
-        public async Task<ActionResult<DeleteBannerResponse>> DeleteBanner(string userId, string bannerId)
+        public async Task<ActionResult<MessageResponse>> DeleteBanner(string userId, string bannerId)
         {
             try
             {
                 var deleteBannerRequest = new DeleteBannerRequest { UserId = userId, BannerId = bannerId };
-                var response = await _bus.Request<DeleteBannerRequest, DeleteBannerResponse>(deleteBannerRequest);
+                var response = await _bus.Request<DeleteBannerRequest, MessageResponse>(deleteBannerRequest);
                 return Ok(response.Message);
             }
             catch (Exception ex)
@@ -106,11 +106,11 @@ namespace AdvertisingAgency.API.Controllers
         }
 
         [HttpPut("addToQueueToCheck")]
-        public async Task<ActionResult<SetStatusResponse>> AddToQueueToCheck(AddToQueueToCheckRequest addToQueueToCheckRequest)
+        public async Task<ActionResult<MessageResponse>> AddToQueueToCheck(AddToQueueToCheckRequest addToQueueToCheckRequest)
         {
             try
             {
-                var response = await _bus.Request<AddToQueueToCheckRequest, SetStatusResponse>(addToQueueToCheckRequest);
+                var response = await _bus.Request<AddToQueueToCheckRequest, MessageResponse>(addToQueueToCheckRequest);
                 return Ok(response.Message);
             }
             catch (Exception ex)
@@ -120,11 +120,11 @@ namespace AdvertisingAgency.API.Controllers
         }
 
         [HttpPut("setStatusCheckSuccessfull")]
-        public async Task<ActionResult<SetStatusResponse>> SetStatusCheckSuccessful(SetStatusCheckSuccessfulRequest setStatusCheckSuccessfulRequest)
+        public async Task<ActionResult<MessageResponse>> SetStatusCheckSuccessful(SetStatusCheckSuccessfulRequest setStatusCheckSuccessfulRequest)
         {
             try
             {
-                var response = await _bus.Request<SetStatusCheckSuccessfulRequest, SetStatusResponse>(setStatusCheckSuccessfulRequest);
+                var response = await _bus.Request<SetStatusCheckSuccessfulRequest, MessageResponse>(setStatusCheckSuccessfulRequest);
                 return Ok(response.Message);
             }
             catch (Exception ex)
@@ -134,11 +134,11 @@ namespace AdvertisingAgency.API.Controllers
         }
 
         [HttpPut("setStatusCheckNotSuccessful")]
-        public async Task<ActionResult<SetStatusResponse>> SetStatusCheckNotSuccessful(SetStatusCheckNotSuccessfulRequest setStatusCheckNotSuccessfulRequest)
+        public async Task<ActionResult<MessageResponse>> SetStatusCheckNotSuccessful(SetStatusCheckNotSuccessfulRequest setStatusCheckNotSuccessfulRequest)
         {
             try
             {
-                var response = await _bus.Request<SetStatusCheckNotSuccessfulRequest, SetStatusResponse>(setStatusCheckNotSuccessfulRequest);
+                var response = await _bus.Request<SetStatusCheckNotSuccessfulRequest, MessageResponse>(setStatusCheckNotSuccessfulRequest);
                 return Ok(response.Message);
             }
             catch (Exception ex)
@@ -148,11 +148,11 @@ namespace AdvertisingAgency.API.Controllers
         }
 
         [HttpPut("setStatusReleased")]
-        public async Task<ActionResult<SetStatusResponse>> SetStatusReleased(SetStatusReleasedRequest setStatusReleasedRequest)
+        public async Task<ActionResult<MessageResponse>> SetStatusReleased(SetStatusReleasedRequest setStatusReleasedRequest)
         {
             try
             {
-                var response = await _bus.Request<SetStatusReleasedRequest, SetStatusResponse>(setStatusReleasedRequest);
+                var response = await _bus.Request<SetStatusReleasedRequest, MessageResponse>(setStatusReleasedRequest);
                 return Ok(response.Message);
             }
             catch (Exception ex)
@@ -162,11 +162,25 @@ namespace AdvertisingAgency.API.Controllers
         }
 
         [HttpPut("setStatusReleasePlanned")]
-        public async Task<ActionResult<SetStatusResponse>> SetStatusReleasePlanned(SetStatusReleasePlannedRequest setStatusReleasePlannedRequest)
+        public async Task<ActionResult<MessageResponse>> SetStatusReleasePlanned(SetStatusReleasePlannedRequest setStatusReleasePlannedRequest)
         {
             try
             {
-                var response = await _bus.Request<SetStatusReleasePlannedRequest, SetStatusResponse>(setStatusReleasePlannedRequest);
+                var response = await _bus.Request<SetStatusReleasePlannedRequest, MessageResponse>(setStatusReleasePlannedRequest);
+                return Ok(response.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("updateBanner")]
+        public async Task<ActionResult<MessageResponse>> UpdateBanner(UpdateBannerRequest updateAdvertisementRequest)
+        {
+            try
+            {
+                var response = await _bus.Request<UpdateBannerRequest, MessageResponse>(updateAdvertisementRequest);
                 return Ok(response.Message);
             }
             catch (Exception ex)

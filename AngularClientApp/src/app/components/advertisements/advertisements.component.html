@@ -10,7 +10,7 @@
             </div>
             <div class="adv-body">
                 <img [src]="adv.photoUrl" [alt]="adv.title">
-                <button class="adv-button">More information</button>
+                <button class="adv-button" (click)="open(adv)">More information</button>
             </div>
         </div>
     </div>
