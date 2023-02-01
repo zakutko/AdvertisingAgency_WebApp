@@ -8,18 +8,18 @@ import { UpdateAdvertisementComponent } from '../update-advertisement/update-adv
 @Component({
   selector: 'my-advertisements',
   templateUrl: './my-advertisements.component.html',
-  styleUrls: ['./my-advertisements.component.scss']
+  styleUrls: ['./my-advertisements.component.scss'],
 })
 export class MyAdvertisementsComponent implements OnInit {
   advertisementsByUserId!: Advertisement[];
-  selectedSidebarMenu: string = "InQueueToCheck";
+  selectedSidebarMenu: string = 'InQueueToCheck';
 
   jwtHelper = new JwtHelperService();
 
   constructor(
     private advertisementsService: AdvertisementsService,
     private modalService: NgbModal
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getAllBannersByUserId();
@@ -30,28 +30,31 @@ export class MyAdvertisementsComponent implements OnInit {
     modalRef.componentInstance.advertisement = advertisement;
   }
 
-  onDeleteClick(userId: string, bannerId: string){
-    this.advertisementsService.deleteBannerByUserIdAndBannerId(userId, bannerId)
-      .subscribe(result => {
+  onDeleteClick(userId: string, bannerId: string) {
+    this.advertisementsService
+      .deleteBannerByUserIdAndBannerId(userId, bannerId)
+      .subscribe((result) => {
         this.getAllBannersByUserId();
       });
   }
 
   addToQueueToCheck(bannerId: string) {
-    this.advertisementsService.addToQueueToCheck(bannerId)
-      .subscribe(result => {
+    this.advertisementsService
+      .addToQueueToCheck(bannerId)
+      .subscribe((result) => {
         this.getAllBannersByUserId();
       });
   }
 
   getAllBannersByUserId() {
     let token = localStorage.getItem('token');
-    if (token != null){
+    if (token != null) {
       let decodedToken = this.jwtHelper.decodeToken(token);
-      this.advertisementsService.getAllBannersByUserId(decodedToken.nameid)
-        .subscribe(result => {
+      this.advertisementsService
+        .getAllBannersByUserId(decodedToken.nameid)
+        .subscribe((result) => {
           this.advertisementsByUserId = result;
         });
-    };
+    }
   }
 }

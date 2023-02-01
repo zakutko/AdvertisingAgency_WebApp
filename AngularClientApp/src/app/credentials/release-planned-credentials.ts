@@ -1,4 +1,4 @@
 export interface ReleasePlannedCredentials {
-    bannerId: string;
-    releaseDate: Date;
+  bannerId: string;
+  releaseDate: Date;
 }

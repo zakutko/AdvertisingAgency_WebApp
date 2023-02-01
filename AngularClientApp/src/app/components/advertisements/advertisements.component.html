@@ -1,17 +1,17 @@
 <div class="container">
-    <div class="advertisements-title-container">
-        <h1 class="advertisements-title">Advertisements</h1>
+  <div class="advertisements-title-container">
+    <h1 class="advertisements-title">Advertisements</h1>
+  </div>
+  <div class="advertisements">
+    <div class="adv" *ngFor="let adv of advertisements">
+      <div class="adv-title">
+        {{ adv.title }}
+        <div class="adv-status"></div>
+      </div>
+      <div class="adv-body">
+        <img [src]="adv.photoUrl" [alt]="adv.title" />
+        <button class="adv-button" (click)="open(adv)">More information</button>
+      </div>
     </div>
-    <div class="advertisements">
-        <div class="adv" *ngFor="let adv of advertisements">
-            <div class="adv-title">
-                {{adv.title}}
-                <div class="adv-status"></div>
-            </div>
-            <div class="adv-body">
-                <img [src]="adv.photoUrl" [alt]="adv.title">
-                <button class="adv-button" (click)="open(adv)">More information</button>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>

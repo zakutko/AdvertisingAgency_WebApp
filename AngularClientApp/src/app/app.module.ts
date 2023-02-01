@@ -25,7 +25,10 @@ import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbPaginationModule,
+  NgbAlertModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { MyAdvertisementsComponent } from './components/my-advertisements/my-advertisements.component';
 import { EditorPanelComponent } from './components/editor-panel/editor-panel.component';
 import { ApproverPanelComponent } from './components/approver-panel/approver-panel.component';
@@ -48,7 +51,7 @@ import { MoreInformationComponent } from './components/more-information/more-inf
     EditorPanelComponent,
     ApproverPanelComponent,
     UpdateAdvertisementComponent,
-    MoreInformationComponent
+    MoreInformationComponent,
   ],
   imports: [
     NgbPaginationModule,
@@ -64,52 +67,50 @@ import { MoreInformationComponent } from './components/more-information/more-inf
     HttpClientModule,
     RouterModule.forRoot([
       {
-        path: "",
-        component: HomeComponent
+        path: '',
+        component: HomeComponent,
       },
       {
-        path: "about",
-        component: AboutMeComponent
+        path: 'about',
+        component: AboutMeComponent,
       },
       {
-        path: "login",
-        component: LoginComponent
+        path: 'login',
+        component: LoginComponent,
       },
       {
-        path: "register",
-        component: RegisterComponent
+        path: 'register',
+        component: RegisterComponent,
       },
       {
-        path: "profile",
-        component: ProfileComponent
+        path: 'profile',
+        component: ProfileComponent,
       },
       {
-        path: "admin-panel",
-        component: AdminPanelComponent
+        path: 'admin-panel',
+        component: AdminPanelComponent,
       },
       {
-        path: "add-advertisement",
-        component: AddAdvertisementComponent
+        path: 'add-advertisement',
+        component: AddAdvertisementComponent,
       },
       {
-        path: "my-advertisements",
-        component: MyAdvertisementsComponent
+        path: 'my-advertisements',
+        component: MyAdvertisementsComponent,
       },
       {
-        path: "editor-panel",
-        component: EditorPanelComponent
+        path: 'editor-panel',
+        component: EditorPanelComponent,
       },
       {
-        path: "approver-panel",
-        component: ApproverPanelComponent
-      }
+        path: 'approver-panel',
+        component: ApproverPanelComponent,
+      },
     ]),
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
   ],
-  providers: [
-    AuthService
-  ],
-  bootstrap: [AppComponent]
+  providers: [AuthService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

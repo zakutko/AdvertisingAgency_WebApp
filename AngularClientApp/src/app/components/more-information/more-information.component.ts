@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-more-information',
   templateUrl: './more-information.component.html',
-  styleUrls: ['./more-information.component.scss']
+  styleUrls: ['./more-information.component.scss'],
 })
 export class MoreInformationComponent implements OnInit {
   @Input() advertisement!: Advertisement;
@@ -15,12 +15,14 @@ export class MoreInformationComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private authService: AuthService) { }
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.authService.getUsername(this.advertisement.userId)
-      .subscribe(result => {
+    this.authService
+      .getUsername(this.advertisement.userId)
+      .subscribe((result) => {
         this.resultUsername = result;
-      })
+      });
   }
 }

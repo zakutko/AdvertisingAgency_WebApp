@@ -1,4 +1,4 @@
 export interface RejectCredentials {
-    bannerId: string;
-    comment: string;
+  bannerId: string;
+  comment: string;
 }

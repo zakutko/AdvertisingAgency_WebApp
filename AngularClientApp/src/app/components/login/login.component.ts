@@ -7,21 +7,16 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   invalidLogin: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   form = new FormGroup({
-    usernameOrEmail: new FormControl('', [
-      Validators.required
-    ]
-    ),
-    password: new FormControl('', [
-      Validators.required
-    ])
+    usernameOrEmail: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
   });
 
   get usernameOrEmail() {
@@ -32,21 +27,16 @@ export class LoginComponent implements OnInit {
     return this.form.get('password');
   }
 
-  
   login(credentials: LoginCredentials) {
-    this.authService.login(credentials)
-      .subscribe(result => {
-        if(result.errorMessage == null) {
-          localStorage.setItem('token', result.token);
-          this.router.navigate(['']);
-        }
-        else {
-          this.invalidLogin = true;
-        }
-      });
+    this.authService.login(credentials).subscribe((result) => {
+      if (result.errorMessage == null) {
+        localStorage.setItem('token', result.token);
+        this.router.navigate(['']);
+      } else {
+        this.invalidLogin = true;
+      }
+    });
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

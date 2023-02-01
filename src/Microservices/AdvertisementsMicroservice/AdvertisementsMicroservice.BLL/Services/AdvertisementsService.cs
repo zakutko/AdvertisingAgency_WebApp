@@ -21,9 +21,9 @@ namespace AdvertisementsMicroservice.BLL.Services
         public async Task<MessageResponse> AddBanner(AddBannerRequest addBannerRequest)
         {
             var bannerId = await _bannerRepository.AddBannerAndGetBannerId(
-                addBannerRequest.Title, 
-                addBannerRequest.SubTitle, 
-                addBannerRequest.Description, 
+                addBannerRequest.Title,
+                addBannerRequest.SubTitle,
+                addBannerRequest.Description,
                 addBannerRequest.LinkToBrowserPage,
                 addBannerRequest.ImageUrl);
 
@@ -52,7 +52,7 @@ namespace AdvertisementsMicroservice.BLL.Services
                         SubTitle = banner.SubTitle,
                         Description = banner.Description,
                         LinkToBrowserPage = banner.LinkToBrowserPage,
-                        ReleaseDate = banner.ReleaseDate.ToShortDateString(),
+                        ReleaseDate = banner.ReleaseDate.ToString(),
                         Status = await _statusRepository.GetStatusNameById(banner.StatusId),
                         PhotoUrl = banner.PhotoUrl,
                         Comment = banner.Comment
@@ -71,6 +71,36 @@ namespace AdvertisementsMicroservice.BLL.Services
 
             foreach (var item in userBanners)
             {
+                var banner = await _bannerRepository.GetBannerByIdWhereStatusRelease(item.BannerId.ToString());
+                if (banner != null)
+                {
+                    response.BannerList.Add(new BannerResponse
+                    {
+                        UserId = item.UserId.ToString(),
+                        BannerId = item.BannerId.ToString(),
+                        Title = banner.Title,
+                        SubTitle = banner.SubTitle,
+                        Description = banner.Description,
+                        LinkToBrowserPage = banner.LinkToBrowserPage,
+                        ReleaseDate = banner.ReleaseDate.ToString(),
+                        Status = await _statusRepository.GetStatusNameById(banner.StatusId),
+                        PhotoUrl = banner.PhotoUrl,
+                        Comment = banner.Comment
+                    });
+                }
+            }
+
+            return response;
+        }
+
+        public async Task<GetAllBannersResponse> GetAllBannersForAdmin(GetAllBannersForAdminRequest getAllBannersForAdminRequest)
+        {
+            var userBanners = await _userBannerRepository.GetAllUserBanners();
+
+            var response = new GetAllBannersResponse();
+
+            foreach (var item in userBanners)
+            {
                 var banner = await _bannerRepository.GetBannerById(item.BannerId.ToString());
                 if (banner != null)
                 {
@@ -82,7 +112,7 @@ namespace AdvertisementsMicroservice.BLL.Services
                         SubTitle = banner.SubTitle,
                         Description = banner.Description,
                         LinkToBrowserPage = banner.LinkToBrowserPage,
-                        ReleaseDate = banner.ReleaseDate.ToShortDateString(),
+                        ReleaseDate = banner.ReleaseDate.ToString(),
                         Status = await _statusRepository.GetStatusNameById(banner.StatusId),
                         PhotoUrl = banner.PhotoUrl,
                         Comment = banner.Comment
@@ -124,7 +154,7 @@ namespace AdvertisementsMicroservice.BLL.Services
                         SubTitle = banner.SubTitle,
                         Description = banner.Description,
                         LinkToBrowserPage = banner.LinkToBrowserPage,
-                        ReleaseDate = banner.ReleaseDate.ToShortDateString(),
+                        ReleaseDate = banner.ReleaseDate.ToString(),
                         Status = await _statusRepository.GetStatusNameById(banner.StatusId),
                         PhotoUrl = banner.PhotoUrl,
                         Comment = banner.Comment
@@ -154,7 +184,7 @@ namespace AdvertisementsMicroservice.BLL.Services
                         SubTitle = banner.SubTitle,
                         Description = banner.Description,
                         LinkToBrowserPage = banner.LinkToBrowserPage,
-                        ReleaseDate = banner.ReleaseDate.ToShortDateString(),
+                        ReleaseDate = banner.ReleaseDate.ToString(),
                         Status = await _statusRepository.GetStatusNameById(banner.StatusId),
                         PhotoUrl = banner.PhotoUrl,
                         Comment = banner.Comment
@@ -199,6 +229,25 @@ namespace AdvertisementsMicroservice.BLL.Services
                 updateAdvertisementRequest.LinkToBrowserPage,
                 updateAdvertisementRequest.PhotoUrl);
             return new MessageResponse { Message = "Update advertisement successfull" };
+        }
+
+        public async Task<MessageResponse> CheckPlannedRelease(CheckPlannedReleaseRequest checkPlannedReleaseRequest)
+        {
+            var userBanners = await _userBannerRepository.GetAllUserBanners();
+            var result = 0;
+            var dafaultDateTime = new DateTime();
+
+            foreach (var item in userBanners)
+            {
+                var banner = await _bannerRepository.GetBannerWhereStatusReleasePlanned(item.BannerId.ToString());
+                if (banner != null && checkPlannedReleaseRequest.DateTimeNow < banner.ReleaseDate)
+                {
+                    await _bannerRepository.SetStatusReleased(banner.Id.ToString());
+                    result++;
+                }
+            }
+
+            return new MessageResponse { Message = $"{result} banners are released." };
         }
     }
 }

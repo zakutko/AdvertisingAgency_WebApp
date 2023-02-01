@@ -8,7 +8,7 @@ namespace IdentityMicroservice.API.Consumers
     public class IsExistByEmailConsumer : IConsumer<IsExistByEmailOrUsernameRequest>
     {
         private readonly IIdentityService _identityService;
-        
+
         public IsExistByEmailConsumer(IIdentityService identityService)
         {
             _identityService = identityService;
@@ -23,7 +23,7 @@ namespace IdentityMicroservice.API.Consumers
             }
             catch (Exception ex)
             {
-                await context.RespondAsync(new IsExistReponse { IsExist = null, ErrorMessage = ex.Message }) ;
+                await context.RespondAsync(new IsExistReponse { IsExist = null, ErrorMessage = ex.Message });
             }
         }
     }

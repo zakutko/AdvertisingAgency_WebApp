@@ -6,41 +6,35 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit
-{
+export class NavbarComponent implements OnInit {
   userInfo!: UserInfo;
-  
-  constructor(private router: Router, private authService: AuthService) { }
 
-  ngOnInit(): void
-  {
+  constructor(private router: Router, private authService: AuthService) {}
+
+  ngOnInit(): void {
     let token = localStorage.getItem('token');
     if (token != null) {
-      this.authService.getCurrentUser(token)
-        .subscribe(result => {
-          this.userInfo = result;
-        });
+      this.authService.getCurrentUser(token).subscribe((result) => {
+        this.userInfo = result;
+      });
     }
   }
 
   isLoggedIn() {
     if (localStorage.getItem('token') === null) {
       return false;
-    }
-    else {
+    } else {
       return true;
     }
   }
 
-  onLoginClick()
-  {
+  onLoginClick() {
     this.router.navigate(['login']);
   }
 
-  onRegisterClick()
-  {
+  onRegisterClick() {
     this.router.navigate(['register']);
   }
 

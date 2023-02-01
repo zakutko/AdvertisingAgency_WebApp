@@ -16,6 +16,21 @@ namespace AdvertisingAgency.API.Controllers
             _bus = bus;
         }
 
+        [HttpGet("getAllBannersForAdmin")]
+        public async Task<ActionResult<GetAllBannersResponse>> GetAllBannersForAdmin()
+        {
+            try
+            {
+                var getAllBannersForAdminRequest = new GetAllBannersForAdminRequest { Message = "Get all banners for admin" };
+                var response = await _bus.Request<GetAllBannersForAdminRequest, GetAllBannersResponse>(getAllBannersForAdminRequest);
+                return Ok(response.Message.BannerList);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("getAllBanners")]
         public async Task<ActionResult<GetAllBannersResponse>> GetAllBanners(string message)
         {
@@ -181,6 +196,20 @@ namespace AdvertisingAgency.API.Controllers
             try
             {
                 var response = await _bus.Request<UpdateBannerRequest, MessageResponse>(updateAdvertisementRequest);
+                return Ok(response.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("checkPlannedRelease")]
+        public async Task<ActionResult<MessageResponse>> CheckPlannedRelease(CheckPlannedReleaseRequest checkPlannedReleaseRequest)
+        {
+            try
+            {
+                var response = await _bus.Request<CheckPlannedReleaseRequest, MessageResponse>(checkPlannedReleaseRequest);
                 return Ok(response.Message);
             }
             catch (Exception ex)

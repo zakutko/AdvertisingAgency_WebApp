@@ -2,6 +2,6 @@
 {
     public class IsExistByEmailOrUsernameRequest
     {
-        public string RequestValue { get; set; }   
+        public string RequestValue { get; set; }
     }
 }

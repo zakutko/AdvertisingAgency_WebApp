@@ -7,7 +7,7 @@ import { MoreInformationComponent } from '../more-information/more-information.c
 @Component({
   selector: 'advertisements',
   templateUrl: './advertisements.component.html',
-  styleUrls: ['./advertisements.component.scss']
+  styleUrls: ['./advertisements.component.scss'],
 })
 export class AdvertisementsComponent implements OnInit {
   advertisements!: Advertisement[];
@@ -15,17 +15,29 @@ export class AdvertisementsComponent implements OnInit {
   constructor(
     private advertisementsService: AdvertisementsService,
     private modalService: NgbModal
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.advertisementsService.getAllBanners("get all banners")
-      .subscribe(result => {
+    this.advertisementsService
+      .getAllBanners('get all banners')
+      .subscribe((result) => {
         this.advertisements = result;
       });
+    setInterval(() => {
+      this.advertisementsService
+        .getAllBanners('get all banners')
+        .subscribe((result) => {
+          this.advertisements = result;
+        });
+    }, 3000);
   }
 
   open(advertisement: Advertisement) {
-    const modalRef = this.modalService.open(MoreInformationComponent, { size: 'lg', backdrop: 'static', centered: true });
+    const modalRef = this.modalService.open(MoreInformationComponent, {
+      size: 'lg',
+      backdrop: 'static',
+      centered: true,
+    });
     modalRef.componentInstance.advertisement = advertisement;
   }
 }

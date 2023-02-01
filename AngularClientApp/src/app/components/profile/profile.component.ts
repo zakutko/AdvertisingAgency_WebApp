@@ -6,7 +6,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
   userInfo!: UserInfo;
@@ -14,41 +14,42 @@ export class ProfileComponent implements OnInit {
   numberOfPublications!: number;
   getRoleRequestMessage!: string | null;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     let token = localStorage.getItem('token');
     if (token != null) {
-      this.authService.getCurrentUser(token)
-        .subscribe(result => {
-          this.userInfo = result;
-          if(result.isOldUser == null){
-            this.thisIsOldUser = false;
-          }
-          else{
-            this.thisIsOldUser = result.isOldUser;
-          }
-          if(result.numberOfPublications == null){
-            this.numberOfPublications = 0;
-          }
-          else {
-            this.numberOfPublications = result.numberOfPublications;
-          }
-        });
+      this.authService.getCurrentUser(token).subscribe((result) => {
+        this.userInfo = result;
+        if (result.isOldUser == null) {
+          this.thisIsOldUser = false;
+        } else {
+          this.thisIsOldUser = result.isOldUser;
+        }
+        if (result.numberOfPublications == null) {
+          this.numberOfPublications = 0;
+        } else {
+          this.numberOfPublications = result.numberOfPublications;
+        }
+      });
     }
   }
 
   onUpdateRoleRequestClick(roleName: string) {
     let token = localStorage.getItem('token');
-    if(token != null){
-      let updateRoleCredentials: UpdateRoleCredentials = {token: token, roleName: roleName};
-      this.authService.updateRoleRequest(updateRoleCredentials)
-        .subscribe(result => {
+    if (token != null) {
+      let updateRoleCredentials: UpdateRoleCredentials = {
+        token: token,
+        roleName: roleName,
+      };
+      this.authService
+        .updateRoleRequest(updateRoleCredentials)
+        .subscribe((result) => {
           this.getRoleRequestMessage = result.message;
           setTimeout(() => {
             this.getRoleRequestMessage = null;
           }, 4000);
-        })
+        });
     }
   }
 }

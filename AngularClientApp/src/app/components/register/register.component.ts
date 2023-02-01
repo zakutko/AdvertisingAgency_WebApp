@@ -10,45 +10,39 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit
-{
+export class RegisterComponent implements OnInit {
   invalidRegister: boolean = false;
   isExist!: boolean;
 
   form = new FormGroup({
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email
-    ],
-    [
-      EmailValidators.shouldBeUnique(this.authService)
-    ]),
-    username: new FormControl('', [
-      Validators.required,
-      Validators.minLength(4),
-      UsernameValidators.cannotContainSpace
-    ],
-    [
-      UsernameValidators.shouldBeUnique(this.authService)
-    ]),
-    birthday: new FormControl('', [
-      Validators.required
-    ]),
-    aboutInfo: new FormControl('', [
-      Validators.required
-    ]),
+    email: new FormControl(
+      '',
+      [Validators.required, Validators.email],
+      [EmailValidators.shouldBeUnique(this.authService)]
+    ),
+    username: new FormControl(
+      '',
+      [
+        Validators.required,
+        Validators.minLength(4),
+        UsernameValidators.cannotContainSpace,
+      ],
+      [UsernameValidators.shouldBeUnique(this.authService)]
+    ),
+    birthday: new FormControl('', [Validators.required]),
+    aboutInfo: new FormControl('', [Validators.required]),
     password: new FormControl('', [
       Validators.required,
-      PasswordValidators.cannotContainSpace, 
+      PasswordValidators.cannotContainSpace,
       PasswordValidators.passwordShouldHaveNumbers,
       PasswordValidators.passwordShouldHaveCapitalCase,
-      PasswordValidators.passwordShouldHaveSpecialCharacter
-    ])
+      PasswordValidators.passwordShouldHaveSpecialCharacter,
+    ]),
   });
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   get email() {
     return this.form.get('email');
@@ -63,7 +57,7 @@ export class RegisterComponent implements OnInit
   }
 
   get aboutInfo() {
-    return this.form.get('aboutInfo')
+    return this.form.get('aboutInfo');
   }
 
   get password() {
@@ -71,20 +65,15 @@ export class RegisterComponent implements OnInit
   }
 
   register(credentials: RegisterCredentials) {
-    this.authService.register(credentials)
-      .subscribe(result => {
-        if(result.errorMessage == null) {
-          localStorage.setItem('token', result.token);
-          this.router.navigate(['']);
-        }
-        else {
-          this.invalidRegister = true;
-        }
-      })
+    this.authService.register(credentials).subscribe((result) => {
+      if (result.errorMessage == null) {
+        localStorage.setItem('token', result.token);
+        this.router.navigate(['']);
+      } else {
+        this.invalidRegister = true;
+      }
+    });
   }
 
-  ngOnInit(): void
-  {
-  }
-
+  ngOnInit(): void {}
 }

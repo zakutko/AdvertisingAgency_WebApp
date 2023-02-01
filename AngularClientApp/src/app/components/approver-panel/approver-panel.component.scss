@@ -1,251 +1,250 @@
-$color-white: #FFFFFF;
-$color-dark: #1A1A1D;
-$color-dark-vine: #6F2232;
-$color-light-vine: #C3073F;
+$color-white: #ffffff;
+$color-dark: #1a1a1d;
+$color-dark-vine: #6f2232;
+$color-light-vine: #c3073f;
 $color-light-grey: #dbdbdb;
 
 .container {
+  .approver-panel-title-container {
+    display: flex;
+    justify-content: center;
 
-    .approver-panel-title-container {
+    .approver-panel-title {
+      display: inline-block;
+      padding: 30px 50px 5px 50px;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      border-bottom: 3px solid $color-light-vine;
+
+      font-family: "Hando Soft Trial";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 38px;
+
+      color: $color-dark;
+    }
+  }
+
+  .approver-panel-container {
+    display: flex;
+    margin-top: 30px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+      rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+    .approver-panel-sidebar {
+      flex: 0.2;
+      background-color: $color-light-grey;
+
+      .approver-panel-sidebar-title {
+        padding: 10px;
+        text-align: center;
+        font-family: "Hando Soft Trial";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+
+        background-color: $color-light-grey;
+        color: $color-dark-vine;
+      }
+
+      a {
+        display: block;
+        padding: 15px;
+        text-decoration: none;
+        font-family: "Hando Soft Trial";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+
+        color: $color-dark;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $color-dark-vine;
+          color: $color-white;
+        }
+        &.active {
+          font-weight: bold;
+          background-color: $color-white;
+          color: $color-dark-vine;
+        }
+      }
+    }
+
+    .approver-panel-content {
+      flex: 0.8;
+      padding: 20px;
+
+      .approver-panel-content-title {
+        margin-bottom: 30px;
+        text-align: center;
+        font-family: "Hando Soft Trial";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 32px;
+        text-shadow: 3px 3px 20px $color-dark, -2px 1px 30px $color-dark;
+
+        color: $color-dark-vine;
+      }
+
+      .cards {
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
 
-        .approver-panel-title {
-            display: inline-block;
-            padding: 30px 50px 5px 50px;
-            margin-bottom: 10px;
-            margin-top: 10px;
-            border-bottom: 3px solid $color-light-vine;
+        .card {
+          border: 0;
+          box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+            rgba(0, 0, 0, 0.22) 0px 15px 12px;
+          margin: 10px;
+          position: relative;
+          min-width: 250px;
 
-            font-family: 'Hando Soft Trial';
+          .card-header {
+            text-align: center;
+            font-family: "Hando Soft Trial";
             font-style: normal;
             font-weight: 700;
-            font-size: 32px;
-            line-height: 38px;
+            font-size: 20px;
+          }
 
-            color: $color-dark;
-        }
-    }
+          .edit-user-form {
+            padding: 10px;
 
-    .approver-panel-container {
-        display: flex;
-        margin-top: 30px;
-        box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+            .star {
+              position: absolute;
+              top: 0;
+              right: 0;
+              padding: 5px;
 
-        .approver-panel-sidebar {
-            flex: 0.2;
-            background-color: $color-light-grey;
-
-            .approver-panel-sidebar-title {
-                padding: 10px;
-                text-align: center;
-                font-family: 'Hando Soft Trial';
-                font-style: normal;
-                font-weight: 700;
-                font-size: 24px;
-
-                background-color: $color-light-grey;
-                color: $color-dark-vine;
+              img {
+                width: 30px;
+                height: 30px;
+              }
             }
 
-            a {
+            .edit-user-group {
+              display: flex;
+              justify-content: flex-start;
+
+              label {
                 display: block;
-                padding: 15px;
-                text-decoration: none;
-                font-family: 'Hando Soft Trial';
+                font-weight: bold;
+                margin-right: 10px;
+              }
+
+              .input {
+                border: 0;
+                display: inline-block;
+
+                &::placeholder {
+                  color: $color-dark;
+                  font-size: 16px;
+
+                  &:hover {
+                    cursor: pointer;
+                  }
+                }
+              }
+            }
+          }
+
+          .card-body {
+            form {
+              .form-group {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .form-button {
+                  width: 150px;
+                  height: 35px;
+
+                  border: 3px solid $color-dark-vine;
+                  border-radius: 10px;
+                  margin-left: 10px;
+                }
+              }
+
+              label {
+                font-weight: bold;
+                font-size: 16px;
+                padding-bottom: 10px;
+                margin-top: 5px;
+                color: $color-light-vine;
+              }
+            }
+
+            .star {
+              position: absolute;
+              top: 0;
+              right: 0;
+              padding: 5px;
+
+              img {
+                width: 30px;
+                height: 30px;
+              }
+            }
+
+            .card-text {
+              margin-bottom: 5px;
+              font-family: "Hando Soft Trial";
+              font-style: normal;
+              font-weight: 400;
+              font-size: 20px;
+
+              span {
+                font-weight: bold;
+              }
+            }
+
+            .card-buttons {
+              display: flex;
+              justify-content: center;
+              margin-top: 10px;
+
+              .card-button {
+                width: 100px;
+                height: 35px;
+
+                border-radius: 10px;
+                border: none;
+
+                font-family: "Hando Soft Trial";
                 font-style: normal;
                 font-weight: 400;
-                font-size: 20px;
+                font-size: 16px;
 
                 color: $color-dark;
-                cursor: pointer;
+                transition: 0.7s;
+
+                &[disabled] {
+                  opacity: 0.5;
+                }
+
+                &.update {
+                  border: 3px solid $color-dark-vine;
+                }
+
+                &.delete {
+                  border: 3px solid $color-dark-vine;
+                }
 
                 &:hover {
-                    background-color: $color-dark-vine;
-                    color: $color-white;
+                  background-color: $color-dark-vine;
+                  color: $color-white;
                 }
-                &.active {
-                    font-weight: bold;
-                    background-color: $color-white;
-                    color: $color-dark-vine;
+
+                &:last-child {
+                  margin-left: 10px;
                 }
+              }
             }
+          }
         }
-
-        .approver-panel-content {
-            flex: 0.8;
-            padding: 20px;
-
-            .approver-panel-content-title {
-                margin-bottom: 30px;
-                text-align: center;
-                font-family: 'Hando Soft Trial';
-                font-style: normal;
-                font-weight: 700;
-                font-size: 32px;
-                text-shadow: 3px 3px 20px $color-dark, -2px 1px 30px $color-dark;
-
-                color: $color-dark-vine;
-            }
-
-            .cards {
-                display: flex;
-                justify-content: space-around;
-                flex-wrap: wrap;
-
-                .card {
-                    border: 0;
-                    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-                    margin: 10px;
-                    position: relative;
-                    min-width: 250px;
-
-                    .card-header {
-                        text-align: center;
-                        font-family: 'Hando Soft Trial';
-                        font-style: normal;
-                        font-weight: 700;
-                        font-size: 20px;
-                    }
-
-                    .edit-user-form {
-                        padding: 10px;
-
-                        .star {
-                            position: absolute;
-                            top: 0;
-                            right: 0;
-                            padding: 5px;
-
-                            img {
-                                width: 30px;
-                                height: 30px;
-                            }
-                        }
-
-                        .edit-user-group {
-                            display: flex;
-                            justify-content: flex-start;
-
-                            label {
-                                display: block;
-                                font-weight: bold;
-                                margin-right: 10px;
-                            }
-
-                            .input {
-                                border: 0;
-                                display: inline-block;
-
-                                &::placeholder{
-                                    color: $color-dark;
-                                    font-size: 16px;
-
-                                    &:hover {
-                                        cursor: pointer;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    .card-body {
-
-                        form {
-
-                            .form-group {
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-
-                                .form-button {
-                                    width: 150px;
-                                    height: 35px;
-
-                                    border: 3px solid $color-dark-vine;
-                                    border-radius: 10px;
-                                    margin-left: 10px;
-                                }
-                            }
-
-                            label {
-                                font-weight: bold;
-                                font-size: 16px;
-                                padding-bottom: 10px;
-                                margin-top: 5px;
-                                color: $color-light-vine;
-                            }
-                        }
-
-                        .star {
-                            position: absolute;
-                            top: 0;
-                            right: 0;
-                            padding: 5px;
-
-                            img {
-                                width: 30px;
-                                height: 30px;
-                            }
-                        }
-
-                        .card-text {
-                            margin-bottom: 5px;
-                            font-family: 'Hando Soft Trial';
-                            font-style: normal;
-                            font-weight: 400;
-                            font-size: 20px;
-
-                            span {
-                                font-weight: bold;
-                            }
-                        }
-
-                        .card-buttons {
-                            display: flex;
-                            justify-content: center;
-                            margin-top: 10px;
-
-                            .card-button {
-                                width: 100px;
-                                height: 35px;
-                    
-                                border-radius: 10px;
-                                border: none;
-                    
-                                font-family: 'Hando Soft Trial';
-                                font-style: normal;
-                                font-weight: 400;
-                                font-size: 16px;
-                    
-                                color: $color-dark;
-                                transition: 0.7s;
-
-                                &[disabled]{
-                                    opacity: 0.5;
-                                }
-
-                                &.update {
-                                    border: 3px solid $color-dark-vine;
-                                }
-    
-                                &.delete {
-                                    border: 3px solid $color-dark-vine;
-                                }
-                    
-                                &:hover {
-                                    background-color: $color-dark-vine;
-                                    color: $color-white;
-                                }
-                    
-                                &:last-child {
-                                    margin-left: 10px;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+      }
     }
+  }
 }

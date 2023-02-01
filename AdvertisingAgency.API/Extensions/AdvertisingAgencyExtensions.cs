@@ -34,6 +34,8 @@ namespace AdvertisingAgency.API.Extensions
                 x.AddRequestClient<RejectRoleRequest>();
                 x.AddRequestClient<AcceptRoleRequest>();
                 x.AddRequestClient<GetUsernameRequest>();
+                x.AddRequestClient<GetAllBannersForAdminRequest>();
+                x.AddRequestClient<CheckPlannedReleaseRequest>();
             });
 
             services.AddOptions<MassTransitHostOptions>()

@@ -1,211 +1,209 @@
-$color-white: #FFFFFF;
-$color-dark: #1A1A1D;
-$color-dark-vine: #6F2232;
-$color-light-vine: #C3073F;
+$color-white: #ffffff;
+$color-dark: #1a1a1d;
+$color-dark-vine: #6f2232;
+$color-light-vine: #c3073f;
 
 .navbar {
-    background-color: $color-dark;
-    width: 100vw;
-    height: 100px;
+  background-color: $color-dark;
+  width: 100vw;
+  height: 100px;
 
-    .container {
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    position: relative;
+
+    .navigation-container {
+      flex: 1;
+      display: flex;
+
+      .navigation-menu-link {
+        padding: 0 5px;
+        margin-left: 10px;
+        height: 35px;
+        border-bottom: 3px solid $color-white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s;
+
+        .navigation-menu-link-title {
+          text-decoration: none;
+          font-family: "Hando Soft Trial";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 19px;
+          transition: 0.5s;
+          cursor: pointer;
+
+          color: $color-white;
+        }
+
+        &:first-child {
+          margin-left: 0px;
+        }
+
+        &:hover {
+          border-bottom: 3px solid $color-light-vine;
+
+          .navigation-menu-link-title {
+            color: $color-light-vine;
+          }
+        }
+      }
+
+      .about-me {
+        padding: 0 5px;
+        height: 35px;
+        border-bottom: 3px solid $color-white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s;
+
+        &:hover {
+          border-bottom: 3px solid $color-light-vine;
+
+          .about-me-title {
+            color: $color-light-vine;
+          }
+        }
+
+        .about-me-title {
+          text-decoration: none;
+          font-family: "Hando Soft Trial";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 19px;
+          transition: 0.5s;
+          cursor: pointer;
+
+          color: $color-white;
+        }
+      }
+    }
+
+    .logo {
+      width: 255px;
+      height: 55px;
+      border-width: 3px 3px 6px 3px;
+      border-style: solid;
+      border-color: $color-white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .logo-title {
+        color: $color-light-vine;
+        margin-bottom: 0;
+        font-family: "Hando Soft Trial";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 29px;
+        text-decoration: none;
+      }
+    }
+
+    .login-register-buttons {
+      display: flex;
+      flex: 1;
+      flex-direction: row-reverse;
+
+      .button {
+        width: 100px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-radius: 10px;
+        border: none;
+
+        font-family: "Hando Soft Trial";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+
+        color: $color-white;
+        background-color: $color-dark-vine;
+        transition: 0.5s;
+
+        &:hover {
+          background-color: $color-light-vine;
+        }
+
+        &:last-child {
+          margin-right: 10px;
+        }
+      }
+
+      .menu-nav {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        flex-wrap: nowrap;
-        position: relative;
-        
-        .navigation-container {
-            flex: 1;
-            display: flex;
 
-            .navigation-menu-link {
-                padding: 0 5px;
-                margin-left: 10px;
-                height: 35px;
-                border-bottom: 3px solid $color-white;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                transition: 0.5s;
-
-                .navigation-menu-link-title {
-                    text-decoration: none;
-                    font-family: 'Hando Soft Trial';
-                    font-style: normal;
-                    font-weight: 400;
-                    font-size: 16px;
-                    line-height: 19px;
-                    transition: 0.5s;
-                    cursor: pointer;
-    
-                    color: $color-white;
-                }
-
-                &:first-child {
-                    margin-left: 0px;
-                }
-
-                &:hover {
-                    border-bottom: 3px solid $color-light-vine;
-    
-                    .navigation-menu-link-title {
-                        color: $color-light-vine;
-                    }
-                }
-            }
-
-            .about-me {
-                padding: 0 5px;
-                height: 35px;
-                border-bottom: 3px solid $color-white;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                transition: 0.5s;
-    
-                &:hover {
-                    border-bottom: 3px solid $color-light-vine;
-    
-                    .about-me-title {
-                        color: $color-light-vine;
-                    }
-                }
-    
-                .about-me-title {
-                    text-decoration: none;
-                    font-family: 'Hando Soft Trial';
-                    font-style: normal;
-                    font-weight: 400;
-                    font-size: 16px;
-                    line-height: 19px;
-                    transition: 0.5s;
-                    cursor: pointer;
-    
-                    color: $color-white;
-                }
-            }
+        .menu-item {
+          color: $color-light-vine;
+          padding: 3px;
         }
-    
-        .logo {
-            width: 255px;
-            height: 55px;
-            border-width: 3px 3px 6px 3px;
-            border-style: solid;
-            border-color: $color-white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-    
-            .logo-title {
+
+        .dropdown-container {
+          .dropdown {
+            position: absolute;
+            right: 10px;
+            text-align: center;
+
+            outline: none;
+            opacity: 0;
+            z-index: -1;
+            max-height: 0;
+            transition: opacity 0.1s, z-index 0.1s, max-height 5s;
+            background-color: $color-dark;
+
+            div {
+              padding: 5px;
+              text-decoration: none;
+              font-family: "Hando Soft Trial";
+              font-style: normal;
+              font-weight: 400;
+              font-size: 20px;
+              color: $color-white;
+              transition: 0.5s;
+              padding: 10px;
+
+              &:hover {
                 color: $color-light-vine;
-                margin-bottom: 0;
-                font-family: 'Hando Soft Trial';
-                font-style: normal;
-                font-weight: 700;
-                font-size: 24px;
-                line-height: 29px;
-                text-decoration: none;
+                cursor: pointer;
+              }
             }
+          }
+
+          .three-dots {
+            &::after {
+              cursor: pointer;
+              color: $color-white;
+              content: "\2807";
+              font-size: 35px;
+              padding: 0 5px;
+            }
+          }
+
+          &:focus {
+            outline: none;
+          }
+
+          &:focus .dropdown {
+            opacity: 1;
+            z-index: 100;
+            max-height: 100vh;
+            transition: opacity 0.2s, z-index 0.2s, max-height 0.2s;
+          }
         }
-    
-        .login-register-buttons {
-            display: flex;
-            flex: 1;
-            flex-direction: row-reverse;
-    
-            .button {
-                width: 100px;
-                height: 35px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-    
-                border-radius: 10px;
-                border: none;
-    
-                font-family: 'Hando Soft Trial';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 16px;
-    
-                color: $color-white;
-                background-color: $color-dark-vine;
-                transition: 0.5s;
-    
-                &:hover {
-                    background-color: $color-light-vine;
-                }
-    
-                &:last-child {
-                    margin-right: 10px;
-                }
-            }
-
-            .menu-nav {
-                display: flex;
-                justify-content: space-between;
-
-                .menu-item {
-                    color: $color-light-vine;
-                    padding: 3px;
-                }
-
-                .dropdown-container {
-
-                    .dropdown {
-                        position: absolute;
-                        right: 10px;
-                        text-align: center;
-                        
-                        outline: none;
-                        opacity: 0;
-                        z-index: -1;
-                        max-height: 0;
-                        transition: opacity 0.1s, z-index 0.1s, max-height 5s;
-                        background-color: $color-dark;
-
-                        div {
-                            padding: 5px;
-                            text-decoration: none;
-                            font-family: 'Hando Soft Trial';
-                            font-style: normal;
-                            font-weight: 400;
-                            font-size: 20px;
-                            color: $color-white;
-                            transition: 0.5s;
-                            padding: 10px;
-                            
-                            &:hover {
-                                color: $color-light-vine;
-                                cursor: pointer;
-                            }
-                        }
-                    }
-
-                    .three-dots {
-                        
-                        &::after {
-                            cursor: pointer;
-                            color: $color-white;
-                            content: '\2807';
-                            font-size: 35px;
-                            padding: 0 5px;
-                        }
-                    }
-                    
-                    &:focus {
-                        outline: none;
-                    }
-                    
-                    &:focus .dropdown {
-                        opacity: 1;
-                        z-index: 100;
-                        max-height: 100vh;
-                        transition: opacity 0.2s, z-index 0.2s, max-height 0.2s;
-                    }
-                }
-            }
-        }
+      }
     }
+  }
 }

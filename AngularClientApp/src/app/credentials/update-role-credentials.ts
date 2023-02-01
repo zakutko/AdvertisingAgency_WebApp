@@ -1,4 +1,4 @@
-export interface UpdateRoleCredentials{
-    token: string;
-    roleName: string;
+export interface UpdateRoleCredentials {
+  token: string;
+  roleName: string;
 }

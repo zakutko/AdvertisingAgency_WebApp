@@ -4,14 +4,16 @@
     {
         //Banner
         public const string queryGetAllBanners = "SELECT * FROM [Banner]";
-        public const string queryGetBannerById = "SELECT * FROM [Banner] WHERE Id = @id AND StatusId = 6";
+        public const string queryGetBannerById = "SELECT * FROM [Banner] WHERE Id = @id";
+        public const string queryGetBannerByIdWhereStatusRelease = "SELECT * FROM [Banner] WHERE Id = @id AND StatusId = 6";
+        public const string queryGetBannerByIdWhereStatusReleasePlanned = "SELECT * FROM [Banner] WHERE Id = @id AND StatusId = 5";
         public const string queryGetBannerByIdAndStatusInQueueToCheck = "SELECT * FROM[Banner] WHERE Id = @id AND StatusId = 2";
         public const string queryGetBannerByIdAndStatusCheckSuccessful = "SELECT * FROM[Banner] WHERE Id = @id AND StatusId = 3";
         public const string queryGetBannerByIdAnyStatus = "SELECT * FROM [Banner] WHERE Id = @id";
         public const string queryAddbannerAdnReturnBannerId = "" +
-            "INSERT INTO [Banner] (Title, SubTitle, Description, LinkToBrowserPage, ReleaseDate, StatusId, PhotoUrl) " +
+            "INSERT INTO [Banner] (Title, SubTitle, Description, LinkToBrowserPage, StatusId, PhotoUrl) " +
             "OUTPUT INSERTED.Id " +
-            "VALUES(@title, @subtitle, @description, @linkToBrowserPage, NULL, 1, @photoUrl)";
+            "VALUES(@title, @subtitle, @description, @linkToBrowserPage, 1, @photoUrl)";
         public const string queryUpdateBannerAddToQueueToCheck = "UPDATE [Banner] SET StatusId = (SELECT Id FROM [Status] WHERE StatusName = 'InQueueToCheck') WHERE Id = @bannerId";
         public const string querySetStatusCheckSuccessful = "UPDATE [Banner] SET StatusId = (SELECT Id FROM [Status] WHERE StatusName = 'CheckSuccessful') WHERE Id = @bannerId";
         public const string querySetStatusReleased = "" +

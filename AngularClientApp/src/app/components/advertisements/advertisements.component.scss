@@ -1,116 +1,115 @@
-$color-dark: #1A1A1D;
-$color-white: #FFFFFF;
+$color-dark: #1a1a1d;
+$color-white: #ffffff;
 $color-dark-vine: #950740;
-$color-light-vine: #C3073F;
+$color-light-vine: #c3073f;
 $color-green: rgba(21, 255, 0, 0.644);
 
 .container {
+  .advertisements-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .advertisements-title-container {
+    .advertisements-title {
+      display: inline-block;
+      padding: 30px 50px 5px 50px;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      border-bottom: 3px solid $color-dark-vine;
+
+      font-family: "Hando Soft Trial";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 38px;
+
+      color: $color-dark;
+    }
+  }
+
+  .advertisements {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+
+    .adv {
+      width: 600px;
+      height: 350px;
+      margin-bottom: 50px;
+      position: relative;
+      box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+
+      .adv-title {
+        position: relative;
+        height: 50px;
+        margin-bottom: 0px;
         display: flex;
         justify-content: center;
         align-items: center;
 
-        .advertisements-title {
-            display: inline-block;
-            padding: 30px 50px 5px 50px;
-            margin-bottom: 10px;
-            margin-top: 10px;
-            border-bottom: 3px solid $color-dark-vine;
+        font-family: "Hando Soft Trial";
+        font-style: normal;
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 19px;
 
-            font-family: 'Hando Soft Trial';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 32px;
-            line-height: 38px;
+        border-bottom: 3px solid $color-white;
+        background-color: $color-dark;
+        color: $color-white;
 
-            color: $color-dark;
+        .adv-status {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 15px;
+          height: 15px;
+
+          border-radius: 15px;
+          margin: 10px;
+
+          background-color: $color-green;
         }
-    }
+      }
 
-    .advertisements {
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        margin-top: 20px;
+      .adv-body {
+        background-color: $color-dark;
 
-        .adv {
-            width: 600px;
-            height: 350px;
-            margin-bottom: 50px;
-            position: relative;
-            box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+        img {
+          width: 600px;
+          height: 300px;
+          background-size: cover;
 
-            .adv-title {
-                position: relative;
-                height: 50px;
-                margin-bottom: 0px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                font-family: 'Hando Soft Trial';
-                font-style: normal;
-                font-weight: bold;
-                font-size: 22px;
-                line-height: 19px;
-
-                border-bottom: 3px solid $color-white;
-                background-color: $color-dark;
-                color: $color-white;
-                
-                .adv-status {
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    width: 15px;
-                    height: 15px;
-    
-                    border-radius: 15px;
-                    margin: 10px;
-    
-                    background-color: $color-green;
-                }
-            }
-
-            .adv-body {
-                background-color: $color-dark;
-
-                img {
-                    width: 600px;
-                    height: 300px;
-                    background-size: cover;
-
-                    opacity: 1;
-                    transition: 0.7s;
-                }
-
-                .adv-button {
-                    position: absolute;
-                    top: 60%;
-                    left: 50%;
-                    margin-right: -50%;
-                    transform: translate(-50%, -50%);
-                    width: 145px;
-                    height: 35px;
-                    background-color: $color-light-vine;
-                    border-radius: 10px;
-                    justify-content: center;
-                    align-items: center;
-                    color: $color-white;
-                    border: none;
-                    transition: 0.7s;
-                    display: none;
-                }
-
-                &:hover .adv-button {
-                    display: flex;
-                }
-
-                &:hover img {
-                    opacity: 0.5;
-                }
-            }
+          opacity: 1;
+          transition: 0.7s;
         }
+
+        .adv-button {
+          position: absolute;
+          top: 60%;
+          left: 50%;
+          margin-right: -50%;
+          transform: translate(-50%, -50%);
+          width: 145px;
+          height: 35px;
+          background-color: $color-light-vine;
+          border-radius: 10px;
+          justify-content: center;
+          align-items: center;
+          color: $color-white;
+          border: none;
+          transition: 0.7s;
+          display: none;
+        }
+
+        &:hover .adv-button {
+          display: flex;
+        }
+
+        &:hover img {
+          opacity: 0.5;
+        }
+      }
     }
+  }
 }

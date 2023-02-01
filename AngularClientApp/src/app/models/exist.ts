@@ -1,3 +1,3 @@
 export interface Exist {
-    isExist: boolean;
+  isExist: boolean;
 }

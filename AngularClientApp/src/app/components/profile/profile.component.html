@@ -1,61 +1,77 @@
 <navbar></navbar>
 <div class="container">
-    <div class="profile-title-container">
-        <h1 class="profile-title">Profile</h1>
-    </div>
-    <div class="profile-information-container">
-        <div class="profile-information">
-            <p class="profile-part"><span>Username</span> {{userInfo.username}}</p>
-            <p class="profile-part"><span>Birthday</span> {{userInfo.birthday}}</p>
-            <p class="profile-part"><span>Email</span> {{userInfo.email}}</p>
-            <p class="profile-part"><span>About Info</span> {{userInfo.aboutInfo}}</p>
-            <p class="profile-part"><span>Role</span> {{userInfo.roleName}}</p>
+  <div class="profile-title-container">
+    <h1 class="profile-title">Profile</h1>
+  </div>
+  <div class="profile-information-container">
+    <div class="profile-information">
+      <p class="profile-part"><span>Username</span> {{ userInfo.username }}</p>
+      <p class="profile-part"><span>Birthday</span> {{ userInfo.birthday }}</p>
+      <p class="profile-part"><span>Email</span> {{ userInfo.email }}</p>
+      <p class="profile-part">
+        <span>About Info</span> {{ userInfo.aboutInfo }}
+      </p>
+      <p class="profile-part"><span>Role</span> {{ userInfo.roleName }}</p>
 
-            <div *ngIf="thisIsOldUser == false; then isNewUser; else isOldUser"></div>
-            <div *ngIf="numberOfPublications == 0; then zeroPublications; else notZeroPublications"></div>
-        </div>
-    </div> 
-    <div class="get-role-alert alert alert-success" *ngIf="getRoleRequestMessage != null">{{getRoleRequestMessage}}</div>
-    <div *ngIf="numberOfPublications >= 5 && userInfo.roleName != 'Admin'; then requestRole"></div>
+      <div *ngIf="thisIsOldUser == false; then isNewUser; else isOldUser"></div>
+      <div
+        *ngIf="
+          numberOfPublications == 0;
+          then zeroPublications;
+          else notZeroPublications
+        "
+      ></div>
+    </div>
+  </div>
+  <div
+    class="get-role-alert alert alert-success"
+    *ngIf="getRoleRequestMessage != null"
+  >
+    {{ getRoleRequestMessage }}
+  </div>
+  <div
+    *ngIf="
+      numberOfPublications >= 5 && userInfo.roleName != 'Admin';
+      then requestRole
+    "
+  ></div>
 </div>
 
 <ng-template #isOldUser>
-    <div class="star">
-        <img src="../../assets/images/star-old-user.png" alt="oldUser">
-    </div>
+  <div class="star">
+    <img src="../../assets/images/star-old-user.png" alt="oldUser" />
+  </div>
 </ng-template>
 
 <ng-template #isNewUser>
-    <div class="star">
-        <img src="../../assets/images/star-new-user.png" alt="newUser">
-    </div>
+  <div class="star">
+    <img src="../../assets/images/star-new-user.png" alt="newUser" />
+  </div>
 </ng-template>
 
 <ng-template #zeroPublications>
-    <div class="number-of-publications">
-        No one publications!
-    </div>
+  <div class="number-of-publications">No one publications!</div>
 </ng-template>
 
 <ng-template #notZeroPublications>
-    <div class="number-of-publications">
-        Number of publications: {{numberOfPublications}}
-    </div>
+  <div class="number-of-publications">
+    Number of publications: {{ numberOfPublications }}
+  </div>
 </ng-template>
 
 <ng-template #requestRole>
-    <div class="dropdown">
-        <input type="checkbox" id="dropdown">
-        
-        <label class="dropdown__face" for="dropdown">
-            <div class="dropdown__text">Request a role</div>
-            <div class="dropdown__arrow"></div>
-        </label>
-        
-        <ul class="dropdown__items">
-            <li (click)="onUpdateRoleRequestClick('Editor')">Editor</li>
-            <li (click)="onUpdateRoleRequestClick('Approver')">Approver</li>
-            <li (click)="onUpdateRoleRequestClick('Admin')">Admin</li>
-        </ul>
-    </div>    
+  <div class="dropdown">
+    <input type="checkbox" id="dropdown" />
+
+    <label class="dropdown__face" for="dropdown">
+      <div class="dropdown__text">Request a role</div>
+      <div class="dropdown__arrow"></div>
+    </label>
+
+    <ul class="dropdown__items">
+      <li (click)="onUpdateRoleRequestClick('Editor')">Editor</li>
+      <li (click)="onUpdateRoleRequestClick('Approver')">Approver</li>
+      <li (click)="onUpdateRoleRequestClick('Admin')">Admin</li>
+    </ul>
+  </div>
 </ng-template>

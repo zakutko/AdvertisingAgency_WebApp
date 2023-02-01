@@ -8,9 +8,8 @@ describe('ApproverPanelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ApproverPanelComponent ]
-    })
-    .compileComponents();
+      declarations: [ApproverPanelComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ApproverPanelComponent);
     component = fixture.componentInstance;

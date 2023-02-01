@@ -5,6 +5,7 @@ namespace AdvertisementsMicroservice.BLL.Interfaces
 {
     public interface IAdvertisementsService
     {
+        Task<GetAllBannersResponse> GetAllBannersForAdmin(GetAllBannersForAdminRequest getAllBannersForAdminRequest);
         Task<GetAllBannersResponse> GetAllBanners();
         Task<GetAllBannersResponse> GetAllBannersByUserId(GetAllBannersByUserIdRequest getAllBannersByUserIdRequest);
         Task<GetAllBannersResponse> GetAllBannersWhereStatusInQueueToCheck();
@@ -17,5 +18,6 @@ namespace AdvertisementsMicroservice.BLL.Interfaces
         Task<MessageResponse> SetStatusReleased(SetStatusReleasedRequest setStatusReleasedRequest);
         Task<MessageResponse> SetStatusReleasePlanned(SetStatusReleasePlannedRequest setStatusReleasePlannedRequest);
         Task<MessageResponse> UpdateBanner(UpdateBannerRequest updateAdvertisementRequest);
+        Task<MessageResponse> CheckPlannedRelease(CheckPlannedReleaseRequest checkPlannedReleaseRequest);
     }
 }

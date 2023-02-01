@@ -1,3 +1,3 @@
-export interface UpdateAdvertisementResponse{
-    message: string;
+export interface UpdateAdvertisementResponse {
+  message: string;
 }

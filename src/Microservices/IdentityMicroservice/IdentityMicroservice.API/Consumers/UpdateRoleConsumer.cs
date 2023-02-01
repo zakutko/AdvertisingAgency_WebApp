@@ -1,5 +1,4 @@
 ﻿using AdvertisingAgency.Contracts.Requests;
-using AdvertisingAgency.Contracts.Responses;
 using IdentityMicroservice.BLL.Interfaces;
 using MassTransit;
 

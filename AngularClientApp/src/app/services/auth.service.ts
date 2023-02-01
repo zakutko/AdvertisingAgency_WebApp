@@ -13,25 +13,31 @@ import { DeleteUserCredentials } from '../credentials/delete-user-credentials';
 import { Username } from '../models/username';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  baseUrl = "https://localhost:56782/api";
+  baseUrl = 'https://localhost:57720/api';
 
   httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
-  }
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   login(credentials: LoginCredentials) {
-    return this.http.post<User>(this.baseUrl + '/Identity/login', 
-      credentials, this.httpOptions);
+    return this.http.post<User>(
+      this.baseUrl + '/Identity/login',
+      credentials,
+      this.httpOptions
+    );
   }
 
   register(credentials: RegisterCredentials) {
-    return this.http.post<User>(this.baseUrl + '/Identity/register',
-      credentials, this.httpOptions);
+    return this.http.post<User>(
+      this.baseUrl + '/Identity/register',
+      credentials,
+      this.httpOptions
+    );
   }
 
   logout() {
@@ -39,43 +45,66 @@ export class AuthService {
   }
 
   getCurrentUser(token: string) {
-    return this.http.get<UserInfo>(this.baseUrl + `/Identity/currentUser?token=${token}`);
+    return this.http.get<UserInfo>(
+      this.baseUrl + `/Identity/currentUser?token=${token}`
+    );
   }
 
   isUserExistByEmailOrUsername(requestValue: string) {
-    return this.http.get<Exist>(this.baseUrl + `/Identity/isExistByEmail?requestValue=${requestValue}`);
+    return this.http.get<Exist>(
+      this.baseUrl + `/Identity/isExistByEmail?requestValue=${requestValue}`
+    );
   }
 
   updateRoleRequest(credentials: UpdateRoleCredentials) {
-    return this.http.post<UpdateRoleResponse>(this.baseUrl + '/Identity/updateRole', 
-      credentials, this.httpOptions);
+    return this.http.post<UpdateRoleResponse>(
+      this.baseUrl + '/Identity/updateRole',
+      credentials,
+      this.httpOptions
+    );
   }
 
   getAllUsers(token: string) {
-    return this.http.get<UserInfo[]>(this.baseUrl + `/Identity/getAllUsers?token=${token}`);
+    return this.http.get<UserInfo[]>(
+      this.baseUrl + `/Identity/getAllUsers?token=${token}`
+    );
   }
 
   getAllRoleRequests(token: string) {
-    return this.http.get<RoleRequest[]>(this.baseUrl + `/Identity/getAllRoleRequests?token=${token}`);
+    return this.http.get<RoleRequest[]>(
+      this.baseUrl + `/Identity/getAllRoleRequests?token=${token}`
+    );
   }
 
-  getAllAdvertisements(token: string){
-    return this.http.get<Advertisement[]>(this.baseUrl + `/Identity/getAllAdvertisements?token=${token}`);
+  getAllAdvertisements(token: string) {
+    return this.http.get<Advertisement[]>(
+      this.baseUrl + `/Identity/getAllAdvertisements?token=${token}`
+    );
   }
 
-  deleteUser(credentials: DeleteUserCredentials){
-    return this.http.delete(this.baseUrl + `/Identity/deleteUserByUsernameAndEmail?username=${credentials.username}&&email=${credentials.email}`, this.httpOptions);
+  deleteUser(credentials: DeleteUserCredentials) {
+    return this.http.delete(
+      this.baseUrl +
+        `/Identity/deleteUserByUsernameAndEmail?username=${credentials.username}&&email=${credentials.email}`,
+      this.httpOptions
+    );
   }
 
-  rejectRoleRequest(userId: string){
-    return this.http.get(this.baseUrl + `/Identity/rejectRoleRequest?userId=${userId}`);
+  rejectRoleRequest(userId: string) {
+    return this.http.get(
+      this.baseUrl + `/Identity/rejectRoleRequest?userId=${userId}`
+    );
   }
 
-  acceptRoleRequest(userId: string){
-    return this.http.get(this.baseUrl + `/Identity/acceptRoleRequest?userId=${userId}`);
+  acceptRoleRequest(userId: string) {
+    return this.http.get(
+      this.baseUrl + `/Identity/acceptRoleRequest?userId=${userId}`
+    );
   }
 
-  getUsername(userId: string){
-    return this.http.get<Username>(this.baseUrl + `/Identity/getUsername?userId=${userId}`);
+  getUsername(userId: string) {
+    return this.http.get<Username>(
+      this.baseUrl + `/Identity/getUsername?userId=${userId}`
+    );
   }
 }

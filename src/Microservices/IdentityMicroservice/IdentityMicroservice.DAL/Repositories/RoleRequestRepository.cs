@@ -24,13 +24,13 @@ namespace IdentityMicroservice.DAL.Repositories
         public async Task InsertNewRoleRequest(string userId, string roleName, int numberOfPublications, bool isOldUser)
         {
             using var connection = _context.CreateConnection();
-            await connection.ExecuteAsync(IdentityServiceConstants.queryInsertNewRoleRequest, 
+            await connection.ExecuteAsync(IdentityServiceConstants.queryInsertNewRoleRequest,
                 new
                 {
                     userId = userId,
                     roleName = roleName,
                     numberOfPublications = numberOfPublications,
-                    isOldUser = isOldUser 
+                    isOldUser = isOldUser
                 });
         }
 

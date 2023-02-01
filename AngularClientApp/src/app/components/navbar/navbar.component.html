@@ -1,85 +1,94 @@
 <div class="navbar">
-    <div class="container">
-        <div *ngIf="isLoggedIn() == true; then navigationAuthorized; else navigationUnAuthorized"></div>
-        <div class="logo">
-            <a class="logo-title" routerLink="">Advertising Agency</a>
-        </div>
-        <div *ngIf="isLoggedIn() == true; then authorized; else unauthorized"></div>
-        <ng-template #unauthorized>
-            <div class="login-register-buttons">
-                <button class="button" (click)="onLoginClick()">Login</button>
-                <button class="button" (click)="onRegisterClick()">Register</button>
-            </div>
-        </ng-template>
-        
-        <ng-template #authorized>
-            <div class="login-register-buttons">
-                <div class="menu-nav">
-                    <div class="menu-item"></div>
-                    <div class="dropdown-container" tabindex="-1">
-                      <div class="three-dots"></div>
-                      <div *ngIf="userInfo?.roleName == 'Admin'; then isAdmin"></div>
-                      <div *ngIf="userInfo?.roleName == 'Author'; then isAuthor"></div>
-                      <div *ngIf="userInfo?.roleName == 'Editor'; then isEditor"></div>
-                      <div *ngIf="userInfo?.roleName == 'Approver'; then isApprover"></div>
-                    </div>
-                </div>
-            </div>
-        </ng-template>
+  <div class="container">
+    <div
+      *ngIf="
+        isLoggedIn() == true;
+        then navigationAuthorized;
+        else navigationUnAuthorized
+      "
+    ></div>
+    <div class="logo">
+      <a class="logo-title" routerLink="">Advertising Agency</a>
     </div>
+    <div *ngIf="isLoggedIn() == true; then authorized; else unauthorized"></div>
+    <ng-template #unauthorized>
+      <div class="login-register-buttons">
+        <button class="button" (click)="onLoginClick()">Login</button>
+        <button class="button" (click)="onRegisterClick()">Register</button>
+      </div>
+    </ng-template>
+
+    <ng-template #authorized>
+      <div class="login-register-buttons">
+        <div class="menu-nav">
+          <div class="menu-item"></div>
+          <div class="dropdown-container" tabindex="-1">
+            <div class="three-dots"></div>
+            <div *ngIf="userInfo?.roleName == 'Admin'; then isAdmin"></div>
+            <div *ngIf="userInfo?.roleName == 'Author'; then isAuthor"></div>
+            <div *ngIf="userInfo?.roleName == 'Editor'; then isEditor"></div>
+            <div
+              *ngIf="userInfo?.roleName == 'Approver'; then isApprover"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
 </div>
 
-
 <ng-template #navigationAuthorized>
-    <div class="navigation-container">
-        <div class="about-me">
-            <a (click)="onAboutClick()" class="about-me-title">About</a>
-        </div>
-        <div class="navigation-menu-link">
-            <a (click)="onAddAdvertisementClick()" class="navigation-menu-link-title">Add advertisement</a>
-        </div>
+  <div class="navigation-container">
+    <div class="about-me">
+      <a (click)="onAboutClick()" class="about-me-title">About</a>
     </div>
+    <div class="navigation-menu-link">
+      <a (click)="onAddAdvertisementClick()" class="navigation-menu-link-title"
+        >Add advertisement</a
+      >
+    </div>
+  </div>
 </ng-template>
 
 <ng-template #navigationUnAuthorized>
-    <div class="navigation-container">
-        <div class="about-me">
-            <a (click)="onAboutClick()" class="about-me-title">About</a>
-        </div>
+  <div class="navigation-container">
+    <div class="about-me">
+      <a (click)="onAboutClick()" class="about-me-title">About</a>
     </div>
+  </div>
 </ng-template>
 
 <ng-template #isAdmin>
-    <div class="dropdown">
-        <a><div (click)="onAdminPanelClick()">Admin Panel</div></a>
-        <a><div (click)="onMyAdvertisementsClick()">My advertisements</div></a>
-        <a><div (click)="onProfileClick()">Profile</div></a>
-        <a><div (click)="onLogoutClick()">Logout</div></a>
-      </div>
+  <div class="dropdown">
+    <a><div (click)="onAdminPanelClick()">Admin Panel</div></a>
+    <a><div (click)="onMyAdvertisementsClick()">My advertisements</div></a>
+    <a><div (click)="onProfileClick()">Profile</div></a>
+    <a><div (click)="onLogoutClick()">Logout</div></a>
+  </div>
 </ng-template>
 
 <ng-template #isAuthor>
-    <div class="dropdown">
-        <a><div (click)="onMyAdvertisementsClick()">My advertisements</div></a>
-        <a><div (click)="onProfileClick()">Profile</div></a>
-        <a><div (click)="onLogoutClick()">Logout</div></a>
-    </div>
+  <div class="dropdown">
+    <a><div (click)="onMyAdvertisementsClick()">My advertisements</div></a>
+    <a><div (click)="onProfileClick()">Profile</div></a>
+    <a><div (click)="onLogoutClick()">Logout</div></a>
+  </div>
 </ng-template>
 
 <ng-template #isEditor>
-    <div class="dropdown">
-        <a><div (click)="onEditorPanelClick()">Editor Panel</div></a>
-        <a><div (click)="onMyAdvertisementsClick()">My advertisements</div></a>
-        <a><div (click)="onProfileClick()">Profile</div></a>
-        <a><div (click)="onLogoutClick()">Logout</div></a>
-    </div>
+  <div class="dropdown">
+    <a><div (click)="onEditorPanelClick()">Editor Panel</div></a>
+    <a><div (click)="onMyAdvertisementsClick()">My advertisements</div></a>
+    <a><div (click)="onProfileClick()">Profile</div></a>
+    <a><div (click)="onLogoutClick()">Logout</div></a>
+  </div>
 </ng-template>
 
 <ng-template #isApprover>
-    <div class="dropdown">
-        <a><div (click)="onApproverPanelClick()">Approver Panel</div></a>
-        <a><div (click)="onMyAdvertisementsClick()">My advertisements</div></a>
-        <a><div (click)="onProfileClick()">Profile</div></a>
-        <a><div (click)="onLogoutClick()">Logout</div></a>
-    </div>
+  <div class="dropdown">
+    <a><div (click)="onApproverPanelClick()">Approver Panel</div></a>
+    <a><div (click)="onMyAdvertisementsClick()">My advertisements</div></a>
+    <a><div (click)="onProfileClick()">Profile</div></a>
+    <a><div (click)="onLogoutClick()">Logout</div></a>
+  </div>
 </ng-template>

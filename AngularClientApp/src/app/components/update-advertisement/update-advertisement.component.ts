@@ -3,13 +3,18 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UpdateAdvertisementCredentials } from 'src/app/credentials/update-advertisement-credentials';
 import { Advertisement } from 'src/app/models/advertisement';
-import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
+import {
+  Storage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from '@angular/fire/storage';
 import { AdvertisementsService } from 'src/app/services/advertisements.service';
 
 @Component({
   selector: 'update-advertisement',
   templateUrl: './update-advertisement.component.html',
-  styleUrls: ['./update-advertisement.component.scss']
+  styleUrls: ['./update-advertisement.component.scss'],
 })
 export class UpdateAdvertisementComponent implements OnInit {
   @Input() advertisement!: Advertisement;
@@ -23,17 +28,15 @@ export class UpdateAdvertisementComponent implements OnInit {
     title: new FormControl(''),
     subTitle: new FormControl(''),
     description: new FormControl(''),
-    linkToBrowserPage: new FormControl('')
+    linkToBrowserPage: new FormControl(''),
   });
   constructor(
     public activeModal: NgbActiveModal,
     private storage: Storage,
     private advertisementsService: AdvertisementsService
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   onChange(event: any) {
     this.file = event.target.files[0];
@@ -43,9 +46,12 @@ export class UpdateAdvertisementComponent implements OnInit {
     const storageRef = ref(this.storage, this.file.name);
     const uploadTask = uploadBytesResumable(storageRef, this.file);
 
-    uploadTask.on('state_changed',
+    uploadTask.on(
+      'state_changed',
       (snapshot) => {
-        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
         this.progressPercent = progress;
       },
       (error) => {
@@ -55,12 +61,12 @@ export class UpdateAdvertisementComponent implements OnInit {
         getDownloadURL(uploadTask.snapshot.ref).then((dowloadURL) => {
           this.imageUrl = dowloadURL;
           console.log(this.imageUrl);
-        })
+        });
       }
     );
   }
 
-  updateAdvertisement(credentials: UpdateAdvertisementCredentials){
+  updateAdvertisement(credentials: UpdateAdvertisementCredentials) {
     if (credentials.title === '') {
       credentials.title = this.advertisement.title;
     }
@@ -75,18 +81,16 @@ export class UpdateAdvertisementComponent implements OnInit {
     }
     if (this.imageUrl != null) {
       credentials.photoUrl = this.imageUrl;
-    }
-    else {
+    } else {
       credentials.photoUrl = this.advertisement.photoUrl;
     }
     credentials.bannerId = this.advertisement.bannerId;
-    this.advertisementsService.updateBanner(credentials)
-      .subscribe(result => {
-        this.resultMessage = result.message;
-      });
+    this.advertisementsService.updateBanner(credentials).subscribe((result) => {
+      this.resultMessage = result.message;
+    });
   }
 
-  reloadPage(){
+  reloadPage() {
     location.reload();
   }
 }

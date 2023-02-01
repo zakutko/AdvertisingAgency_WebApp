@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace AdvertisingAgency.Contracts.Requests
+﻿namespace AdvertisingAgency.Contracts.Requests
 {
     public class AddBannerRequest
     {

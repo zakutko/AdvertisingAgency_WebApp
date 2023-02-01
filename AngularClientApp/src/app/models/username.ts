@@ -1,3 +1,3 @@
 export interface Username {
-    username: string;
+  username: string;
 }

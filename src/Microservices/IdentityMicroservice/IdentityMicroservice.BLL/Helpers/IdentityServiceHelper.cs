@@ -1,5 +1,4 @@
 ﻿using IdentityMicroservice.BLL.Interfaces;
-using IdentityMicroservice.DAL.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
 using System.Text;

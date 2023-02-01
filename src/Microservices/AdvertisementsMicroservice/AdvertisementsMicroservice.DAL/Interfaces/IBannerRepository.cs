@@ -4,11 +4,13 @@ namespace AdvertisementsMicroservice.DAL.Interfaces
 {
     public interface IBannerRepository
     {
-        Task<IEnumerable<Banner>> GetAllBanners();
         Task<Banner> GetBannerById(string id);
+        Task<IEnumerable<Banner>> GetAllBanners();
+        Task<Banner> GetBannerByIdWhereStatusRelease(string id);
         Task<Banner> GetBannerByIdWhereToQueueToCheck(string id);
         Task<Banner> GetBannerByIdWhereCheckSuccessful(string id);
         Task<Banner> GetBannerByIdAnyStatus(string id);
+        Task<Banner> GetBannerWhereStatusReleasePlanned(string id);
         Task<Guid> AddBannerAndGetBannerId(string title, string subtitle, string description, string linkToBrowserPage, string photoUrl);
         Task AddBannerToQueueToCheck(string bannerId);
         Task SetStatusCheckSuccessful(string bannerId);

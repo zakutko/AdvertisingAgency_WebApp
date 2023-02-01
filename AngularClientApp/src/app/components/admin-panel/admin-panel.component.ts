@@ -11,7 +11,7 @@ import { UpdateAdvertisementComponent } from '../update-advertisement/update-adv
 @Component({
   selector: 'admin-panel',
   templateUrl: './admin-panel.component.html',
-  styleUrls: ['./admin-panel.component.scss']
+  styleUrls: ['./admin-panel.component.scss'],
 })
 export class AdminPanelComponent implements OnInit {
   selectedSideBarMenu!: string;
@@ -20,58 +20,54 @@ export class AdminPanelComponent implements OnInit {
   advertisementsList!: Advertisement[];
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private advertisementsService: AdvertisementsService,
     private modalService: NgbModal
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     let token = localStorage.getItem('token');
-    if(token != null){
-      this.authService.getAllUsers(token)
-        .subscribe(result => {
-          this.usersInfo = result;
-        })
+    if (token != null) {
+      this.authService.getAllUsers(token).subscribe((result) => {
+        this.usersInfo = result;
+      });
     }
-    this.selectedSideBarMenu = "Users";
+    this.selectedSideBarMenu = 'Users';
   }
 
   getAllUsers() {
     let token = localStorage.getItem('token');
-    if(token != null){
-      this.authService.getAllUsers(token)
-        .subscribe(result => {
-          this.usersInfo = result;
-        })
-    };
+    if (token != null) {
+      this.authService.getAllUsers(token).subscribe((result) => {
+        this.usersInfo = result;
+      });
+    }
   }
 
   getAllRoleRequests() {
     let token = localStorage.getItem('token');
-    if(token != null){
-      this.authService.getAllRoleRequests(token)
-        .subscribe(result => {
-          this.roleRequests = result;
-        });
-    };
+    if (token != null) {
+      this.authService.getAllRoleRequests(token).subscribe((result) => {
+        this.roleRequests = result;
+      });
+    }
   }
 
   getAllAdvertisements() {
     let token = localStorage.getItem('token');
-    if(token != null){
-      this.advertisementsService.getAllBanners("get all advertisements")
-        .subscribe(result => {
-          this.advertisementsList = result;
-        })
+    if (token != null) {
+      this.advertisementsService.getAllBannerForAdmin().subscribe((result) => {
+        this.advertisementsList = result;
+      });
     }
   }
 
   onDeleteButtonClick(username: string, email: string) {
-    let credentials: DeleteUserCredentials = {username, email};
-    this.authService.deleteUser(credentials)
-      .subscribe(result => {
-        console.log(result);
-      });
+    let credentials: DeleteUserCredentials = { username, email };
+    this.authService.deleteUser(credentials).subscribe((result) => {
+      console.log(result);
+      this.getAllUsers();
+    });
   }
 
   open(advertisement: Advertisement) {
@@ -80,24 +76,23 @@ export class AdminPanelComponent implements OnInit {
   }
 
   onAcceptClick(userId: string) {
-    this.authService.acceptRoleRequest(userId)
-      .subscribe(result => {
-        console.log(result);
-        this.getAllRoleRequests();
-      })
+    this.authService.acceptRoleRequest(userId).subscribe((result) => {
+      console.log(result);
+      this.getAllRoleRequests();
+    });
   }
 
   onRejectClick(userId: string) {
-    this.authService.rejectRoleRequest(userId)
-      .subscribe(result => {
-        console.log(result);
-        this.getAllRoleRequests();
-      })
+    this.authService.rejectRoleRequest(userId).subscribe((result) => {
+      console.log(result);
+      this.getAllRoleRequests();
+    });
   }
 
   onDeleteAdvClick(userId: string, bannerId: string) {
-    this.advertisementsService.deleteBannerByUserIdAndBannerId(userId, bannerId)
-      .subscribe(result => {
+    this.advertisementsService
+      .deleteBannerByUserIdAndBannerId(userId, bannerId)
+      .subscribe((result) => {
         console.log(result);
         this.getAllAdvertisements();
       });

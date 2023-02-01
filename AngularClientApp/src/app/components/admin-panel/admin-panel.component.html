@@ -1,97 +1,178 @@
 <navbar></navbar>
 <div class="container">
-    <div class="admin-panel-title-container">
-        <h1 class="admin-panel-title">Admin panel</h1>
+  <div class="admin-panel-title-container">
+    <h1 class="admin-panel-title">Admin panel</h1>
+  </div>
+  <div class="admin-panel-container">
+    <div class="admin-panel-sidebar">
+      <h1 class="admin-panel-sidebar-title">Admin opportunities</h1>
+      <a
+        [ngClass]="{ active: selectedSideBarMenu === 'Users' }"
+        (click)="selectedSideBarMenu = 'Users'; getAllUsers()"
+        >Users</a
+      >
+      <a
+        [ngClass]="{ active: selectedSideBarMenu === 'UpdateRoleRequests' }"
+        (click)="
+          selectedSideBarMenu = 'UpdateRoleRequests'; getAllRoleRequests()
+        "
+        >Update role requests</a
+      >
+      <a
+        [ngClass]="{ active: selectedSideBarMenu === 'Advertisements' }"
+        (click)="selectedSideBarMenu = 'Advertisements'; getAllAdvertisements()"
+        >Advertisements</a
+      >
     </div>
-    <div class="admin-panel-container">
-        <div class="admin-panel-sidebar">
-            <h1 class="admin-panel-sidebar-title">
-                Admin opportunities
-            </h1>
-            <a [ngClass]="{'active': selectedSideBarMenu === 'Users'}" (click)="selectedSideBarMenu = 'Users'; getAllUsers()">Users</a>
-            <a [ngClass]="{'active': selectedSideBarMenu === 'UpdateRoleRequests'}" (click)="selectedSideBarMenu = 'UpdateRoleRequests'; getAllRoleRequests()">Update role requests</a>
-            <a [ngClass]="{'active': selectedSideBarMenu === 'Advertisements'}" (click)="selectedSideBarMenu = 'Advertisements'; getAllAdvertisements()">Advertisements</a>
-        </div>
-        <div *ngIf="selectedSideBarMenu == 'Users'; then users"></div>
-        <div *ngIf="selectedSideBarMenu == 'UpdateRoleRequests'; then updateRoleRequest"></div>
-        <div *ngIf="selectedSideBarMenu == 'Advertisements'; then advertisements"></div>
-    </div>
+    <div *ngIf="selectedSideBarMenu == 'Users'; then users"></div>
+    <div
+      *ngIf="
+        selectedSideBarMenu == 'UpdateRoleRequests';
+        then updateRoleRequest
+      "
+    ></div>
+    <div
+      *ngIf="selectedSideBarMenu == 'Advertisements'; then advertisements"
+    ></div>
+  </div>
 </div>
 
 <ng-template #users>
-    <div class="admin-panel-content">
-        <h1 class="admin-panel-content-title">{{selectedSideBarMenu}}</h1>
-        <div class="cards">
-            <div *ngFor="let user of usersInfo; index as i;" class="card">
-                <div class="card-header">{{user.username}}</div>
-                <div class="card-body">
-                    <p class="card-text"><span>Birthday:</span> {{user.birthday}}</p>
-                    <p class="card-text"><span>Email:</span> {{user.email}}</p>
-                    <p class="card-text"><span>About:</span> {{user.aboutInfo}}</p>
-                    <p class="card-text"><span>Number Of Publications:</span> {{user.numberOfPublications}}</p>
-                    <p class="card-text"><span>Role:</span> {{user.roleName}}</p>
-                    <div *ngIf="user.isOldUser == false || user.isOldUser == null; then isNewUser; else isOldUser"></div>
-                    <div class="card-buttons">
-                        <!--<button class="card-button update" (click)="onEditButtonClick()">Edit</button>-->
-                        <button class="card-button delete" (click)="onDeleteButtonClick(user.username, user.email)">Delete</button>
-                    </div>
-                </div>
-            </div>
+  <div class="admin-panel-content">
+    <h1 class="admin-panel-content-title">{{ selectedSideBarMenu }}</h1>
+    <div class="cards">
+      <div *ngFor="let user of usersInfo; index as i" class="card">
+        <div class="card-header">{{ user.username }}</div>
+        <div class="card-body">
+          <p class="card-text"><span>Birthday:</span> {{ user.birthday }}</p>
+          <p class="card-text"><span>Email:</span> {{ user.email }}</p>
+          <p class="card-text"><span>About:</span> {{ user.aboutInfo }}</p>
+          <p class="card-text">
+            <span>Number Of Publications:</span> {{ user.numberOfPublications }}
+          </p>
+          <p class="card-text"><span>Role:</span> {{ user.roleName }}</p>
+          <div
+            *ngIf="
+              user.isOldUser == false || user.isOldUser == null;
+              then isNewUser;
+              else isOldUser
+            "
+          ></div>
+          <div class="card-buttons">
+            <!--<button class="card-button update" (click)="onEditButtonClick()">Edit</button>-->
+            <button
+              class="card-button delete"
+              (click)="onDeleteButtonClick(user.username, user.email)"
+            >
+              Delete
+            </button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </ng-template>
 
 <ng-template #updateRoleRequest>
-    <div class="admin-panel-content">
-        <h1 class="admin-panel-content-title">{{selectedSideBarMenu}}</h1>
-        <div class="cards">
-            <div *ngFor="let roleRequest of roleRequests; index as i;" class="card">
-                <div class="card-header">{{roleRequest.username}}</div>
-                <div class="card-body">
-                    <p class="card-text"><span>Desired role:</span> {{roleRequest.roleName}}</p>
-                    <p class="card-text"><span>Number Of Publications:</span> {{roleRequest.numberOfPublications}}</p>
-                    <div *ngIf="roleRequest.isOldUser == false; then isNewUser; else isOldUser"></div>
-                    <div class="card-buttons">
-                        <button class="card-button update" (click)="onAcceptClick(roleRequest.userId)">Accept</button>
-                        <button class="card-button delete" (click)="onRejectClick(roleRequest.userId)">Reject</button>
-                    </div>
-                </div>
-            </div>
+  <div class="admin-panel-content">
+    <h1 class="admin-panel-content-title">{{ selectedSideBarMenu }}</h1>
+    <div class="cards">
+      <div *ngFor="let roleRequest of roleRequests; index as i" class="card">
+        <div class="card-header">{{ roleRequest.username }}</div>
+        <div class="card-body">
+          <p class="card-text">
+            <span>Desired role:</span> {{ roleRequest.roleName }}
+          </p>
+          <p class="card-text">
+            <span>Number Of Publications:</span>
+            {{ roleRequest.numberOfPublications }}
+          </p>
+          <div
+            *ngIf="
+              roleRequest.isOldUser == false;
+              then isNewUser;
+              else isOldUser
+            "
+          ></div>
+          <div class="card-buttons">
+            <button
+              class="card-button update"
+              (click)="onAcceptClick(roleRequest.userId)"
+            >
+              Accept
+            </button>
+            <button
+              class="card-button delete"
+              (click)="onRejectClick(roleRequest.userId)"
+            >
+              Reject
+            </button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </ng-template>
 
 <ng-template #advertisements>
-    <div class="admin-panel-content">
-        <h1 class="admin-panel-content-title">{{selectedSideBarMenu}}</h1>
-        <div class="cards">
-            <div *ngFor="let advertisement of advertisementsList index as i;" class="card">
-                <div class="card-header">{{advertisement.title}}</div>
-                <div class="card-body">
-                    <p class="card-text"><span>Subtitle: </span> {{advertisement.subTitle}}</p>
-                    <p class="card-text"><span>Description: </span> {{advertisement.description}}</p>
-                    <p class="card-text"><span>Link: </span><a [href]="advertisement.linkToBrowserPage">Link to browser page</a></p>
-                    <p class="card-text"><span>Release Date: </span> {{advertisement.releaseDate}}</p>
-                    <p class="card-text"><span>Status:</span> {{advertisement.status}}</p>
-                    <p class="card-text"><span>Photo url: </span> <a [href]="advertisement.photoUrl">Link to image</a></p>
-                    <div class="card-buttons">
-                        <button class="card-button update" (click)="open(advertisement)">Update</button>
-                        <button class="card-button delete" (click)="onDeleteAdvClick(advertisement.userId, advertisement.bannerId)">Delete</button>
-                    </div>
-                </div>
-            </div>
+  <div class="admin-panel-content">
+    <h1 class="admin-panel-content-title">{{ selectedSideBarMenu }}</h1>
+    <div class="cards">
+      <div
+        *ngFor="let advertisement of advertisementsList; index as i"
+        class="card"
+      >
+        <div class="card-header">{{ advertisement.title }}</div>
+        <div class="card-body">
+          <p class="card-text">
+            <span>Subtitle: </span> {{ advertisement.subTitle }}
+          </p>
+          <p class="card-text">
+            <span>Description: </span> {{ advertisement.description }}
+          </p>
+          <p class="card-text">
+            <span>Link: </span
+            ><a [href]="advertisement.linkToBrowserPage"
+              >Link to browser page</a
+            >
+          </p>
+          <p class="card-text">
+            <span>Release Date: </span> {{ advertisement.releaseDate }}
+          </p>
+          <p class="card-text">
+            <span>Status:</span> {{ advertisement.status }}
+          </p>
+          <p class="card-text">
+            <span>Photo url: </span>
+            <a [href]="advertisement.photoUrl">Link to image</a>
+          </p>
+          <div class="card-buttons">
+            <button class="card-button update" (click)="open(advertisement)">
+              Update
+            </button>
+            <button
+              class="card-button delete"
+              (click)="
+                onDeleteAdvClick(advertisement.userId, advertisement.bannerId)
+              "
+            >
+              Delete
+            </button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </ng-template>
 
 <ng-template #isOldUser>
-    <div class="star">
-        <img src="../../assets/images/star-old-user.png" alt="oldUser">
-    </div>
+  <div class="star">
+    <img src="../../assets/images/star-old-user.png" alt="oldUser" />
+  </div>
 </ng-template>
 
 <ng-template #isNewUser>
-    <div class="star">
-        <img src="../../assets/images/star-new-user.png" alt="newUser">
-    </div>
+  <div class="star">
+    <img src="../../assets/images/star-new-user.png" alt="newUser" />
+  </div>
 </ng-template>

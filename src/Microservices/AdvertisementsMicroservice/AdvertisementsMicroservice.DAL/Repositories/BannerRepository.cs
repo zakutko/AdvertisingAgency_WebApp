@@ -36,10 +36,10 @@ namespace AdvertisementsMicroservice.DAL.Repositories
             return await connection.QueryAsync<Banner>(AdvertisementsServiceConstants.queryGetAllBanners);
         }
 
-        public async Task<Banner> GetBannerById(string id)
+        public async Task<Banner> GetBannerByIdWhereStatusRelease(string id)
         {
             using var connection = _context.CreateConnection();
-            return await connection.QueryFirstOrDefaultAsync<Banner>(AdvertisementsServiceConstants.queryGetBannerById, new { id = id });
+            return await connection.QueryFirstOrDefaultAsync<Banner>(AdvertisementsServiceConstants.queryGetBannerByIdWhereStatusRelease, new { id = id });
         }
 
         public async Task<Banner> GetBannerByIdWhereToQueueToCheck(string id)
@@ -93,7 +93,7 @@ namespace AdvertisementsMicroservice.DAL.Repositories
         public async Task UpdateBanner(string bannerId, string title, string subTitle, string description, string linkToBrowserPage, string photoUrl)
         {
             using var connection = _context.CreateConnection();
-            await connection.ExecuteAsync(AdvertisementsServiceConstants.queryUpdateBannerById, 
+            await connection.ExecuteAsync(AdvertisementsServiceConstants.queryUpdateBannerById,
                 new
                 {
                     bannerId = Guid.Parse(bannerId),
@@ -103,6 +103,18 @@ namespace AdvertisementsMicroservice.DAL.Repositories
                     linkToBrowserPage = linkToBrowserPage,
                     photoUrl = photoUrl
                 });
+        }
+
+        public async Task<Banner> GetBannerById(string id)
+        {
+            using var connection = _context.CreateConnection();
+            return await connection.QueryFirstOrDefaultAsync<Banner>(AdvertisementsServiceConstants.queryGetBannerById, new { id = id });
+        }
+
+        public async Task<Banner> GetBannerWhereStatusReleasePlanned(string id)
+        {
+            using var connection = _context.CreateConnection();
+            return await connection.QueryFirstOrDefaultAsync<Banner>(AdvertisementsServiceConstants.queryGetBannerByIdWhereStatusReleasePlanned, new { id = id });
         }
     }
 }
